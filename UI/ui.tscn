@@ -1,0 +1,181 @@
+[gd_scene load_steps=11 format=3 uid="uid://dt45rgg8nbwsp"]
+
+[ext_resource type="Theme" uid="uid://bg3jq1neuxixx" path="res://res/new_theme.tres" id="1_cunch"]
+[ext_resource type="Script" path="res://Reserve.gd" id="2_1ldh1"]
+[ext_resource type="PackedScene" uid="uid://c18t7edyv5yr6" path="res://UI/ColorButton.tscn" id="3_sktfk"]
+[ext_resource type="Script" path="res://ColorPanel.gd" id="4_3h104"]
+[ext_resource type="Script" path="res://Colors.gd" id="5_jgp8u"]
+[ext_resource type="Script" path="res://SpellMaker.gd" id="6_2621t"]
+[ext_resource type="Script" path="res://DropColor.gd" id="7_o2f8g"]
+[ext_resource type="AudioStream" uid="uid://cwx38lgsuokh0" path="res://La Marseillaise French National Anthem FrEn.mp3" id="8_d6qhp"]
+[ext_resource type="PackedScene" uid="uid://ef0syu5snnng" path="res://UI/close_button.tscn" id="9_aefkk"]
+[ext_resource type="Script" path="res://UI/SpellContainer.gd" id="10_fw5ec"]
+
+[node name="UI" type="Control"]
+texture_filter = 2
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_cunch")
+metadata/_edit_lock_ = true
+
+[node name="Reserve" type="PanelContainer" parent="."]
+layout_mode = 0
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 171.0
+offset_top = -141.0
+offset_right = 231.0
+offset_bottom = -81.0
+script = ExtResource("2_1ldh1")
+
+[node name="ColorButton" parent="Reserve" instance=ExtResource("3_sktfk")]
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -168.0
+offset_top = -64.0
+offset_right = 168.0
+grow_horizontal = 2
+grow_vertical = 0
+script = ExtResource("4_3h104")
+
+[node name="Colors" type="HBoxContainer" parent="PanelContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 4
+alignment = 1
+script = ExtResource("5_jgp8u")
+
+[node name="ColorButton" parent="PanelContainer/Colors" instance=ExtResource("3_sktfk")]
+layout_mode = 2
+
+[node name="ColorButton2" parent="PanelContainer/Colors" instance=ExtResource("3_sktfk")]
+layout_mode = 2
+color = 1
+
+[node name="ColorButton3" parent="PanelContainer/Colors" instance=ExtResource("3_sktfk")]
+layout_mode = 2
+color = 2
+
+[node name="ColorButton4" parent="PanelContainer/Colors" instance=ExtResource("3_sktfk")]
+layout_mode = 2
+color = 3
+
+[node name="ColorButton5" parent="PanelContainer/Colors" instance=ExtResource("3_sktfk")]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 320.0
+grow_horizontal = 2
+theme_override_constants/margin_left = 200
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 200
+
+[node name="SpellContainer" type="HFlowContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+alignment = 1
+script = ExtResource("10_fw5ec")
+
+[node name="SpellMaker" type="Control" parent="." node_paths=PackedStringArray("nb_label")]
+anchors_preset = 0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -447.5
+offset_top = -196.5
+offset_right = 447.5
+offset_bottom = 196.5
+script = ExtResource("6_2621t")
+nb_label = NodePath("MarginContainer/VBoxContainer/Label")
+
+[node name="Panel" type="Panel" parent="SpellMaker"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="SpellMaker"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="SpellMaker/MarginContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="SpellMaker/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Lâchez votre couleur ici"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="SpellMaker/MarginContainer/VBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="DropColor" type="HBoxContainer" parent="SpellMaker/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+size_flags_horizontal = 4
+alignment = 1
+script = ExtResource("7_o2f8g")
+
+[node name="HSeparator2" type="HSeparator" parent="SpellMaker/MarginContainer/VBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="SpellName" type="Label" parent="SpellMaker/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 33
+text = "FIREBALL"
+horizontal_alignment = 1
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="SpellMaker/MarginContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="desc" type="Label" parent="SpellMaker/MarginContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+text = "desc"
+horizontal_alignment = 1
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="SpellMaker/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 10
+alignment = 2
+
+[node name="Create" type="Button" parent="SpellMaker/MarginContainer/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+size_flags_stretch_ratio = 20.0
+mouse_filter = 1
+theme_override_font_sizes/font_size = 22
+text = "Créer votre sort"
+
+[node name="bluewhitered" type="AudioStreamPlayer" parent="SpellMaker"]
+stream = ExtResource("8_d6qhp")
+
+[node name="Close" parent="SpellMaker" instance=ExtResource("9_aefkk")]
+layout_mode = 1
+offset_left = -30.0

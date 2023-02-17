@@ -1,0 +1,151 @@
+[gd_scene load_steps=21 format=3 uid="uid://btvj3i40vbhqf"]
+
+[ext_resource type="Script" path="res://Spells/List/fireball/Ball.gd" id="1_nv26m"]
+[ext_resource type="PackedScene" uid="uid://cy2tpoccf1jv6" path="res://Scenes/spell_sprite.tscn" id="2_xxstc"]
+[ext_resource type="Texture2D" uid="uid://b1hgqa8l2wiaw" path="res://res/Explosion SpriteSheet.png" id="3_tt1it"]
+
+[sub_resource type="Shader" id="Shader_yokwg"]
+resource_local_to_scene = true
+code = "shader_type canvas_item;
+
+uniform float gen = 1.0;
+
+void fragment() {
+	float value = (0.5+UV.x)*(gen)*22.0*COLOR.r;
+	if (value > 10.0){
+		
+	}
+	else if(value > 9.5){
+		COLOR.rgb = vec3(1.0);
+	}
+	else{
+		COLOR.a = 0.0;
+		
+	}
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_40047"]
+resource_local_to_scene = true
+shader = SubResource("Shader_yokwg")
+shader_parameter/gen = 0.708
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wd5d7"]
+atlas = ExtResource("3_tt1it")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kmvw2"]
+atlas = ExtResource("3_tt1it")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rf0cf"]
+atlas = ExtResource("3_tt1it")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_clxs3"]
+atlas = ExtResource("3_tt1it")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xvbbl"]
+atlas = ExtResource("3_tt1it")
+region = Rect2(0, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hcbap"]
+atlas = ExtResource("3_tt1it")
+region = Rect2(64, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5hnx2"]
+atlas = ExtResource("3_tt1it")
+region = Rect2(128, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kn4fo"]
+atlas = ExtResource("3_tt1it")
+region = Rect2(192, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tftjv"]
+atlas = ExtResource("3_tt1it")
+region = Rect2(0, 128, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_53rvs"]
+atlas = ExtResource("3_tt1it")
+region = Rect2(64, 128, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pipss"]
+atlas = ExtResource("3_tt1it")
+region = Rect2(128, 128, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wmdoc"]
+atlas = ExtResource("3_tt1it")
+region = Rect2(192, 128, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_078yj"]
+atlas = ExtResource("3_tt1it")
+region = Rect2(0, 192, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fjrxp"]
+atlas = ExtResource("3_tt1it")
+region = Rect2(64, 192, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_l501s"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wd5d7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kmvw2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rf0cf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_clxs3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xvbbl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hcbap")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5hnx2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kn4fo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tftjv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_53rvs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pipss")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wmdoc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_078yj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fjrxp")
+}, {
+"duration": 1.0,
+"texture": null
+}],
+"loop": false,
+"name": &"default",
+"speed": 16.0
+}]
+
+[node name="Ball" type="Node2D"]
+texture_filter = 1
+script = ExtResource("1_nv26m")
+
+[node name="SpellSprite" parent="." instance=ExtResource("2_xxstc")]
+material = SubResource("ShaderMaterial_40047")
+
+[node name="Explosion" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_l501s")
+frame_progress = 0.0226536

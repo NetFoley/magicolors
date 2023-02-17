@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://co0fgwbh8h481"]
+
+[ext_resource type="PackedScene" uid="uid://bvcso44tg3wn5" path="res://Spells/Spell.tscn" id="1_docqh"]
+
+[node name="make_reserve" instance=ExtResource("1_docqh")]
+spell_id = "make_reserve"
+spell_name = "Surcharge mentale"
+spell_desc = "Toutes vos couleurs deviennent la couleur de votre réserve"

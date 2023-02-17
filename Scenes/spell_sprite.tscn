@@ -1,0 +1,86 @@
+[gd_scene load_steps=10 format=3 uid="uid://cy2tpoccf1jv6"]
+
+[ext_resource type="Texture2D" uid="uid://kind10w437do" path="res://res/Fire Bullet Pixel All.png" id="2_25y5s"]
+
+[sub_resource type="Shader" id="Shader_6d486"]
+resource_local_to_scene = true
+code = "shader_type canvas_item;
+
+uniform float gen = 1.0;
+
+void fragment() {
+	float value = (0.5+UV.x)*(gen)*22.0*COLOR.r;
+	if (value > 10.0){
+		
+	}
+	else if(value > 9.5){
+		COLOR.rgb = vec3(1.0);
+	}
+	else{
+		COLOR.a = 0.0;
+		
+	}
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4qou4"]
+resource_local_to_scene = true
+shader = SubResource("Shader_6d486")
+shader_parameter/gen = 0.708
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lclbh"]
+atlas = ExtResource("2_25y5s")
+region = Rect2(80, 112, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xkeqi"]
+atlas = ExtResource("2_25y5s")
+region = Rect2(112, 112, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2lsiw"]
+atlas = ExtResource("2_25y5s")
+region = Rect2(144, 112, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_754fl"]
+atlas = ExtResource("2_25y5s")
+region = Rect2(176, 112, 32, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_g31sq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lclbh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xkeqi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2lsiw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_754fl")
+}],
+"loop": true,
+"name": &"default",
+"speed": 12.65
+}]
+
+[sub_resource type="GDScript" id="GDScript_2ytwx"]
+script/source = "extends AnimatedSprite2D
+
+signal appear_finished
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func appear():
+	set_material(get_material().duplicate() )
+	var tween = create_tween()
+	tween.tween_method(set_gen_value, 0.6, 0.75, 2.0).set_ease(Tween.EASE_OUT)
+	tween.finished.connect(emit_signal.bind(\"appear_finished\"))
+
+func set_gen_value(value):
+	material.set_shader_parameter(\"gen\", value)
+"
+
+[node name="SpellSprite" type="AnimatedSprite2D"]
+material = SubResource("ShaderMaterial_4qou4")
+sprite_frames = SubResource("SpriteFrames_g31sq")
+script = SubResource("GDScript_2ytwx")

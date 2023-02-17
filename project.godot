@@ -6,16 +6,37 @@
 ;   [section] ; section goes between []
 ;   param=value ; assign values to parameters
 
-config_version=4
+config_version=5
 
 [application]
 
 config/name="magicolors"
-config/icon="res://icon.png"
+run/main_scene="res://Battleground.tscn"
+config/features=PackedStringArray("4.0")
+config/icon="res://res/icon.png"
+
+[autoload]
+
+GAME="*res://GAME.tscn"
+
+[display]
+
+window/size/viewport_width=1280
+window/size/viewport_height=720
+window/stretch/mode="canvas_items"
+window/stretch/aspect="keep_width"
 
 [gui]
 
 common/drop_mouse_on_gui_input_disabled=true
+
+[input]
+
+remove={
+"deadzone": 0.5,
+"events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":3,"position":Vector2(477, 20),"global_position":Vector2(482, 74),"factor":1.0,"button_index":2,"pressed":true,"double_click":false,"script":null)
+]
+}
 
 [physics]
 
@@ -23,4 +44,5 @@ common/enable_pause_aware_picking=true
 
 [rendering]
 
-environment/default_environment="res://default_env.tres"
+environment/defaults/default_clear_color=Color(0.00784314, 0.203922, 0.188235, 1)
+environment/default_environment="res://res/default_env.tres"

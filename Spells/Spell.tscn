@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://bvcso44tg3wn5"]
+
+[ext_resource type="Script" path="res://Spells/Spell.gd" id="1_smvci"]
+[ext_resource type="Texture2D" uid="uid://vihfeathgqqs" path="res://res/icon.png" id="2_bnla5"]
+
+[node name="Spell" type="Node" node_paths=PackedStringArray("icon")]
+script = ExtResource("1_smvci")
+icon = NodePath("Icon")
+
+[node name="Icon" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("2_bnla5")

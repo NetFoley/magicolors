@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=3 uid="uid://cua3n1jbalw8b"]
+
+[ext_resource type="PackedScene" uid="uid://bvcso44tg3wn5" path="res://Spells/Spell.tscn" id="1_o4jl7"]
+[ext_resource type="Script" path="res://Spells/List/fireball.gd" id="2_j33g7"]
+[ext_resource type="Texture2D" uid="uid://kind10w437do" path="res://res/Fire Bullet Pixel All.png" id="3_jpdbd"]
+[ext_resource type="PackedScene" uid="uid://btvj3i40vbhqf" path="res://Spells/List/fireball/Ball.tscn" id="4_5wkwi"]
+
+[node name="Fireball" instance=ExtResource("1_o4jl7")]
+script = ExtResource("2_j33g7")
+spell_id = "fire_ball"
+spell_name = "Boule de feu"
+spell_desc = "Lance une boule de feu infligeant 10 dégâts dans une zone 3x3"
+
+[node name="Icon" parent="." index="0"]
+texture = ExtResource("3_jpdbd")
+region_enabled = true
+region_rect = Rect2(80, 112, 32, 16)
+
+[node name="Ball" parent="." index="1" instance=ExtResource("4_5wkwi")]
+visible = false

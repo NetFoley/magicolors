@@ -1,0 +1,28 @@
+[gd_resource type="Theme" load_steps=3 format=3 uid="uid://bg3jq1neuxixx"]
+
+[ext_resource type="FontFile" path="res://res/new_dynamicfont.tres" id="1"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bdww8"]
+bg_color = Color(0.0235294, 0.188235, 0.145098, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0, 0.396078, 0.247059, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+shadow_size = 8
+shadow_offset = Vector2(3, 3)
+anti_aliasing_size = 1.487
+
+[resource]
+default_font = ExtResource("1")
+Label/font_sizes/font_size = 22
+MarginContainer/constants/margin_bottom = 10
+MarginContainer/constants/margin_left = 10
+MarginContainer/constants/margin_right = 10
+MarginContainer/constants/margin_top = 10
+Panel/styles/panel = SubResource("StyleBoxFlat_bdww8")
+VBoxContainer/constants/separation = 5
