@@ -1,8 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://d0i2tfqxt0d7g"]
+[gd_scene load_steps=3 format=3 uid="uid://d0i2tfqxt0d7g"]
 
 [ext_resource type="PackedScene" uid="uid://bvcso44tg3wn5" path="res://Spells/Spell.tscn" id="1_v2gyd"]
+[ext_resource type="Script" path="res://Spells/List/invoc_reserve.gd" id="2_122ml"]
 
 [node name="InvocReserve" instance=ExtResource("1_v2gyd")]
+script = ExtResource("2_122ml")
 spell_id = "invoc_reserve"
 spell_name = "Invocation guidée"
 spell_desc = "Invoque une créature de la couleur de la réserve"

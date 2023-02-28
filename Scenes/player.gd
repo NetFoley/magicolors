@@ -19,12 +19,14 @@ extends Node2D
 func _ready():
 	$AnimNode/AnimatedSprite2D2/AnimationPlayer.play("Idle")
 	flipped = flipped
+	if Engine.is_editor_hint():
+		return
 	if flipped:
 		GAME.player2 = self
 	else:
 		GAME.player1 = self
 
-func cast(spell):
+func cast(spell, target):
 	print(name + " casted " + spell.name + " !")
 	$AnimNode/Node2D/Sprite2D/AnimationPlayer.play("Cast")
-	spell.launch()
+	spell.launch(target)

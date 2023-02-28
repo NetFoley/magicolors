@@ -1,15 +1,19 @@
-[gd_scene load_steps=11 format=3 uid="uid://dt45rgg8nbwsp"]
+[gd_scene load_steps=15 format=3 uid="uid://cnhblbba4j373"]
 
 [ext_resource type="Theme" uid="uid://bg3jq1neuxixx" path="res://res/new_theme.tres" id="1_cunch"]
-[ext_resource type="Script" path="res://Reserve.gd" id="2_1ldh1"]
+[ext_resource type="Script" path="res://UI/Reserve.gd" id="2_fbog8"]
 [ext_resource type="PackedScene" uid="uid://c18t7edyv5yr6" path="res://UI/ColorButton.tscn" id="3_sktfk"]
-[ext_resource type="Script" path="res://ColorPanel.gd" id="4_3h104"]
-[ext_resource type="Script" path="res://Colors.gd" id="5_jgp8u"]
-[ext_resource type="Script" path="res://SpellMaker.gd" id="6_2621t"]
-[ext_resource type="Script" path="res://DropColor.gd" id="7_o2f8g"]
-[ext_resource type="AudioStream" uid="uid://cwx38lgsuokh0" path="res://La Marseillaise French National Anthem FrEn.mp3" id="8_d6qhp"]
+[ext_resource type="Script" path="res://UI/ColorPanel.gd" id="4_ulrkx"]
+[ext_resource type="Script" path="res://UI/Colors.gd" id="5_rud7d"]
+[ext_resource type="Script" path="res://UI/SpellFlow.gd" id="6_gd841"]
+[ext_resource type="Script" path="res://UI/SpellMaker.gd" id="7_in54p"]
+[ext_resource type="Script" path="res://UI/DropColor.gd" id="8_p6t5y"]
 [ext_resource type="PackedScene" uid="uid://ef0syu5snnng" path="res://UI/close_button.tscn" id="9_aefkk"]
+[ext_resource type="AudioStream" uid="uid://cwx38lgsuokh0" path="res://res/La Marseillaise French National Anthem FrEn.mp3" id="9_mb512"]
 [ext_resource type="Script" path="res://UI/SpellContainer.gd" id="10_fw5ec"]
+[ext_resource type="Script" path="res://UI/CancelBut.gd" id="11_y8md7"]
+[ext_resource type="Script" path="res://UI/TurnLabel.gd" id="12_3tqid"]
+[ext_resource type="Script" path="res://UI/EndTurnBut.gd" id="13_v5sc7"]
 
 [node name="UI" type="Control"]
 texture_filter = 2
@@ -30,52 +34,58 @@ offset_left = 171.0
 offset_top = -141.0
 offset_right = 231.0
 offset_bottom = -81.0
-script = ExtResource("2_1ldh1")
+script = ExtResource("2_fbog8")
 
 [node name="ColorButton" parent="Reserve" instance=ExtResource("3_sktfk")]
 layout_mode = 2
 
-[node name="PanelContainer" type="PanelContainer" parent="."]
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
 layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
+anchors_preset = -1
+anchor_left = 0.1
 anchor_top = 1.0
-anchor_right = 0.5
+anchor_right = 0.9
 anchor_bottom = 1.0
-offset_left = -168.0
-offset_top = -64.0
-offset_right = 168.0
+offset_top = -72.0
 grow_horizontal = 2
 grow_vertical = 0
-script = ExtResource("4_3h104")
+follow_focus = true
+vertical_scroll_mode = 0
 
-[node name="Colors" type="HBoxContainer" parent="PanelContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="ScrollContainer"]
+custom_minimum_size = Vector2(500, 0)
 layout_mode = 2
-size_flags_horizontal = 4
+size_flags_horizontal = 6
+size_flags_vertical = 4
+script = ExtResource("4_ulrkx")
+
+[node name="Colors" type="HBoxContainer" parent="ScrollContainer/PanelContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
 size_flags_vertical = 4
 theme_override_constants/separation = 4
 alignment = 1
-script = ExtResource("5_jgp8u")
+script = ExtResource("5_rud7d")
 
-[node name="ColorButton" parent="PanelContainer/Colors" instance=ExtResource("3_sktfk")]
+[node name="ColorButton" parent="ScrollContainer/PanelContainer/Colors" instance=ExtResource("3_sktfk")]
 layout_mode = 2
 
-[node name="ColorButton2" parent="PanelContainer/Colors" instance=ExtResource("3_sktfk")]
+[node name="ColorButton2" parent="ScrollContainer/PanelContainer/Colors" instance=ExtResource("3_sktfk")]
 layout_mode = 2
 color = 1
 
-[node name="ColorButton3" parent="PanelContainer/Colors" instance=ExtResource("3_sktfk")]
+[node name="ColorButton3" parent="ScrollContainer/PanelContainer/Colors" instance=ExtResource("3_sktfk")]
 layout_mode = 2
 color = 2
 
-[node name="ColorButton4" parent="PanelContainer/Colors" instance=ExtResource("3_sktfk")]
+[node name="ColorButton4" parent="ScrollContainer/PanelContainer/Colors" instance=ExtResource("3_sktfk")]
 layout_mode = 2
 color = 3
 
-[node name="ColorButton5" parent="PanelContainer/Colors" instance=ExtResource("3_sktfk")]
+[node name="ColorButton5" parent="ScrollContainer/PanelContainer/Colors" instance=ExtResource("3_sktfk")]
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="SpellContainer" type="MarginContainer" parent="."]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
@@ -84,12 +94,19 @@ grow_horizontal = 2
 theme_override_constants/margin_left = 200
 theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 200
+script = ExtResource("10_fw5ec")
 
-[node name="SpellContainer" type="HFlowContainer" parent="MarginContainer"]
+[node name="SpellFlow" type="HFlowContainer" parent="SpellContainer"]
 layout_mode = 2
 size_flags_vertical = 0
 alignment = 1
-script = ExtResource("10_fw5ec")
+script = ExtResource("6_gd841")
+
+[node name="SpellCount" type="Label" parent="SpellContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+text = "0/5"
 
 [node name="SpellMaker" type="Control" parent="." node_paths=PackedStringArray("nb_label")]
 anchors_preset = 0
@@ -101,7 +118,7 @@ offset_left = -447.5
 offset_top = -196.5
 offset_right = 447.5
 offset_bottom = 196.5
-script = ExtResource("6_2621t")
+script = ExtResource("7_in54p")
 nb_label = NodePath("MarginContainer/VBoxContainer/Label")
 
 [node name="Panel" type="Panel" parent="SpellMaker"]
@@ -138,7 +155,7 @@ custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
 size_flags_horizontal = 4
 alignment = 1
-script = ExtResource("7_o2f8g")
+script = ExtResource("8_p6t5y")
 
 [node name="HSeparator2" type="HSeparator" parent="SpellMaker/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -174,8 +191,53 @@ theme_override_font_sizes/font_size = 22
 text = "Créer votre sort"
 
 [node name="bluewhitered" type="AudioStreamPlayer" parent="SpellMaker"]
-stream = ExtResource("8_d6qhp")
+stream = ExtResource("9_mb512")
 
 [node name="Close" parent="SpellMaker" instance=ExtResource("9_aefkk")]
 layout_mode = 1
 offset_left = -30.0
+
+[node name="CancelBut" type="Button" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -68.0
+offset_top = -13.5
+offset_bottom = 13.5
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_font_sizes/font_size = 31
+action_mode = 0
+text = "CANCEL"
+script = ExtResource("11_y8md7")
+
+[node name="TurnLabel" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 27.0
+grow_horizontal = 2
+text = "Tour 0"
+script = ExtResource("12_3tqid")
+
+[node name="EndTurnBut" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -127.0
+offset_top = -39.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_font_sizes/font_size = 38
+text = "Fin du tour"
+script = ExtResource("13_v5sc7")

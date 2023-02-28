@@ -6,10 +6,11 @@ class_name Spell
 @export var spell_desc = ""
 @export var icon : Sprite2D
 
-func launch():
+func launch(_target):
 	print("default Launch spell " + spell_id)
 
-func get_targets():
+func get_target():
+	GAME.selecting.emit(true)
 	print("default get targets " + spell_id)
 
 func get_icon():

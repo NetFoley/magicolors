@@ -1,0 +1,34 @@
+[gd_scene load_steps=4 format=3 uid="uid://dcrmgvlucwn8t"]
+
+[ext_resource type="PackedScene" uid="uid://dquvnnqcn2rmc" path="res://Scenes/Creatures/Creature.tscn" id="1_mtdku"]
+
+[sub_resource type="Shader" id="Shader_atsyp"]
+resource_local_to_scene = true
+code = "shader_type canvas_item;
+
+uniform float gen = 1.0;
+
+void fragment() {
+	float value = (0.5+UV.x)*(gen)*22.0*COLOR.r;
+	if (value > 10.0){
+		
+	}
+	else if(value > 9.5){
+		COLOR.rgb = vec3(1.0);
+	}
+	else{
+		COLOR.a = 0.0;
+		
+	}
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_v0y65"]
+resource_local_to_scene = true
+shader = SubResource("Shader_atsyp")
+shader_parameter/gen = 0.708
+
+[node name="Red1" instance=ExtResource("1_mtdku")]
+
+[node name="SpellSprite" parent="." index="0"]
+material = SubResource("ShaderMaterial_v0y65")

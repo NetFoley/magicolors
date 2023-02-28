@@ -1,0 +1,43 @@
+[gd_scene load_steps=3 format=3 uid="uid://c7k5umi21myyf"]
+
+[sub_resource type="Animation" id="Animation_nsb35"]
+resource_name = "Idle"
+length = 0.45
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimNode:skew")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.122173, -0.122173]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimNode:scale")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1, 1.075), Vector2(1, 1), Vector2(1, 1.075)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_psdt3"]
+_data = {
+"Idle": SubResource("Animation_nsb35")
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer"]
+root_node = NodePath("../../..")
+speed_scale = 0.2
+libraries = {
+"": SubResource("AnimationLibrary_psdt3")
+}

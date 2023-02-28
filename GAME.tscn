@@ -7,3 +7,5 @@ script = ExtResource("1")
 color_but_res = "res://UI/ColorButton.tscn"
 
 [node name="Spells" type="Node" parent="."]
+
+[node name="Creatures" type="Node" parent="."]

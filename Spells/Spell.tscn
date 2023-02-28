@@ -8,5 +8,6 @@ script = ExtResource("1_smvci")
 icon = NodePath("Icon")
 
 [node name="Icon" type="Sprite2D" parent="."]
+visible = false
 texture_filter = 1
 texture = ExtResource("2_bnla5")

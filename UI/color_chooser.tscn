@@ -1,0 +1,60 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://UI/Color_Chooser.gd" id="1_tr3x5"]
+[ext_resource type="PackedScene" uid="uid://c18t7edyv5yr6" path="res://UI/ColorButton.tscn" id="2_qme6x"]
+
+[node name="ColorChooser" type="PanelContainer"]
+visible = false
+anchors_preset = -1
+anchor_left = 0.1
+anchor_top = 0.1
+anchor_right = 0.9
+anchor_bottom = 0.9
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_tr3x5")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+text = "Choisissez un pack de couleur qui "
+
+[node name="HFlowContainer" type="HFlowContainer" parent="."]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/h_separation = 41
+theme_override_constants/v_separation = 14
+alignment = 1
+
+[node name="CenterContainer" type="CenterContainer" parent="HFlowContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="HFlowContainer" type="HFlowContainer" parent="HFlowContainer/CenterContainer"]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+alignment = 1
+
+[node name="ColorButton" parent="HFlowContainer/CenterContainer/HFlowContainer" instance=ExtResource("2_qme6x")]
+layout_mode = 2
+
+[node name="ColorButton2" parent="HFlowContainer/CenterContainer/HFlowContainer" instance=ExtResource("2_qme6x")]
+layout_mode = 2
+
+[node name="ColorButton3" parent="HFlowContainer/CenterContainer/HFlowContainer" instance=ExtResource("2_qme6x")]
+layout_mode = 2
+
+[node name="ColorButton4" parent="HFlowContainer/CenterContainer/HFlowContainer" instance=ExtResource("2_qme6x")]
+layout_mode = 2
+
+[node name="ColorButton5" parent="HFlowContainer/CenterContainer/HFlowContainer" instance=ExtResource("2_qme6x")]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="HFlowContainer/CenterContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Prendre"
