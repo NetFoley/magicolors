@@ -1,11 +1,12 @@
-res://Scenes/spell_sprite.tscn
-res://res/new_theme.tres
 res://Scenes/Battleground.tscn
+res://res/new_theme.tres
 res://UI/ui.tscn
-res://Scenes/player.tscn
 res://Spells/List/fireball/Ball.tscn
 res://Spells/List/fireball.tscn
 res://Spells/Spell.tscn
 res://GAME.tscn
 res://Scenes/Creatures/Creature.tscn
 res://Spells/List/invoc_reserve.tscn
+res://Scenes/spell_sprite.tscn
+res://Scenes/Player_anim.tscn
+res://Scenes/player.tscn
