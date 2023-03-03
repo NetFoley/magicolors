@@ -17,4 +17,3 @@ region_enabled = true
 region_rect = Rect2(80, 112, 32, 16)
 
 [node name="Ball" parent="." index="1" instance=ExtResource("4_5wkwi")]
-visible = false

@@ -1,8 +1,7 @@
-[gd_scene load_steps=15 format=3 uid="uid://cnhblbba4j373"]
+[gd_scene load_steps=14 format=3 uid="uid://cnhblbba4j373"]
 
 [ext_resource type="Theme" uid="uid://bg3jq1neuxixx" path="res://res/new_theme.tres" id="1_cunch"]
 [ext_resource type="Script" path="res://UI/Reserve.gd" id="2_fbog8"]
-[ext_resource type="PackedScene" uid="uid://c18t7edyv5yr6" path="res://UI/ColorButton.tscn" id="3_sktfk"]
 [ext_resource type="Script" path="res://UI/ColorPanel.gd" id="4_ulrkx"]
 [ext_resource type="Script" path="res://UI/Colors.gd" id="5_rud7d"]
 [ext_resource type="Script" path="res://UI/SpellFlow.gd" id="6_gd841"]
@@ -36,9 +35,6 @@ offset_right = 231.0
 offset_bottom = -81.0
 script = ExtResource("2_fbog8")
 
-[node name="ColorButton" parent="Reserve" instance=ExtResource("3_sktfk")]
-layout_mode = 2
-
 [node name="ScrollContainer" type="ScrollContainer" parent="."]
 layout_mode = 1
 anchors_preset = -1
@@ -66,24 +62,6 @@ size_flags_vertical = 4
 theme_override_constants/separation = 4
 alignment = 1
 script = ExtResource("5_rud7d")
-
-[node name="ColorButton" parent="ScrollContainer/PanelContainer/Colors" instance=ExtResource("3_sktfk")]
-layout_mode = 2
-
-[node name="ColorButton2" parent="ScrollContainer/PanelContainer/Colors" instance=ExtResource("3_sktfk")]
-layout_mode = 2
-color = 1
-
-[node name="ColorButton3" parent="ScrollContainer/PanelContainer/Colors" instance=ExtResource("3_sktfk")]
-layout_mode = 2
-color = 2
-
-[node name="ColorButton4" parent="ScrollContainer/PanelContainer/Colors" instance=ExtResource("3_sktfk")]
-layout_mode = 2
-color = 3
-
-[node name="ColorButton5" parent="ScrollContainer/PanelContainer/Colors" instance=ExtResource("3_sktfk")]
-layout_mode = 2
 
 [node name="SpellContainer" type="MarginContainer" parent="."]
 layout_mode = 1

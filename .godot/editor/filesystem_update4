@@ -10,3 +10,7 @@ res://Spells/List/invoc_reserve.tscn
 res://Scenes/spell_sprite.tscn
 res://Scenes/Player_anim.tscn
 res://Scenes/player.tscn
+res://UI/ColorButton.tscn
+Scenes/Creatures/Creature.tscn
+Spells/List/fireball/Ball.tscn
+UI/ColorButton.tscn

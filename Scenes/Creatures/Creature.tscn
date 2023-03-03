@@ -25,7 +25,7 @@ void fragment() {
 }
 "
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_kkl18"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7uf6a"]
 resource_local_to_scene = true
 shader = SubResource("Shader_atsyp")
 shader_parameter/gen = 1.0
@@ -71,5 +71,5 @@ texture_filter = 1
 script = ExtResource("1_p1ic5")
 
 [node name="Sprite" parent="." instance=ExtResource("2_rcetl")]
-material = SubResource("ShaderMaterial_kkl18")
+material = SubResource("ShaderMaterial_7uf6a")
 sprite_frames = SubResource("SpriteFrames_aiedk")
