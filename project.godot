@@ -11,13 +11,14 @@ config_version=5
 [application]
 
 config/name="magicolors"
-run/main_scene="res://Scenes/Battleground.tscn"
+run/main_scene="res://UI/Menu.tscn"
 config/features=PackedStringArray("4.0")
 config/icon="res://res/icon.png"
 
 [autoload]
 
-GAME="*res://GAME.tscn"
+GAME="*res://GLOBAL/GAME.tscn"
+NETWORK="*res://GLOBAL/NETWORK.tscn"
 
 [display]
 

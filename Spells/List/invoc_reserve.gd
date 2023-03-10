@@ -3,12 +3,9 @@ extends Spell
 
 # Called when the node enters the scene tree for the first time.
 
-
-func launch(target):
-	var crea = GAME.spawn_creature(0)
-	GAME.get_player().add_child(crea)
-	crea.appear()
-	crea.global_position = Vector2(target)
+func launch(target, sender):
+#	var _crea = GAME.spawn_creature(0, target["position"], GAME.local_player)
+	var _crea = GAME.spawn_creature(0, target["position"], sender)
 
 func get_target():
-	GAME.get_tile()
+	GAME.get_targets({"type": GAME.tile_map.select_type.FREE_TILE})

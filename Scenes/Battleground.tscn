@@ -1,12 +1,16 @@
-[gd_scene load_steps=10 format=3 uid="uid://b8vyq4w81bpml"]
+[gd_scene load_steps=14 format=3 uid="uid://b8vyq4w81bpml"]
 
 [ext_resource type="Script" path="res://Scenes/Battleground.gd" id="1_8h6iu"]
 [ext_resource type="PackedScene" uid="uid://cnhblbba4j373" path="res://UI/ui.tscn" id="1_hn8y0"]
 [ext_resource type="Script" path="res://UI/Debug.gd" id="2_m6b6y"]
 [ext_resource type="Texture2D" uid="uid://30leiholxpcn" path="res://res/0x72_DungeonTilesetII_v1.4.png" id="3_g66mf"]
+[ext_resource type="Script" path="res://Scenes/CheckButton.gd" id="3_i3w7o"]
+[ext_resource type="Script" path="res://Scenes/DebugUI.gd" id="3_v70pw"]
 [ext_resource type="PackedScene" uid="uid://end5hd6isluf" path="res://Scenes/player.tscn" id="4_4r4o0"]
 [ext_resource type="Script" path="res://Scenes/TileMap.gd" id="4_x6h0e"]
 [ext_resource type="Texture2D" uid="uid://dfdl5sm3kvhqy" path="res://res/select_cursor.png" id="5_uithd"]
+[ext_resource type="Script" path="res://Scenes/ValidTargets.gd" id="7_b1rot"]
+[ext_resource type="PackedScene" uid="uid://bn02kafsp5aul" path="res://Scenes/Creatures/crystal.tscn" id="7_dw85s"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_33fsj"]
 resource_name = "ground"
@@ -551,25 +555,40 @@ script = ExtResource("1_8h6iu")
 [node name="UI" parent="CanvasLayer" instance=ExtResource("1_hn8y0")]
 
 [node name="Debug" type="HBoxContainer" parent="CanvasLayer"]
-offset_right = 94.0
+offset_right = 40.0
 offset_bottom = 40.0
+script = ExtResource("3_v70pw")
+
+[node name="DebugColors" type="HBoxContainer" parent="CanvasLayer/Debug"]
+layout_mode = 2
 script = ExtResource("2_m6b6y")
 
-[node name="debugRed" type="Button" parent="CanvasLayer/Debug"]
+[node name="debugRed" type="Button" parent="CanvasLayer/Debug/DebugColors"]
 layout_mode = 2
 text = "R"
 
-[node name="debugGreen" type="Button" parent="CanvasLayer/Debug"]
+[node name="debugGreen" type="Button" parent="CanvasLayer/Debug/DebugColors"]
 layout_mode = 2
 text = "G"
 
-[node name="debugBlue" type="Button" parent="CanvasLayer/Debug"]
+[node name="debugBlue" type="Button" parent="CanvasLayer/Debug/DebugColors"]
 layout_mode = 2
 text = "B"
 
-[node name="debugWhite" type="Button" parent="CanvasLayer/Debug"]
+[node name="debugWhite" type="Button" parent="CanvasLayer/Debug/DebugColors"]
 layout_mode = 2
 text = "W"
+
+[node name="CheckButton" type="CheckButton" parent="CanvasLayer/Debug"]
+layout_mode = 2
+text = "Player"
+script = ExtResource("3_i3w7o")
+
+[node name="Label" type="Label" parent="CanvasLayer/Debug"]
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="CanvasLayer/Debug"]
+layout_mode = 2
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(172, 58)
@@ -582,7 +601,7 @@ texture_filter = 1
 tile_set = SubResource("TileSet_avoqi")
 format = 2
 layer_0/name = "ground"
-layer_0/tile_data = PackedInt32Array(65538, 65536, 4, 131074, 65536, 4, 196610, 65536, 4, 262146, 65536, 4, 327682, 65536, 4, 393218, 65536, 4, 458754, 65536, 4, 65539, 65536, 4, 131075, 65536, 4, 196611, 65536, 4, 262147, 65536, 4, 327683, 65536, 4, 393219, 65536, 4, 458755, 65536, 4, 65540, 65536, 4, 131076, 65536, 4, 196612, 65536, 4, 262148, 65536, 4, 327684, 65536, 4, 393220, 65536, 4, 458756, 65536, 4, 65541, 65536, 4, 131077, 65536, 4, 196613, 65536, 4, 262149, 65536, 4, 327685, 65536, 4, 393221, 65536, 4, 458757, 65536, 4, 65542, 65536, 4, 131078, 65536, 4, 196614, 65536, 4, 262150, 65536, 4, 327686, 65536, 4, 393222, 65536, 4, 458758, 65536, 4, 65543, 65536, 4, 131079, 65536, 4, 196615, 65536, 4, 262151, 65536, 4, 327687, 65536, 4, 393223, 65536, 4, 458759, 65536, 4, 65544, 65536, 4, 131080, 65536, 4, 196616, 65536, 4, 262152, 65536, 4, 327688, 65536, 4, 393224, 65536, 4, 458760, 65536, 4, 65545, 65536, 4, 131081, 65536, 4, 196617, 65536, 4, 262153, 65536, 4, 327689, 65536, 4, 393225, 65536, 4, 458761, 65536, 4, 65546, 65536, 4, 131082, 65536, 4, 196618, 65536, 4, 262154, 65536, 4, 327690, 65536, 4, 393226, 65536, 4, 458762, 65536, 4, 65547, 65536, 4, 131083, 65536, 4, 196619, 65536, 4, 262155, 65536, 4, 327691, 65536, 4, 393227, 65536, 4, 458763, 65536, 4, 65548, 65536, 4, 131084, 65536, 4, 196620, 65536, 4, 262156, 65536, 4, 327692, 65536, 4, 393228, 65536, 4, 458764, 65536, 4, 65549, 65536, 4, 131085, 65536, 4, 196621, 65536, 4, 262157, 65536, 4, 327693, 65536, 4, 393229, 65536, 4, 458765, 65536, 4, 65550, 65536, 4, 131086, 65536, 4, 196622, 65536, 4, 262158, 65536, 4, 327694, 65536, 4, 393230, 65536, 4, 458766, 65536, 4, 65551, 65536, 4, 131087, 65536, 4, 196623, 65536, 4, 262159, 65536, 4, 327695, 65536, 4, 393231, 65536, 4, 458767, 65536, 4, 65552, 65536, 4, 131088, 65536, 4, 196624, 65536, 4, 262160, 65536, 4, 327696, 65536, 4, 393232, 65536, 4, 458768, 65536, 4, 65553, 65536, 4, 131089, 65536, 4, 196625, 65536, 4, 262161, 65536, 4, 327697, 65536, 4, 393233, 65536, 4, 458769, 65536, 4, 65554, 65536, 4, 131090, 65536, 4, 196626, 65536, 4, 262162, 65536, 4, 327698, 65536, 4, 393234, 65536, 4, 458770, 65536, 4, 65555, 65536, 4, 131091, 65536, 4, 196627, 65536, 4, 262163, 65536, 4, 327699, 65536, 4, 393235, 65536, 4, 458771, 65536, 4)
+layer_0/tile_data = PackedInt32Array(65538, 65536, 4, 131074, 65536, 4, 196610, 65536, 4, 262146, 65536, 4, 327682, 65536, 4, 393218, 65536, 4, 458754, 65536, 4, 65539, 65536, 4, 131075, 65536, 4, 196611, 65536, 4, 327683, 65536, 4, 393219, 65536, 4, 458755, 65536, 4, 65540, 65536, 4, 131076, 65536, 4, 196612, 65536, 4, 262148, 65536, 4, 327684, 65536, 4, 393220, 65536, 4, 458756, 65536, 4, 65541, 65536, 4, 131077, 65536, 4, 196613, 65536, 4, 262149, 65536, 4, 327685, 65536, 4, 393221, 65536, 4, 458757, 65536, 4, 65542, 65536, 4, 131078, 65536, 4, 196614, 65536, 4, 262150, 65536, 4, 327686, 65536, 4, 393222, 65536, 4, 458758, 65536, 4, 65543, 65536, 4, 131079, 65536, 4, 196615, 65536, 4, 262151, 65536, 4, 327687, 65536, 4, 393223, 65536, 4, 458759, 65536, 4, 65544, 65536, 4, 131080, 65536, 4, 196616, 65536, 4, 262152, 65536, 4, 327688, 65536, 4, 393224, 65536, 4, 458760, 65536, 4, 65545, 65536, 4, 131081, 65536, 4, 196617, 65536, 4, 262153, 65536, 4, 327689, 65536, 4, 393225, 65536, 4, 458761, 65536, 4, 65546, 65536, 4, 131082, 65536, 4, 196618, 65536, 4, 262154, 65536, 4, 327690, 65536, 4, 393226, 65536, 4, 458762, 65536, 4, 65547, 65536, 4, 131083, 65536, 4, 196619, 65536, 4, 262155, 65536, 4, 327691, 65536, 4, 393227, 65536, 4, 458763, 65536, 4, 65548, 65536, 4, 131084, 65536, 4, 196620, 65536, 4, 262156, 65536, 4, 327692, 65536, 4, 393228, 65536, 4, 458764, 65536, 4, 65549, 65536, 4, 131085, 65536, 4, 196621, 65536, 4, 262157, 65536, 4, 327693, 65536, 4, 393229, 65536, 4, 458765, 65536, 4, 65550, 65536, 4, 131086, 65536, 4, 196622, 65536, 4, 262158, 65536, 4, 327694, 65536, 4, 393230, 65536, 4, 458766, 65536, 4, 65551, 65536, 4, 131087, 65536, 4, 196623, 65536, 4, 262159, 65536, 4, 327695, 65536, 4, 393231, 65536, 4, 458767, 65536, 4, 65552, 65536, 4, 131088, 65536, 4, 196624, 65536, 4, 262160, 65536, 4, 327696, 65536, 4, 393232, 65536, 4, 458768, 65536, 4, 65553, 65536, 4, 131089, 65536, 4, 196625, 65536, 4, 262161, 65536, 4, 327697, 65536, 4, 393233, 65536, 4, 458769, 65536, 4, 65554, 65536, 4, 131090, 65536, 4, 196626, 65536, 4, 262162, 65536, 4, 327698, 65536, 4, 393234, 65536, 4, 458770, 65536, 4, 65555, 65536, 4, 131091, 65536, 4, 196627, 65536, 4, 262163, 65536, 4, 327699, 65536, 4, 393235, 65536, 4, 458771, 65536, 4, 262147, 65536, 4)
 layer_1/name = "low_wall"
 layer_1/enabled = true
 layer_1/modulate = Color(1, 1, 1, 1)
@@ -596,7 +615,7 @@ layer_2/modulate = Color(1, 1, 1, 1)
 layer_2/y_sort_enabled = true
 layer_2/y_sort_origin = 107
 layer_2/z_index = 1
-layer_2/tile_data = PackedInt32Array(524289, 65536, 1, 524290, 65536, 1, 524291, 65536, 1, 524292, 65536, 1, 524293, 65536, 1, 524294, 65536, 1, 524295, 65536, 1, 524296, 65536, 1, 524297, 65536, 1, 524298, 65536, 1, 524299, 65536, 1, 524300, 65536, 1, 524301, 65536, 1, 524302, 65536, 1, 524303, 65536, 1, 524304, 65536, 1, 524305, 65536, 1, 524306, 65536, 1, 524307, 65536, 1, 524308, 65536, 1)
+layer_2/tile_data = PackedInt32Array(524289, 65536, 1, 524290, 65536, 1, 524291, 65536, 1, 524296, 65536, 1, 524297, 65536, 1, 524298, 65536, 1, 524299, 65536, 1, 524300, 65536, 1, 524301, 65536, 1, 524302, 65536, 1, 524303, 65536, 1, 524304, 65536, 1, 524305, 65536, 1, 524306, 65536, 1, 524307, 65536, 1, 524308, 65536, 1, 524295, 65536, 1, 524294, 65536, 1, 524293, 65536, 1, 524292, 65536, 1)
 script = ExtResource("4_x6h0e")
 
 [node name="SelectCursor" type="Sprite2D" parent="TileMap"]
@@ -606,7 +625,24 @@ scale = Vector2(0.75, 0.75)
 texture = ExtResource("5_uithd")
 offset = Vector2(0, -2)
 
-[node name="Player" parent="." instance=ExtResource("4_4r4o0")]
+[node name="Creatures" type="Node2D" parent="TileMap"]
+
+[node name="Crystal" parent="TileMap/Creatures" instance=ExtResource("7_dw85s")]
+position = Vector2(56, 48)
+start_player = "Player1"
+end_turn_life = 3
+heal_range = 2
+
+[node name="Crystal2" parent="TileMap/Creatures" instance=ExtResource("7_dw85s")]
+position = Vector2(296, 50)
+start_player = "Player2"
+end_turn_life = 3
+heal_range = 2
+
+[node name="ValidTargets" type="Node2D" parent="TileMap"]
+script = ExtResource("7_b1rot")
+
+[node name="Player1" parent="." instance=ExtResource("4_4r4o0")]
 position = Vector2(-24, 30)
 
 [node name="Player2" parent="." instance=ExtResource("4_4r4o0")]

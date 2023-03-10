@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://dquvnnqcn2rmc"]
+[gd_scene load_steps=13 format=3 uid="uid://dquvnnqcn2rmc"]
 
 [ext_resource type="Texture2D" uid="uid://30leiholxpcn" path="res://res/0x72_DungeonTilesetII_v1.4.png" id="1_iyf6o"]
 [ext_resource type="Script" path="res://Scenes/Creatures/Creature.gd" id="1_p1ic5"]
@@ -25,7 +25,7 @@ void fragment() {
 }
 "
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_7uf6a"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4qt7q"]
 resource_local_to_scene = true
 shader = SubResource("Shader_atsyp")
 shader_parameter/gen = 1.0
@@ -66,10 +66,50 @@ animations = [{
 "speed": 12.65
 }]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yu63v"]
+bg_color = Color(0, 0, 0, 0.345098)
+border_color = Color(1, 1, 1, 1)
+corner_detail = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o0nsd"]
+bg_color = Color(1, 0, 0, 1)
+
 [node name="Creature" type="Node2D"]
 texture_filter = 1
 script = ExtResource("1_p1ic5")
+max_life = 10
+dmg = 5
 
 [node name="Sprite" parent="." instance=ExtResource("2_rcetl")]
-material = SubResource("ShaderMaterial_7uf6a")
+material = SubResource("ShaderMaterial_4qt7q")
 sprite_frames = SubResource("SpriteFrames_aiedk")
+
+[node name="SelectButton" type="Button" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -5.0
+offset_top = -5.0
+offset_right = 5.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_mode = 1
+mouse_filter = 1
+mouse_default_cursor_shape = 2
+theme_override_constants/outline_size = 0
+theme_override_constants/h_separation = 0
+action_mode = 0
+flat = true
+
+[node name="LifeBar" type="ProgressBar" parent="."]
+offset_left = -13.0
+offset_top = -20.0
+offset_right = 14.0
+offset_bottom = -15.0
+theme_override_styles/background = SubResource("StyleBoxFlat_yu63v")
+theme_override_styles/fill = SubResource("StyleBoxFlat_o0nsd")
+value = 60.0
+show_percentage = false

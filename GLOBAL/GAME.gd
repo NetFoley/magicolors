@@ -90,16 +90,19 @@ signal new_spell(spell_id)
 signal target_selected(target)
 signal selecting(value)
 signal cancel_selection()
+signal new_creature(creature, player)
 
 var dir_creature_path = "res://Scenes/Creatures/List/"
 var creature_list = [Creature]
 var dir_spell_path = "res://Spells/List/"
 var spell_list = [Spell]
+var end_label
 
 var color_container = null
 
 var player1 : Node2D
 var player2 : Node2D
+var local_player
 
 var tile_map = null
 
@@ -108,24 +111,60 @@ var tile_map = null
 @onready var spells_node = get_node("Spells")
 @onready var creatures_node = get_node("Creatures")
 
+var emetter
+
 func _ready():
 	load_spells()
 	load_creatures()
+	target_selected.connect(_on_target_selected)
 	var __ = connect("turn_changed", _on_new_turn)
+	cancel_selection.connect(_on_cancel_selection)
 	
-func get_player():
+	
+func get_player() -> String:
+	if NETWORK.side == "Server":
+		return "Player1"
+	else:
+		return "Player2"
+	if local_player:
+		return local_player
+	return "Player1"
+	
+func get_player_object(player : String) -> Node:
+	if player == "Player1":
+		return player1
+	if player == "Player2":
+		return player2
+	push_error("Invalid player string")
 	return player1
 	
-func get_mental_capacity():
-	return 5
+func get_mental_capacity(player : Node) -> int:
+	var cap = 5
+	if is_instance_valid(player):
+		cap -= player.creatures.size()
+	return cap 
 	
 func is_our_turn():
-	return true
+	var mod = (turn % 2)
+	if get_player() == "Player1":
+		return mod == 1
+	else:
+		return mod == 0
+	return false
 	
-func spawn_creature(color):
+func spawn_creature(color, pos, player):
 	for child in creatures_node.get_children():
 		if child.color == color:
 			var crea = child.duplicate()
+			crea.visible = true
+			crea.player = player
+			tile_map.add_creature(crea)
+			var player_obj = get_player_object(player)
+			player_obj.creatures.append(crea)
+			crea.set_multiplayer_authority(multiplayer.get_remote_sender_id())
+			crea.appear()
+			crea.global_position = Vector2(pos)
+			new_creature.emit(crea, player)
 			return crea
 	return null
 	
@@ -215,7 +254,22 @@ func get_spell(id):
 			print("Found ! " + spell.name)
 			return spell
 
-func get_tile():
+func get_targets(info : Dictionary):
 	if !tile_map:
 		return
-	tile_map.selecting = true
+	GAME.selecting.emit(true)
+	tile_map.get_tiles(info)
+	
+func end_game(crystal):
+	if crystal.player == get_player():
+		end_label.text = "DEFAITE"
+	else:
+		end_label.text = "VICTOIRE"
+	end_label.visible = true
+
+func _on_target_selected(target):
+	selecting.emit(false)
+	emetter.target_selected(target)
+
+func _on_cancel_selection():
+	selecting.emit(false)

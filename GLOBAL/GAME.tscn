@@ -1,9 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://od4x16f0bmyu"]
+[gd_scene load_steps=2 format=3 uid="uid://bevxrh8833q0a"]
 
-[ext_resource type="Script" path="res://GAME.gd" id="1"]
+[ext_resource type="Script" path="res://GLOBAL/GAME.gd" id="1_itph7"]
 
 [node name="GAME" type="Node"]
-script = ExtResource("1")
+script = ExtResource("1_itph7")
 color_but_res = "res://UI/ColorButton.tscn"
 
 [node name="Spells" type="Node" parent="."]

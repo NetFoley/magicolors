@@ -7,4 +7,8 @@ func _ready():
 	
 func _on_pressed():
 	if GAME.is_our_turn():
-		GAME.turn = GAME.turn + 1
+		rpc("go_next_turn")
+
+@rpc("reliable", "call_local", "any_peer")
+func go_next_turn():
+	GAME.turn += 1

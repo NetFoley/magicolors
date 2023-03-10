@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://cnhblbba4j373"]
+[gd_scene load_steps=16 format=3 uid="uid://cnhblbba4j373"]
 
 [ext_resource type="Theme" uid="uid://bg3jq1neuxixx" path="res://res/new_theme.tres" id="1_cunch"]
 [ext_resource type="Script" path="res://UI/Reserve.gd" id="2_fbog8"]
@@ -13,6 +13,8 @@
 [ext_resource type="Script" path="res://UI/CancelBut.gd" id="11_y8md7"]
 [ext_resource type="Script" path="res://UI/TurnLabel.gd" id="12_3tqid"]
 [ext_resource type="Script" path="res://UI/EndTurnBut.gd" id="13_v5sc7"]
+[ext_resource type="Script" path="res://UI/EndLabel.gd" id="14_ekso8"]
+[ext_resource type="Script" path="res://UI/Label.gd" id="15_ihnaf"]
 
 [node name="UI" type="Control"]
 texture_filter = 2
@@ -22,6 +24,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 theme = ExtResource("1_cunch")
 metadata/_edit_lock_ = true
 
@@ -67,7 +70,7 @@ script = ExtResource("5_rud7d")
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
-offset_bottom = 320.0
+offset_bottom = 170.0
 grow_horizontal = 2
 theme_override_constants/margin_left = 200
 theme_override_constants/margin_top = 20
@@ -219,3 +222,26 @@ grow_vertical = 0
 theme_override_font_sizes/font_size = 38
 text = "Fin du tour"
 script = ExtResource("13_v5sc7")
+
+[node name="EndLabel" type="Label" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(650, 350)
+theme_override_font_sizes/font_size = 202
+text = "VICTOIRE"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("14_ekso8")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 6.0
+offset_top = 35.0
+offset_right = 46.0
+offset_bottom = 65.0
+script = ExtResource("15_ihnaf")

@@ -13,7 +13,7 @@ func _on_turn_changed(_value):
 	if !GAME.is_our_turn():
 		return
 		
-	var cap = GAME.get_mental_capacity() # - NB OF CREATURE (TODO)
+	var cap = GAME.get_mental_capacity(GAME.player1) # - NB OF CREATURE (TODO)
 	var readied = 0
 	var i = 0
 	while(readied < cap and i < get_child_count()):
@@ -40,17 +40,20 @@ func _on_new_spell(spell: Spell):
 	add_child(spell_but)
 	
 func _on_but_pressed(but, spell: Spell):
-	if current_but: #CHECK CAN LAUNCH
-		return
 	if GAME.is_our_turn(): #CHECK WHICH PLAYER
 		current_spell = spell
 		current_but = but
 		spell.get_target()
+		GAME.emetter = self
 
-func _on_target_selected(target):
-	GAME.get_player().cast(current_spell, target)
+func target_selected(target):
+	if !current_spell:
+		return
+	var player_obj = GAME.get_player_object(GAME.get_player())
+	player_obj.rpc("cast", current_spell.spell_id, target)
 	current_but.queue_free()
 	remove_child(current_but)
 	current_but = null
 	current_spell = null
+	get_parent().update_label()
 	

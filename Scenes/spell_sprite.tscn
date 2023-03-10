@@ -26,7 +26,7 @@ void fragment() {
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_4qou4"]
 resource_local_to_scene = true
 shader = SubResource("Shader_6d486")
-shader_parameter/gen = 1.0
+shader_parameter/gen = 1.522
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_lclbh"]
 atlas = ExtResource("2_25y5s")

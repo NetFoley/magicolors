@@ -24,9 +24,9 @@ func _ready():
 	var __ = GAME.connect("color_drag",Callable(self,"_on_color_drag"))
 	nb_of_color = 0
 	visible = false
-	__ = spell_but.pressed.connect(_on_create_spell)
-	__ = close_but.pressed.connect(_close_pressed)
-	__ = GAME.turn_changed.connect(_on_turn_changed)
+	spell_but.pressed.connect(_on_create_spell)
+	close_but.pressed.connect(_close_pressed)
+	GAME.turn_changed.connect(_on_turn_changed)
 
 func _on_turn_changed(_value):
 	clear_colors()
@@ -143,7 +143,7 @@ func update_current_spell():
 func can_create_spell(spell):
 	if !spell:
 		return false
-	if GAME.spell_cont.get_child_count() >= GAME.get_mental_capacity():
+	if GAME.spell_cont.get_child_count() >= GAME.get_mental_capacity(GAME.player1):
 		return false
 		
 	return true

@@ -1,5 +1,6 @@
 @tool
 extends Node2D
+class_name Player
 
 @onready var anim_spr : AnimatedSprite2D = get_node("AnimNode/AnimatedSprite2D2")
 @onready var staff_spr : Node2D = get_node("AnimNode/Node2D")
@@ -16,6 +17,8 @@ extends Node2D
 				staff_spr.position = Vector2(10,-18)
 				staff_spr.scale = Vector2(-1, 1)
 
+var creatures = []
+
 func _ready():
 	$AnimNode/AnimatedSprite2D2/AnimationPlayer.play("Idle")
 	flipped = flipped
@@ -26,7 +29,9 @@ func _ready():
 	else:
 		GAME.player1 = self
 
-func cast(spell, target):
+@rpc("reliable", "any_peer", "call_local")
+func cast(spell_id, target):
+	var spell = GAME.get_spell(spell_id)
 	print(name + " casted " + spell.name + " !")
 	$AnimNode/Node2D/Sprite2D/AnimationPlayer.play("Cast")
-	spell.launch(target)
+	spell.launch(target, name)

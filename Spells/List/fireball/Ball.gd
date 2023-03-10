@@ -8,8 +8,8 @@ func _ready():
 	
 func appear():
 	visible = true
-	$SpellSprite.look_at(goal_pos)
 	$SpellSprite.appear()
+	rotate(global_position.direction_to(goal_pos).angle())
 	
 
 func _spell_tween_finished():
