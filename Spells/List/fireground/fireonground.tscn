@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=3 uid="uid://dtpkei2idnfkl"]
+
+[ext_resource type="Script" path="res://Spells/List/fireground/fireonground.gd" id="1_88cqf"]
+
+[sub_resource type="Curve" id="Curve_qgwi0"]
+_data = [Vector2(0.0480427, 0), 0.0, 0.0, 0, 0, Vector2(0.176157, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_vrqii"]
+curve = SubResource("Curve_qgwi0")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_1rmo4"]
+emission_shape = 1
+emission_sphere_radius = 5.92
+particle_flag_disable_z = true
+gravity = Vector3(0, -150, 0)
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+scale_min = 0.82
+scale_max = 1.9
+scale_curve = SubResource("CurveTexture_vrqii")
+color = Color(1, 0.482353, 0.196078, 1)
+hue_variation_min = -0.03
+hue_variation_max = 0.15
+turbulence_enabled = true
+turbulence_influence_min = 0.16
+turbulence_influence_max = 0.16
+
+[node name="fireonground" type="Node2D"]
+script = ExtResource("1_88cqf")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+amount = 135
+process_material = SubResource("ParticleProcessMaterial_1rmo4")
+lifetime = 0.47

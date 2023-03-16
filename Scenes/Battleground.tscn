@@ -630,14 +630,12 @@ offset = Vector2(0, -2)
 [node name="Crystal" parent="TileMap/Creatures" instance=ExtResource("7_dw85s")]
 position = Vector2(56, 48)
 start_player = "Player1"
-end_turn_life = 3
-heal_range = 2
+end_turn_life = 1
 
 [node name="Crystal2" parent="TileMap/Creatures" instance=ExtResource("7_dw85s")]
 position = Vector2(296, 50)
 start_player = "Player2"
-end_turn_life = 3
-heal_range = 2
+end_turn_life = 1
 
 [node name="ValidTargets" type="Node2D" parent="TileMap"]
 script = ExtResource("7_b1rot")

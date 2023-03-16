@@ -1,0 +1,43 @@
+[gd_scene load_steps=5 format=3 uid="uid://bcitfvnyk34wq"]
+
+[ext_resource type="Script" path="res://Spells/List/fireshield/shield_of_fire.gd" id="1_xmifd"]
+
+[sub_resource type="Curve" id="Curve_sqn2f"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.571174, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_bedw3"]
+curve = SubResource("Curve_sqn2f")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_yaufn"]
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 1.0
+emission_ring_radius = 8.0
+emission_ring_inner_radius = 6.0
+particle_flag_disable_z = true
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = -0.11
+initial_velocity_max = -0.11
+angular_velocity_min = 261.29
+angular_velocity_max = 261.29
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+tangential_accel_min = 10.71
+tangential_accel_max = 10.71
+scale_min = 1.49
+scale_max = 2.69
+scale_curve = SubResource("CurveTexture_bedw3")
+color = Color(1, 0.662745, 0.168627, 1)
+hue_variation_min = -0.05
+hue_variation_max = 0.16
+
+[node name="shield_of_fire" type="Node2D"]
+visible = false
+script = ExtResource("1_xmifd")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+amount = 25
+process_material = SubResource("ParticleProcessMaterial_yaufn")
+trail_sections = 43
+trail_section_subdivisions = 40

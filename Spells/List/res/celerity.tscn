@@ -1,0 +1,43 @@
+[gd_scene load_steps=7 format=3 uid="uid://dalyhiobaeubt"]
+
+[ext_resource type="Script" path="res://Spells/List/res/celerity.gd" id="1_soo68"]
+
+[sub_resource type="Gradient" id="Gradient_vy2vy"]
+interpolation_mode = 2
+offsets = PackedFloat32Array(0, 0.874494)
+colors = PackedColorArray(1, 1, 1, 0.576471, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_dcliw"]
+gradient = SubResource("Gradient_vy2vy")
+
+[sub_resource type="Curve" id="Curve_tfljs"]
+_data = [Vector2(0, 0.126354), 0.0, 0.0640304, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_udfn1"]
+curve = SubResource("Curve_tfljs")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_3g8mg"]
+particle_flag_disable_z = true
+spread = 180.0
+gravity = Vector3(0, 30, 0)
+initial_velocity_min = 24.25
+initial_velocity_max = 30.05
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+scale_min = 3.68
+scale_max = 4.89
+scale_curve = SubResource("CurveTexture_udfn1")
+color = Color(0.313726, 0.913725, 1, 1)
+color_ramp = SubResource("GradientTexture1D_dcliw")
+
+[node name="celerity" type="Node2D"]
+show_behind_parent = true
+script = ExtResource("1_soo68")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+amount = 6
+process_material = SubResource("ParticleProcessMaterial_3g8mg")
+lifetime = 0.4
+trail_enabled = true
+trail_lifetime = 0.01

@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=3 uid="uid://df661cfy1njwc"]
+
+[ext_resource type="PackedScene" uid="uid://bvcso44tg3wn5" path="res://Spells/Spell.tscn" id="1_i1e7n"]
+[ext_resource type="Script" path="res://Spells/List/fire_damage.gd" id="2_44wri"]
+[ext_resource type="PackedScene" uid="uid://ce8mc0b8ty7t0" path="res://Spells/List/res/dmg_amp.tscn" id="3_1pv6f"]
+
+[node name="fire_damage" instance=ExtResource("1_i1e7n")]
+script = ExtResource("2_44wri")
+spell_id = "fire_damage"
+spell_name = "Frappe emflammée"
+spell_desc = "La prochaine attaque d'une créature fait double dégât "
+
+[node name="dmg_amp" parent="." index="1" instance=ExtResource("3_1pv6f")]

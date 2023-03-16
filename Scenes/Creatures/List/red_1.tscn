@@ -9,11 +9,12 @@ code = "shader_type canvas_item;
 uniform float gen = 1.0;
 
 void fragment() {
-	float value = (0.5+UV.x)*(gen)*22.0*COLOR.r;
-	if (value > 10.0){
+	float color_int = (COLOR.r + COLOR.g + COLOR.b)/3.0;
+	float value = color_int *UV.x + gen;
+	if (value >= 1.0){
 		
 	}
-	else if(value > 9.5){
+	else if(value > 0.5){
 		COLOR.rgb = vec3(1.0);
 	}
 	else{
@@ -23,12 +24,16 @@ void fragment() {
 }
 "
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_v0y65"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qk5m7"]
 resource_local_to_scene = true
 shader = SubResource("Shader_atsyp")
-shader_parameter/gen = 0.708
+shader_parameter/gen = 1.0
 
 [node name="Red1" instance=ExtResource("1_mtdku")]
+max_life = 25
+movement = 5
+dmg = 12
+mental_cap_cost = 0.5
 
-[node name="SpellSprite" parent="." index="0"]
-material = SubResource("ShaderMaterial_v0y65")
+[node name="Sprite" parent="." index="0"]
+material = SubResource("ShaderMaterial_qk5m7")

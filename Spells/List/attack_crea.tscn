@@ -1,0 +1,35 @@
+[gd_scene load_steps=6 format=3 uid="uid://dguxhq21etc4x"]
+
+[ext_resource type="PackedScene" uid="uid://bvcso44tg3wn5" path="res://Spells/Spell.tscn" id="1_5r42c"]
+[ext_resource type="Script" path="res://Spells/List/attack_crea.gd" id="2_i627j"]
+
+[sub_resource type="Gradient" id="Gradient_4di0h"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_it8pl"]
+gradient = SubResource("Gradient_4di0h")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_a2ura"]
+emission_shape = 3
+emission_box_extents = Vector3(8, 8, 0)
+particle_flag_disable_z = true
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+scale_min = 0.8
+scale_max = 2.42
+color = Color(1, 0.388235, 0.376471, 1)
+color_ramp = SubResource("GradientTexture1D_it8pl")
+
+[node name="attack_crea" instance=ExtResource("1_5r42c")]
+script = ExtResource("2_i627j")
+spell_id = "attack_crea"
+spell_name = "Accumulation de fureur"
+spell_desc = "Augmente définitivement les dégâts d'une de vos créatures de 5"
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="." index="1"]
+visible = false
+amount = 73
+process_material = SubResource("ParticleProcessMaterial_a2ura")
+lifetime = 2.19
+one_shot = true
+explosiveness = 0.87

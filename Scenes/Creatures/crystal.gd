@@ -14,13 +14,12 @@ func _ready():
 	max_life = max_life
 	GAME.turn_changed.connect(_on_turn_changed)
 
-func _on_turn_changed(turn):
+func _on_turn_changed(_turn):
 	if GAME.is_our_turn():
-		var creatures = GAME.tile_map.get_creatures()
+		var pos = GAME.tile_map.local_to_map(position)
+		var creatures = GAME.tile_map.get_creatures_around(pos, heal_range)
 		for creature in creatures:
-			var pos = GAME.tile_map.local_to_map(position)
-			var crea_pos = GAME.tile_map.local_to_map(creature.position)
-			if creature != self and creature.player == player and GAME.tile_map.get_dist_between(pos, crea_pos) < heal_range:
+			if creature != self and creature.player == player:
 				creature.life += end_turn_life
 
 func die():

@@ -3,6 +3,8 @@ extends HFlowContainer
 var current_but = null
 var current_spell = null
 
+signal old_spell
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	var __ = GAME.cancel_selection.connect(_on_cancel_selection)
@@ -13,7 +15,7 @@ func _on_turn_changed(_value):
 	if !GAME.is_our_turn():
 		return
 		
-	var cap = GAME.get_mental_capacity(GAME.player1) # - NB OF CREATURE (TODO)
+	var cap = GAME.get_mental_capacity(GAME.get_player_object(GAME.get_player())) # - NB OF CREATURE (TODO)
 	var readied = 0
 	var i = 0
 	while(readied < cap and i < get_child_count()):
@@ -40,7 +42,7 @@ func _on_new_spell(spell: Spell):
 	add_child(spell_but)
 	
 func _on_but_pressed(but, spell: Spell):
-	if GAME.is_our_turn(): #CHECK WHICH PLAYER
+	if GAME.is_our_turn() and spell.can_be_casted(): #CHECK WHICH PLAYER
 		current_spell = spell
 		current_but = but
 		spell.get_target()
@@ -51,9 +53,14 @@ func target_selected(target):
 		return
 	var player_obj = GAME.get_player_object(GAME.get_player())
 	player_obj.rpc("cast", current_spell.spell_id, target)
-	current_but.queue_free()
-	remove_child(current_but)
+#	current_but.queue_free()
 	current_but = null
 	current_spell = null
 	get_parent().update_label()
 	
+func remove_spell(n):
+	for child in get_children():
+		if child.text == n:
+			child.queue_free()
+			break
+

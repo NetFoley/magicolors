@@ -3,7 +3,6 @@ extends Spell
 
 # Called when the node enters the scene tree for the first time.
 func launch(target, sender):
-	print("fireball launch")
 	var ball = get_node("Ball").duplicate()
 	GAME.get_player_object(sender).add_child(ball)
 	ball.visible = true

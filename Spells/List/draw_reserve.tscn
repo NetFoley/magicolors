@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=3 uid="uid://cursuj1kbe3c8"]
+
+[ext_resource type="PackedScene" uid="uid://bvcso44tg3wn5" path="res://Spells/Spell.tscn" id="1_jvrhf"]
+[ext_resource type="Script" path="res://Spells/List/draw_reserve.gd" id="2_yl73o"]
+[ext_resource type="PackedScene" uid="uid://bfwbcijoyjqb7" path="res://Spells/List/res/draw_res.tscn" id="3_rl7i3"]
+
+[node name="draw_reserve" instance=ExtResource("1_jvrhf")]
+script = ExtResource("2_yl73o")
+spell_id = "draw_reserve"
+spell_name = "Pioche de réserve"
+spell_desc = "Au prochain tour piochez 3 fois la couleur de réserve "
+
+[node name="draw_res" parent="." index="1" instance=ExtResource("3_rl7i3")]

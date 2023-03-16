@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=3 uid="uid://d7g8lxbv0g2v"]
+
+[ext_resource type="PackedScene" uid="uid://bvcso44tg3wn5" path="res://Spells/Spell.tscn" id="1_bhimm"]
+[ext_resource type="Script" path="res://Spells/List/take_crea.gd" id="2_bg1j5"]
+[ext_resource type="PackedScene" uid="uid://37x8hwaeswu8" path="res://Spells/List/res/mental_control.tscn" id="3_ymdkg"]
+
+[node name="take_crea" instance=ExtResource("1_bhimm")]
+script = ExtResource("2_bg1j5")
+spell_id = "take_crea"
+spell_name = "Contrôle télékinésique"
+spell_desc = "Prend le contrôle d'une créature ennemi pour un tour "
+
+[node name="mental_control" parent="." index="1" instance=ExtResource("3_ymdkg")]

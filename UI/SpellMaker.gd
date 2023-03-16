@@ -42,7 +42,7 @@ func _close_pressed():
 
 func _on_create_spell():
 	clear_colors()
-	GAME.new_spell.emit(current_spell)
+	GAME.new_spell.emit(current_spell.spell_id, GAME.get_player())
 	visible = false
 
 func _on_color_drag():

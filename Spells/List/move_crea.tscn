@@ -1,0 +1,18 @@
+[gd_scene load_steps=5 format=3 uid="uid://d0wdsvu7c2ew7"]
+
+[ext_resource type="PackedScene" uid="uid://bvcso44tg3wn5" path="res://Spells/Spell.tscn" id="1_mec2a"]
+[ext_resource type="Script" path="res://Spells/List/move_crea.gd" id="2_h21ab"]
+[ext_resource type="PackedScene" uid="uid://dalyhiobaeubt" path="res://Spells/List/res/celerity.tscn" id="3_yj8xa"]
+[ext_resource type="PackedScene" uid="uid://xid7b6ylqwr5" path="res://Spells/List/res/impede.tscn" id="4_xpdho"]
+
+[node name="move_crea" instance=ExtResource("1_mec2a")]
+script = ExtResource("2_h21ab")
+spell_id = "move_crea"
+spell_name = "Célérité ou Entravement"
+spell_desc = "Augmente la portée de déplacement de 3 sur un allié ou bloque les mouvements d'un ennemi."
+
+[node name="celerity" parent="." index="1" instance=ExtResource("3_yj8xa")]
+visible = false
+
+[node name="impede" parent="." index="2" instance=ExtResource("4_xpdho")]
+visible = false

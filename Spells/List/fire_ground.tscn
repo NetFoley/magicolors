@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3 uid="uid://dwouc45ww1oqp"]
+
+[ext_resource type="PackedScene" uid="uid://bvcso44tg3wn5" path="res://Spells/Spell.tscn" id="1_a4gaf"]
+[ext_resource type="PackedScene" uid="uid://dtpkei2idnfkl" path="res://Spells/List/fireground/fireonground.tscn" id="2_6xwpa"]
+[ext_resource type="Script" path="res://Spells/List/fire_ground.gd" id="2_tl4tw"]
+
+[node name="fire_ground" instance=ExtResource("1_a4gaf")]
+script = ExtResource("2_tl4tw")
+spell_id = "fire_ground"
+spell_name = "Sol de feu"
+spell_desc = "Enflamme le sol en 3x3 pendant 5 tours infligeant 7 dégâts aux créatures qui le traversent et à l'intérieur à chaque fin de tour. "
+
+[node name="fireonground" parent="." index="1" instance=ExtResource("2_6xwpa")]
+visible = false

@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=3 uid="uid://b8vqcoewh7dbe"]
+
+[ext_resource type="PackedScene" uid="uid://bvcso44tg3wn5" path="res://Spells/Spell.tscn" id="1_tx24m"]
+[ext_resource type="Script" path="res://Spells/List/fire_shield.gd" id="2_0usy3"]
+[ext_resource type="PackedScene" uid="uid://bcitfvnyk34wq" path="res://Spells/List/fireshield/shield_of_fire.tscn" id="3_wxj0l"]
+
+[node name="fire_shield" instance=ExtResource("1_tx24m")]
+script = ExtResource("2_0usy3")
+spell_id = "fire_shield"
+spell_name = "Bouclier de feu"
+spell_desc = "Place un bouclier enflammé sur une créature pendant 2 tours qui inflige 10 dégâts à l'attaquant "
+
+[node name="shield_of_fire" parent="." index="1" instance=ExtResource("3_wxj0l")]

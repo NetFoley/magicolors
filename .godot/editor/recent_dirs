@@ -1,9 +1,11 @@
-res://UI
-res://GLOBAL
+C:/Godot/exports/magicolors
+res://Spells/List
+res://Spells/List/res
 res://res
+res://UI
+res://Scenes/Creatures/List
+res://GLOBAL
 res://Scenes/Creatures
 res://Scenes
 C:/Godot/magicolors
-res://Scenes/Creatures/List
-res://Spells/List
 res://Spells

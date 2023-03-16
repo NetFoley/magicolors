@@ -9,7 +9,7 @@
 script = ExtResource("2_j33g7")
 spell_id = "fire_ball"
 spell_name = "Boule de feu"
-spell_desc = "Lance une boule de feu infligeant 10 dégâts dans une zone 3x3"
+spell_desc = "Lance une boule de feu infligeant 10 dégâts dans un rayon de 3 cases"
 
 [node name="Icon" parent="." index="0"]
 texture = ExtResource("3_jpdbd")

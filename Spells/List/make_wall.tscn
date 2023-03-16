@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=3 uid="uid://c6x8pk771ln11"]
+
+[ext_resource type="PackedScene" uid="uid://bvcso44tg3wn5" path="res://Spells/Spell.tscn" id="1_og8lf"]
+[ext_resource type="Script" path="res://Spells/List/make_wall.gd" id="2_dhubd"]
+[ext_resource type="PackedScene" uid="uid://c2x88l6ohjomn" path="res://Spells/List/res/wall.tscn" id="2_pak0w"]
+
+[node name="make_wall" instance=ExtResource("1_og8lf")]
+script = ExtResource("2_dhubd")
+spell_id = "make_wall"
+spell_name = "Apparition de bosquet"
+spell_desc = "Créé des mursr destructibles en 3x3 avec 20 PV chacuns"
+
+[node name="Wall" parent="." index="1" instance=ExtResource("2_pak0w")]

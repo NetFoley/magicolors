@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://cnhblbba4j373"]
+[gd_scene load_steps=18 format=3 uid="uid://cnhblbba4j373"]
 
 [ext_resource type="Theme" uid="uid://bg3jq1neuxixx" path="res://res/new_theme.tres" id="1_cunch"]
 [ext_resource type="Script" path="res://UI/Reserve.gd" id="2_fbog8"]
@@ -15,6 +15,10 @@
 [ext_resource type="Script" path="res://UI/EndTurnBut.gd" id="13_v5sc7"]
 [ext_resource type="Script" path="res://UI/EndLabel.gd" id="14_ekso8"]
 [ext_resource type="Script" path="res://UI/Label.gd" id="15_ihnaf"]
+[ext_resource type="Script" path="res://UI/CastFeedBack.gd" id="16_134tr"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i8srb"]
+bg_color = Color(0, 0, 0, 0.278431)
 
 [node name="UI" type="Control"]
 texture_filter = 2
@@ -66,16 +70,31 @@ theme_override_constants/separation = 4
 alignment = 1
 script = ExtResource("5_rud7d")
 
-[node name="SpellContainer" type="MarginContainer" parent="."]
+[node name="SpellContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
 offset_bottom = 170.0
 grow_horizontal = 2
-theme_override_constants/margin_left = 200
-theme_override_constants/margin_top = 20
-theme_override_constants/margin_right = 200
 script = ExtResource("10_fw5ec")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="SpellContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+mouse_filter = 2
+
+[node name="TurnLabel" type="Label" parent="SpellContainer/VBoxContainer"]
+layout_mode = 2
+text = "Tour 0"
+horizontal_alignment = 1
+script = ExtResource("12_3tqid")
+
+[node name="SpellCount" type="Label" parent="SpellContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+text = "0/5"
+horizontal_alignment = 1
 
 [node name="SpellFlow" type="HFlowContainer" parent="SpellContainer"]
 layout_mode = 2
@@ -83,11 +102,16 @@ size_flags_vertical = 0
 alignment = 1
 script = ExtResource("6_gd841")
 
-[node name="SpellCount" type="Label" parent="SpellContainer"]
+[node name="CastFeedBack" type="Label" parent="SpellContainer"]
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 0
-text = "0/5"
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 6
+theme_override_constants/shadow_offset_y = 6
+theme_override_constants/outline_size = 3
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = SubResource("StyleBoxFlat_i8srb")
+text = "Casted !"
+script = ExtResource("16_134tr")
 
 [node name="SpellMaker" type="Control" parent="." node_paths=PackedStringArray("nb_label")]
 anchors_preset = 0
@@ -154,8 +178,11 @@ alignment = 1
 
 [node name="desc" type="Label" parent="SpellMaker/MarginContainer/VBoxContainer/HBoxContainer2"]
 layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
 text = "desc"
 horizontal_alignment = 1
+autowrap_mode = 3
 
 [node name="HBoxContainer3" type="HBoxContainer" parent="SpellMaker/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -196,18 +223,6 @@ action_mode = 0
 text = "CANCEL"
 script = ExtResource("11_y8md7")
 
-[node name="TurnLabel" type="Label" parent="."]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -20.0
-offset_right = 20.0
-offset_bottom = 27.0
-grow_horizontal = 2
-text = "Tour 0"
-script = ExtResource("12_3tqid")
-
 [node name="EndTurnBut" type="Button" parent="."]
 layout_mode = 1
 anchors_preset = 3
@@ -240,8 +255,8 @@ script = ExtResource("14_ekso8")
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 0
-offset_left = 6.0
-offset_top = 35.0
-offset_right = 46.0
-offset_bottom = 65.0
+offset_left = 2.0
+offset_top = 54.0
+offset_right = 42.0
+offset_bottom = 81.0
 script = ExtResource("15_ihnaf")

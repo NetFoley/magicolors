@@ -39,42 +39,43 @@ var sort_elements = {
 	"WWG": "take_crea",
 	"WGW": "take_crea",
 	"GWW": "take_crea",
-	"WWR": "inst_spell",
-	"WRW": "inst_spell",
-	"RWW": "inst_spell",
+	"WWR": "take_spell",
+	"WRW": "take_spell",
+	"RWW": "take_spell",
 	"RGB": "link_crea",
 	"RBG": "link_crea",
 	"BRG": "link_crea",
 	"GRB": "link_crea",
 	"GBR": "link_crea",
 	"BGR": "link_crea",
-	"WGR": "reset_crea",
-	"RGW": "reset_crea",
-	"GWR": "reset_crea",
-	"GRW": "reset_crea",
-	"RWG": "reset_crea",
-	"WRG": "reset_crea",
+	"WGR": "buff_crea",
+	"RGW": "buff_crea",
+	"GWR": "buff_crea",
+	"GRW": "buff_crea",
+	"RWG": "buff_crea",
+	"WRG": "buff_crea",
 	"GBW": "attack_crea",
 	"GWB": "attack_crea",
 	"WGB": "attack_crea",
 	"BGW": "attack_crea",
 	"BWG": "attack_crea",
 	"WBG": "attack_crea",
-	"RBW": "add_reserve",
-	"RWB": "add_reserve",
-	"WRB": "add_reserve",
-	"BRW": "add_reserve",
-	"BWR": "add_reserve",
-	"WBR": "add_reserve",
+	"RBW": "reset_crea",
+	"RWB": "reset_crea",
+	"WRB": "reset_crea",
+	"BRW": "reset_crea",
+	"BWR": "reset_crea",
+	"WBR": "reset_crea",	
 }
 
 var spells = [Area2D]
 
 enum colorType{
 	RED,
-	BLUE,
 	GREEN,
-	WHITE
+	BLUE,
+	WHITE,
+	BLACK
 }
 
 var spell_cont = null
@@ -84,9 +85,11 @@ var turn = 0 :
 		turn = value
 		turn_changed.emit(value)
 		
+signal casted(spell_name, player_name)
 signal turn_changed(value)
 signal color_drag()
-signal new_spell(spell_id)
+signal new_spell(spell : String, player)
+signal old_spell(spell : String, player)
 signal target_selected(target)
 signal selecting(value)
 signal cancel_selection()
@@ -99,6 +102,7 @@ var spell_list = [Spell]
 var end_label
 
 var color_container = null
+var color_reserve = null
 
 var player1 : Node2D
 var player2 : Node2D
@@ -120,29 +124,38 @@ func _ready():
 	var __ = connect("turn_changed", _on_new_turn)
 	cancel_selection.connect(_on_cancel_selection)
 	
+func get_reserve_color():
+	if color_reserve and color_reserve.get_child_count() > 0:
+		return color_reserve.get_child(0).color
+	return null
 	
 func get_player() -> String:
 	if NETWORK.side == "Server":
 		return "Player1"
 	else:
 		return "Player2"
-	if local_player:
-		return local_player
-	return "Player1"
+#	return "Player1"
 	
 func get_player_object(player : String) -> Node:
 	if player == "Player1":
 		return player1
 	if player == "Player2":
 		return player2
-	push_error("Invalid player string")
-	return player1
+	return null
 	
-func get_mental_capacity(player : Node) -> int:
-	var cap = 5
+func get_mental_capacity(player : Node) -> float:
+	var cap = 5.0
 	if is_instance_valid(player):
-		cap -= player.creatures.size()
+		for crea in player.creatures:
+			cap -= crea.mental_cap_cost
 	return cap 
+	
+func get_crystals():
+	var crystals = []
+	for crea in tile_map.get_creatures():
+		if crea is Crystal:
+			crystals.append(crea)
+	return crystals
 	
 func is_our_turn():
 	var mod = (turn % 2)
@@ -150,23 +163,28 @@ func is_our_turn():
 		return mod == 1
 	else:
 		return mod == 0
-	return false
+#	return false
 	
 func spawn_creature(color, pos, player):
 	for child in creatures_node.get_children():
 		if child.color == color:
 			var crea = child.duplicate()
-			crea.visible = true
-			crea.player = player
-			tile_map.add_creature(crea)
-			var player_obj = get_player_object(player)
-			player_obj.creatures.append(crea)
-			crea.set_multiplayer_authority(multiplayer.get_remote_sender_id())
-			crea.appear()
-			crea.global_position = Vector2(pos)
-			new_creature.emit(crea, player)
+			add_creature_to_tilemap(crea, pos, player)
 			return crea
 	return null
+	
+func add_creature_to_tilemap(crea, pos, player):
+	crea.visible = true
+	crea.player = player
+	tile_map.add_creature(crea)
+	var player_obj = get_player_object(player)
+	if player_obj:
+		player_obj.creatures.append(crea)
+	crea.set_multiplayer_authority(multiplayer.get_remote_sender_id())
+	crea.name = player
+	crea.appear()
+	crea.global_position = Vector2(pos)
+	new_creature.emit(crea, player)
 	
 func add_color(color):
 	if !color_container or color_but_res == "":
@@ -178,12 +196,10 @@ func _on_new_turn(_value):
 	if !color_container:
 		return
 	
-	for child in color_container.get_children():
-		child.disappear()
-	for i in range(10):
-		add_color(randi()%4)
 	
 func get_color_but(color):
+	if color_but_res == "" :
+		return null
 	var color_scene = load(color_but_res)
 	var color_inst = color_scene.instantiate()
 	color_inst.color = color
@@ -196,17 +212,15 @@ func load_creatures():
 		dir.list_dir_begin()
 		var file_name = dir.get_next()
 		while file_name != "":
-			if dir.current_is_dir():
-				print("Found directory: " + file_name)
-			else:
-				print("Found file: " + file_name)
+			if !dir.current_is_dir():
+#				print("Found file: " + file_name)
 				if file_name.ends_with(".tscn"):
-					print("Found tscn: " + file_name)
+#					print("Found tscn: " + file_name)
 					var file_path = dir_creature_path + file_name
 					var scene = load(file_path)
 					var inst = scene.instantiate()
 					creatures_node.add_child(inst)
-					print(inst.name)
+#					print(inst.name)
 			file_name = dir.get_next()
 	
 	
@@ -216,17 +230,14 @@ func load_spells():
 		dir.list_dir_begin()
 		var file_name = dir.get_next()
 		while file_name != "":
-			if dir.current_is_dir():
-				print("Found directory: " + file_name)
-			else:
-				print("Found file: " + file_name)
+			if !dir.current_is_dir():
 				if file_name.ends_with(".tscn"):
-					print("Found tscn: " + file_name)
+#					print("Found tscn: " + file_name)
 					var file_path = dir_spell_path + file_name
 					var scene = load(file_path)
 					var inst = scene.instantiate()
 					spells_node.add_child(inst)
-					print(inst.name)
+#					print(inst.name)
 			file_name = dir.get_next()
 
 
@@ -245,13 +256,11 @@ func get_spell_id(elements) -> String:
 		var sort_a_lancer = sort_elements[combinaison]
 		return sort_a_lancer
 	else:
-		print(combinaison + " ne correspond à aucun sort.")
 		return ""
 
 func get_spell(id):
 	for spell in spells_node.get_children():
 		if spell.spell_id == id:
-			print("Found ! " + spell.name)
 			return spell
 
 func get_targets(info : Dictionary):

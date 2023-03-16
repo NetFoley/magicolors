@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://kj0thlhe6p78"]
+
+[ext_resource type="PackedScene" uid="uid://bvcso44tg3wn5" path="res://Spells/Spell.tscn" id="1_iee4d"]
+[ext_resource type="Script" path="res://Spells/List/reset_crea.gd" id="2_q2ckb"]
+
+[node name="reset_crea" instance=ExtResource("1_iee4d")]
+script = ExtResource("2_q2ckb")
+spell_id = "reset_crea"
+spell_name = "Retour dans le passé"
+spell_desc = "Choisissez une créature, elle peut rejouer son tour "

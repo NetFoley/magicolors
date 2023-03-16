@@ -4,7 +4,7 @@ class_name BoardTileMap
 var valid_mouse_pos = false
 var cursor_pos = Vector2i(0,0)
 
-enum select_type{ANY, FREE_TILE, CREATURE, ALLY_CREATURE, ENEMY_CREATURE}
+enum select_type{ANY, FREE_TILE, CREATURE, ALLY_CREATURE, ENEMY_CREATURE, ANY_CREATURE}
 
 var tile_range = 0
 var from_pos = Vector2i(0, 0)
@@ -38,9 +38,17 @@ func is_tile_valid(map_pos : Vector2i):
 		select_type.FREE_TILE:
 			good_type = !is_pos_occupied(map_pos)
 		select_type.CREATURE:
-			good_type = is_pos_occupied(map_pos)
+			var _crea = get_creature_at_pos(map_pos)
+			good_type = is_pos_occupied(map_pos) and _crea.can_be_targeted
 		select_type.ENEMY_CREATURE:
-			good_type = is_pos_occupied(map_pos)
+			var crea = get_creature_at_pos(map_pos)
+			good_type = is_instance_valid(crea) and crea.player != GAME.get_player() and crea.can_be_targeted
+		select_type.ALLY_CREATURE:
+			var crea = get_creature_at_pos(map_pos)
+			good_type = is_instance_valid(crea) and crea.player == GAME.get_player() and crea.can_be_targeted
+		select_type.ANY_CREATURE:
+			var crea = get_creature_at_pos(map_pos)
+			good_type = is_instance_valid(crea)
 	is_valid = is_valid and good_type
 	if tile_range > 0:
 		var dist = get_dist_between(map_pos, from_pos)
@@ -61,6 +69,8 @@ func _input(event):
 	if event.is_action_pressed("select"):
 		selecting = false
 		var creature_at_pos = get_creature_at_pos(local_to_map(cursor_pos))
+		if creature_at_pos:
+			creature_at_pos = creature_at_pos.get_path()
 		GAME.target_selected.emit({"position": cursor_pos, "creature": creature_at_pos})
 
 func is_pos_occupied(map_pos : Vector2i) -> bool:
@@ -68,7 +78,8 @@ func is_pos_occupied(map_pos : Vector2i) -> bool:
 		return true
 	return false
 
-func get_creature_at_pos(map_pos):
+
+func get_creature_at_pos(map_pos) -> Creature:
 	var creatures = $Creatures.get_children()
 	for creature in creatures:
 		if local_to_map(creature.position) == map_pos:
@@ -78,8 +89,26 @@ func get_creature_at_pos(map_pos):
 func get_creatures():
 	return $Creatures.get_children()
 	
+func get_creatures_around(map_pos, r) -> Array:
+	var creatures = GAME.tile_map.get_creatures()
+	var in_range_crea = []
+	for creature in creatures:
+		var crea_pos = GAME.tile_map.local_to_map(creature.position)
+		if GAME.tile_map.get_dist_between(map_pos, crea_pos) < r:
+			in_range_crea.append(creature)
+	return in_range_crea
+
+	
 func _on_cancel_selection():
 	selecting = false
+
+func get_tiles_around(pos, r) -> Array:
+	var map_tiles = get_used_cells(0)
+	var tiles = []
+	for tile in map_tiles:
+		if get_dist_between(pos, tile) < r:
+			tiles.append(tile)
+	return tiles
 
 func get_tiles(info):
 	if info.has("range"):

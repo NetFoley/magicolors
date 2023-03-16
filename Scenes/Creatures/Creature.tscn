@@ -11,11 +11,12 @@ code = "shader_type canvas_item;
 uniform float gen = 1.0;
 
 void fragment() {
-	float value = (0.5+UV.x)*(gen)*22.0*COLOR.r;
-	if (value > 10.0){
+	float color_int = (COLOR.r + COLOR.g + COLOR.b)/3.0;
+	float value = color_int *UV.x + gen;
+	if (value >= 1.0){
 		
 	}
-	else if(value > 9.5){
+	else if(value > 0.5){
 		COLOR.rgb = vec3(1.0);
 	}
 	else{
@@ -25,7 +26,7 @@ void fragment() {
 }
 "
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_4qt7q"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bto1j"]
 resource_local_to_scene = true
 shader = SubResource("Shader_atsyp")
 shader_parameter/gen = 1.0
@@ -72,7 +73,7 @@ border_color = Color(1, 1, 1, 1)
 corner_detail = 4
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o0nsd"]
-bg_color = Color(1, 0, 0, 1)
+bg_color = Color(1, 0, 0, 0.588235)
 
 [node name="Creature" type="Node2D"]
 texture_filter = 1
@@ -81,7 +82,7 @@ max_life = 10
 dmg = 5
 
 [node name="Sprite" parent="." instance=ExtResource("2_rcetl")]
-material = SubResource("ShaderMaterial_4qt7q")
+material = SubResource("ShaderMaterial_bto1j")
 sprite_frames = SubResource("SpriteFrames_aiedk")
 
 [node name="SelectButton" type="Button" parent="."]
@@ -105,10 +106,10 @@ action_mode = 0
 flat = true
 
 [node name="LifeBar" type="ProgressBar" parent="."]
-offset_left = -13.0
-offset_top = -20.0
-offset_right = 14.0
-offset_bottom = -15.0
+offset_left = -10.0
+offset_top = -18.0
+offset_right = 11.0
+offset_bottom = -13.0
 theme_override_styles/background = SubResource("StyleBoxFlat_yu63v")
 theme_override_styles/fill = SubResource("StyleBoxFlat_o0nsd")
 value = 60.0

@@ -18,6 +18,7 @@ class_name Player
 				staff_spr.scale = Vector2(-1, 1)
 
 var creatures = []
+var spells = []
 
 func _ready():
 	$AnimNode/AnimatedSprite2D2/AnimationPlayer.play("Idle")
@@ -26,12 +27,41 @@ func _ready():
 		return
 	if flipped:
 		GAME.player2 = self
+		var peers = multiplayer.get_peers()
+		for peer in peers:
+			set_multiplayer_authority(peer)
+		multiplayer.peer_connected.connect(_on_peer_connected)
 	else:
 		GAME.player1 = self
+	GAME.new_spell.connect(_on_new_spell)
+	GAME.old_spell.connect(_on_old_spell)
 
-@rpc("reliable", "any_peer", "call_local")
+func _on_new_spell(spell_id, _player):
+	if _player != name:
+		return
+	add_spell.rpc(spell_id)
+	
+@rpc("any_peer", "call_local", "reliable")
+func add_spell(spell_id):
+	spells.append(spell_id)
+	
+func _on_old_spell(spell_id, _player):
+	if _player != name:
+		return
+	remove_spell.rpc(spell_id)
+
+@rpc("any_peer", "call_local", "reliable")
+func remove_spell(spell_id):
+	spells.erase(spell_id)
+	
+func _on_peer_connected(peer_id):
+	set_multiplayer_authority(peer_id)
+
+@rpc("reliable", "authority", "call_local")
 func cast(spell_id, target):
 	var spell = GAME.get_spell(spell_id)
-	print(name + " casted " + spell.name + " !")
+	print("["+str(NETWORK.id)+"]"+name + " casted " + spell.spell_name + " !")
 	$AnimNode/Node2D/Sprite2D/AnimationPlayer.play("Cast")
 	spell.launch(target, name)
+	GAME.casted.emit(spell.spell_name, name)
+	GAME.old_spell.emit(spell.spell_id, name)

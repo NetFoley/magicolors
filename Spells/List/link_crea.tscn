@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3 uid="uid://8i57dqql7enw"]
+
+[ext_resource type="PackedScene" uid="uid://bvcso44tg3wn5" path="res://Spells/Spell.tscn" id="1_xs4jj"]
+[ext_resource type="Script" path="res://Spells/List/link_crea.gd" id="2_oknuy"]
+[ext_resource type="PackedScene" uid="uid://dyostcfou2y7w" path="res://Spells/List/res/magic_shield.tscn" id="3_mks7y"]
+
+[node name="link_crea" instance=ExtResource("1_xs4jj")]
+script = ExtResource("2_oknuy")
+spell_id = "link_crea"
+spell_name = "Protection anti-magie"
+spell_desc = "Rend une créature insensible à tous les sorts pour 3 tours.Rend une créature insensible à tous les sorts pour 3 tours."
+
+[node name="magic_shield" parent="." index="1" instance=ExtResource("3_mks7y")]
+visible = false

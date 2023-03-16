@@ -1,8 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://b6jrl4qaweskt"]
+[gd_scene load_steps=3 format=3 uid="uid://b6jrl4qaweskt"]
 
 [ext_resource type="PackedScene" uid="uid://bvcso44tg3wn5" path="res://Spells/Spell.tscn" id="1_okotk"]
+[ext_resource type="Script" path="res://Spells/List/heal_cryst.gd" id="2_lbcjn"]
 
 [node name="heal_cryst" instance=ExtResource("1_okotk")]
+script = ExtResource("2_lbcjn")
 spell_id = "heal_cryst"
 spell_name = "Soin crystal"
 spell_desc = "Soigne le cristal de 10"

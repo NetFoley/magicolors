@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bfwbcijoyjqb7"]
+
+[ext_resource type="Script" path="res://Spells/List/res/draw_res.gd" id="1_bl14o"]
+
+[node name="draw_res" type="Node"]
+script = ExtResource("1_bl14o")

@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://dkpii3mqu7vg0"]
+
+[ext_resource type="PackedScene" uid="uid://bvcso44tg3wn5" path="res://Spells/Spell.tscn" id="1_ff1sv"]
+[ext_resource type="Script" path="res://Spells/List/take_spell.gd" id="2_34hb2"]
+
+[node name="take_spell" instance=ExtResource("1_ff1sv")]
+script = ExtResource("2_34hb2")
+spell_id = "take_spell"
+spell_name = "Vole sort"
+spell_desc = "Vole un sort adverse en préparation"

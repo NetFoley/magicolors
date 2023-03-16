@@ -24,6 +24,11 @@ func _tween_finished():
 	$SpellSprite.visible = false
 	$Explosion.play("default")
 	$Explosion.animation_finished.connect(_anim_finished)
+	var tiles = GAME.tile_map.get_tiles_around(GAME.tile_map.local_to_map(goal_pos), 3)
+	for tile in tiles:
+		var crea = GAME.tile_map.get_creature_at_pos(tile)
+		if crea and crea.can_be_targeted:
+			crea.damage(10, self)
 
 func _anim_finished():
 	queue_free()

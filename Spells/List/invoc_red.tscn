@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://ca1uonywv6qeu"]
+
+[ext_resource type="PackedScene" uid="uid://bvcso44tg3wn5" path="res://Spells/Spell.tscn" id="1_xvyxb"]
+[ext_resource type="Script" path="res://Spell.gd" id="2_vh5rj"]
+
+[node name="invoc_red" instance=ExtResource("1_xvyxb")]
+script = ExtResource("2_vh5rj")
+spell_id = "invoc_red"
+spell_name = "Invocation rouge"

@@ -47,9 +47,11 @@ animations = [{
 
 [node name="Crystal" instance=ExtResource("1_6n1tl")]
 script = ExtResource("2_pgspa")
-start_player = null
+start_player = ""
+end_turn_life = 3
+heal_range = 2
 color = 4
-max_life = 25
+max_life = 50
 movement = 0
 dmg = 0
 c_range = 0

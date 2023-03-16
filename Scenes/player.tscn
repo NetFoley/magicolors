@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://end5hd6isluf"]
+[gd_scene load_steps=18 format=3 uid="uid://end5hd6isluf"]
 
 [ext_resource type="Script" path="res://Scenes/player.gd" id="1_yk7i2"]
 [ext_resource type="Texture2D" uid="uid://30leiholxpcn" path="res://res/0x72_DungeonTilesetII_v1.4.png" id="2_spkwe"]
@@ -159,13 +159,37 @@ _data = {
 "RESET": SubResource("Animation_sgxwt")
 }
 
+[sub_resource type="Curve" id="Curve_aa7ya"]
+_data = [Vector2(0, 0), 0.0, 1.80345, 0, 0, Vector2(0.848754, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.00361001), 0.417153, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_ksbqg"]
+curve = SubResource("Curve_aa7ya")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_77sv5"]
+particle_flag_disable_z = true
+gravity = Vector3(0, 10, 0)
+angular_velocity_min = -720.0
+angular_velocity_max = 720.0
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+damping_min = 5.0
+damping_max = 5.0
+scale_curve = SubResource("CurveTexture_ksbqg")
+color = Color(0.184314, 0.282353, 1, 0.423529)
+hue_variation_min = -1.0
+hue_variation_max = 1.0
+turbulence_noise_scale = 0.77
+turbulence_influence_min = 0.04
+turbulence_influence_max = 0.04
+
 [node name="Player" type="Node2D"]
 texture_filter = 1
 script = ExtResource("1_yk7i2")
 
 [node name="AnimNode" type="Node2D" parent="."]
-scale = Vector2(1, 1.01098)
-skew = 0.111832
+scale = Vector2(1, 1.00394)
+skew = -0.116084
 
 [node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="AnimNode"]
 material = SubResource("ShaderMaterial_d3jrh")
@@ -195,3 +219,10 @@ region_rect = Rect2(320, 144, 16, 32)
 libraries = {
 "": SubResource("AnimationLibrary_is0cx")
 }
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="AnimNode/Node2D/Sprite2D"]
+position = Vector2(-0.95674, -10.4947)
+amount = 9
+process_material = SubResource("ParticleProcessMaterial_77sv5")
+lifetime = 3.0
+trail_lifetime = 0.06

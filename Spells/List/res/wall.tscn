@@ -1,0 +1,91 @@
+[gd_scene load_steps=12 format=3 uid="uid://c2x88l6ohjomn"]
+
+[ext_resource type="PackedScene" uid="uid://dquvnnqcn2rmc" path="res://Scenes/Creatures/Creature.tscn" id="1_0tkh6"]
+[ext_resource type="Texture2D" uid="uid://c30ddsmx4w2sh" path="res://res/TX Plant.png" id="1_4d1w7"]
+
+[sub_resource type="Shader" id="Shader_atsyp"]
+resource_local_to_scene = true
+code = "shader_type canvas_item;
+
+uniform float gen = 1.0;
+
+void fragment() {
+	float color_int = (COLOR.r + COLOR.g + COLOR.b)/3.0;
+	float value = color_int *UV.x + gen;
+	if (value >= 1.0){
+		
+	}
+	else if(value > 0.5){
+		COLOR.rgb = vec3(1.0);
+	}
+	else{
+		COLOR.a = 0.0;
+		
+	}
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ecvap"]
+resource_local_to_scene = true
+shader = SubResource("Shader_atsyp")
+shader_parameter/gen = 1.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sj52y"]
+atlas = ExtResource("1_4d1w7")
+region = Rect2(32, 192, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_pp1ia"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sj52y")
+}],
+"loop": true,
+"name": &"default",
+"speed": 12.65
+}]
+
+[sub_resource type="Gradient" id="Gradient_cqbpg"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_5vgvj"]
+gradient = SubResource("Gradient_cqbpg")
+
+[sub_resource type="Curve" id="Curve_8kgbb"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.201049, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_khsjh"]
+curve = SubResource("Curve_8kgbb")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_qcava"]
+particle_flag_disable_z = true
+direction = Vector3(0, -1, 0)
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 4.6
+initial_velocity_max = 11.49
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+scale_curve = SubResource("CurveTexture_khsjh")
+color = Color(0.831373, 1, 0.6, 1)
+color_ramp = SubResource("GradientTexture1D_5vgvj")
+hue_variation_min = -1.0
+hue_variation_max = 1.0
+
+[node name="Wall" instance=ExtResource("1_0tkh6")]
+color = 1
+max_life = 30
+movement = 0
+dmg = 0
+c_range = 0
+can_be_selected = false
+
+[node name="Sprite" parent="." index="0"]
+material = SubResource("ShaderMaterial_ecvap")
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_pp1ia")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="." index="3"]
+position = Vector2(0, 5)
+process_material = SubResource("ParticleProcessMaterial_qcava")
+lifetime = 1.89

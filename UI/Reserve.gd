@@ -2,6 +2,9 @@ extends Control
 
 @export var capacity = 1
 
+func _ready():
+	GAME.color_reserve = self
+
 func _can_drop_data(_position, data):
 	return data.has("color")
 	
