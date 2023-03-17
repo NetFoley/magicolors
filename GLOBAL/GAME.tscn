@@ -1,6 +1,29 @@
-[gd_scene load_steps=2 format=3 uid="uid://bevxrh8833q0a"]
+[gd_scene load_steps=25 format=3 uid="uid://bevxrh8833q0a"]
 
 [ext_resource type="Script" path="res://GLOBAL/GAME.gd" id="1_itph7"]
+[ext_resource type="PackedScene" uid="uid://dguxhq21etc4x" path="res://Spells/List/attack_crea.tscn" id="2_ovbwh"]
+[ext_resource type="PackedScene" uid="uid://36wy1f2svh1o" path="res://Spells/List/buff_crea.tscn" id="3_i5wm3"]
+[ext_resource type="PackedScene" uid="uid://cursuj1kbe3c8" path="res://Spells/List/draw_reserve.tscn" id="4_es1my"]
+[ext_resource type="PackedScene" uid="uid://cua3n1jbalw8b" path="res://Spells/List/fireball.tscn" id="5_wki6k"]
+[ext_resource type="PackedScene" uid="uid://df661cfy1njwc" path="res://Spells/List/fire_damage.tscn" id="6_q614w"]
+[ext_resource type="PackedScene" uid="uid://dwouc45ww1oqp" path="res://Spells/List/fire_ground.tscn" id="7_x0my1"]
+[ext_resource type="PackedScene" uid="uid://b8vqcoewh7dbe" path="res://Spells/List/fire_shield.tscn" id="8_b6usy"]
+[ext_resource type="PackedScene" uid="uid://jdeghdi5h4s8" path="res://Spells/List/heal_crea.tscn" id="9_cufub"]
+[ext_resource type="PackedScene" uid="uid://b6jrl4qaweskt" path="res://Spells/List/heal_cryst.tscn" id="10_j2st7"]
+[ext_resource type="PackedScene" uid="uid://2on77jloqxwd" path="res://Spells/List/invoc_blue.tscn" id="11_oc276"]
+[ext_resource type="PackedScene" uid="uid://ca1uonywv6qeu" path="res://Spells/List/invoc_red.tscn" id="12_e80t6"]
+[ext_resource type="PackedScene" uid="uid://d0i2tfqxt0d7g" path="res://Spells/List/invoc_reserve.tscn" id="13_egat0"]
+[ext_resource type="PackedScene" uid="uid://bxg8rtcnbm3xp" path="res://Spells/List/invoc_white.tscn" id="14_k37s6"]
+[ext_resource type="PackedScene" uid="uid://8i57dqql7enw" path="res://Spells/List/link_crea.tscn" id="15_vruxi"]
+[ext_resource type="PackedScene" uid="uid://co0fgwbh8h481" path="res://Spells/List/make_reserve.tscn" id="16_ppbvl"]
+[ext_resource type="PackedScene" uid="uid://c6x8pk771ln11" path="res://Spells/List/make_wall.tscn" id="17_kqvx8"]
+[ext_resource type="PackedScene" uid="uid://d0wdsvu7c2ew7" path="res://Spells/List/move_crea.tscn" id="18_8woyh"]
+[ext_resource type="PackedScene" uid="uid://kj0thlhe6p78" path="res://Spells/List/reset_crea.tscn" id="19_v3dlp"]
+[ext_resource type="PackedScene" uid="uid://d7g8lxbv0g2v" path="res://Spells/List/take_crea.tscn" id="20_j1heg"]
+[ext_resource type="PackedScene" uid="uid://dkpii3mqu7vg0" path="res://Spells/List/take_spell.tscn" id="21_r8kie"]
+[ext_resource type="PackedScene" uid="uid://noe61rhbrjxn" path="res://Scenes/Creatures/List/blue_1.tscn" id="22_0ejb8"]
+[ext_resource type="PackedScene" uid="uid://dcrmgvlucwn8t" path="res://Scenes/Creatures/List/red_1.tscn" id="23_kmh53"]
+[ext_resource type="PackedScene" uid="uid://c2f8ypfw20ywh" path="res://Scenes/Creatures/List/white_1.tscn" id="24_8elqj"]
 
 [node name="GAME" type="Node"]
 script = ExtResource("1_itph7")
@@ -8,4 +31,50 @@ color_but_res = "res://UI/ColorButton.tscn"
 
 [node name="Spells" type="Node" parent="."]
 
+[node name="attack_crea" parent="Spells" instance=ExtResource("2_ovbwh")]
+
+[node name="buff_crea" parent="Spells" instance=ExtResource("3_i5wm3")]
+
+[node name="draw_reserve" parent="Spells" instance=ExtResource("4_es1my")]
+
+[node name="Fireball" parent="Spells" instance=ExtResource("5_wki6k")]
+
+[node name="fire_damage" parent="Spells" instance=ExtResource("6_q614w")]
+
+[node name="fire_ground" parent="Spells" instance=ExtResource("7_x0my1")]
+
+[node name="fire_shield" parent="Spells" instance=ExtResource("8_b6usy")]
+
+[node name="heal_crea" parent="Spells" instance=ExtResource("9_cufub")]
+
+[node name="heal_cryst" parent="Spells" instance=ExtResource("10_j2st7")]
+
+[node name="Spell" parent="Spells" instance=ExtResource("11_oc276")]
+
+[node name="invoc_red" parent="Spells" instance=ExtResource("12_e80t6")]
+
+[node name="InvocReserve" parent="Spells" instance=ExtResource("13_egat0")]
+
+[node name="invoc_white" parent="Spells" instance=ExtResource("14_k37s6")]
+
+[node name="link_crea" parent="Spells" instance=ExtResource("15_vruxi")]
+
+[node name="make_reserve" parent="Spells" instance=ExtResource("16_ppbvl")]
+
+[node name="make_wall" parent="Spells" instance=ExtResource("17_kqvx8")]
+
+[node name="move_crea" parent="Spells" instance=ExtResource("18_8woyh")]
+
+[node name="reset_crea" parent="Spells" instance=ExtResource("19_v3dlp")]
+
+[node name="take_crea" parent="Spells" instance=ExtResource("20_j1heg")]
+
+[node name="take_spell" parent="Spells" instance=ExtResource("21_r8kie")]
+
 [node name="Creatures" type="Node" parent="."]
+
+[node name="blue_1" parent="Creatures" instance=ExtResource("22_0ejb8")]
+
+[node name="Red1" parent="Creatures" instance=ExtResource("23_kmh53")]
+
+[node name="White1" parent="Creatures" instance=ExtResource("24_8elqj")]

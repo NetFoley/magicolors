@@ -1,0 +1,70 @@
+[gd_scene load_steps=3 format=3 uid="uid://cahydqhs3vvso"]
+
+[ext_resource type="Theme" uid="uid://bg3jq1neuxixx" path="res://res/new_theme.tres" id="1_fg3pb"]
+[ext_resource type="Script" path="res://UI/AideContainer.gd" id="1_xj5gu"]
+
+[node name="AideContainer" type="VBoxContainer"]
+anchors_preset = -1
+anchor_left = 0.942
+anchor_top = 0.047
+anchor_right = 0.972
+anchor_bottom = 0.047
+offset_left = -206.16
+offset_top = 0.16
+offset_right = -0.160034
+offset_bottom = 615.16
+grow_horizontal = 0
+mouse_filter = 2
+theme = ExtResource("1_fg3pb")
+script = ExtResource("1_xj5gu")
+
+[node name="Button" type="Button" parent="."]
+custom_minimum_size = Vector2(80, 50)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 24
+toggle_mode = true
+text = "Aide"
+
+[node name="TabContainer" type="TabContainer" parent="."]
+visible = false
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/side_margin = 22
+
+[node name="Sorts" type="TabBar" parent="TabContainer"]
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/Sorts"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Sorts/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Creatures" type="TabBar" parent="TabContainer"]
+visible = false
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/Creatures"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Creatures/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3

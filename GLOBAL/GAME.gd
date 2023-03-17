@@ -68,7 +68,7 @@ var sort_elements = {
 	"WBR": "reset_crea",	
 }
 
-var spells = [Area2D]
+var spells = []
 
 enum colorType{
 	RED,
@@ -118,11 +118,38 @@ var tile_map = null
 var emetter
 
 func _ready():
-	load_spells()
-	load_creatures()
+#	load_spells()
+#	load_creatures()
 	target_selected.connect(_on_target_selected)
 	var __ = connect("turn_changed", _on_new_turn)
 	cancel_selection.connect(_on_cancel_selection)
+	
+func get_color_type(color : String):
+	match(color):
+		"R":
+			return colorType.RED
+		"G":
+			return colorType.GREEN
+		"B":
+			return colorType.BLUE
+		"W":
+			return colorType.WHITE
+		"B":
+			return colorType.BLACK
+	
+func get_combi_of_spell_id(id) -> String :
+	var keys = sort_elements.keys()
+	for key in keys:
+		var value = sort_elements[key]
+		if value == id:
+			return key
+	return ""
+	
+func get_spells():
+	return $Spells.get_children()
+	
+func get_creatures():
+	return $Creatures.get_children()
 	
 func get_reserve_color():
 	if color_reserve and color_reserve.get_child_count() > 0:
@@ -156,6 +183,13 @@ func get_crystals():
 		if crea is Crystal:
 			crystals.append(crea)
 	return crystals
+	
+func get_crystal(player):
+	var crystals = get_crystals()
+	for crystal in crystals:
+		if crystal.player == player:
+			return crystal
+	return null
 	
 func is_our_turn():
 	var mod = (turn % 2)

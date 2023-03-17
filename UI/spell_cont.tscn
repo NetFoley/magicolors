@@ -1,0 +1,83 @@
+[gd_scene load_steps=4 format=3 uid="uid://b63dqrvaouwye"]
+
+[ext_resource type="Script" path="res://UI/spell_cont.gd" id="1_h03hm"]
+[ext_resource type="PackedScene" uid="uid://cl3qf5tgqq252" path="res://UI/ColorText.tscn" id="2_84qh2"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rauto"]
+bg_color = Color(0.117647, 0.0470588, 0.137255, 0.203922)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 1)
+
+[node name="SpellCont" type="PanelContainer"]
+custom_minimum_size = Vector2(250, 0)
+offset_right = 150.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_rauto")
+script = ExtResource("1_h03hm")
+
+[node name="VBOX" type="VBoxContainer" parent="."]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/separation = 0
+alignment = 1
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="VBOX"]
+layout_mode = 2
+size_flags_vertical = 4
+alignment = 1
+
+[node name="Label" type="Label" parent="VBOX/HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 19
+text = "Nom qsd qsdsqdqsdqs"
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="Button" type="Button" parent="VBOX/HBoxContainer3"]
+custom_minimum_size = Vector2(50, 40)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 24
+text = "?"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBOX"]
+clip_contents = true
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+alignment = 1
+
+[node name="Label2" type="Label" parent="VBOX/HBoxContainer"]
+visible = false
+layout_mode = 2
+text = "Combinaison :"
+horizontal_alignment = 1
+
+[node name="ColorText" parent="VBOX/HBoxContainer" instance=ExtResource("2_84qh2")]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+COLORSIZE = 32
+
+[node name="ColorText2" parent="VBOX/HBoxContainer" instance=ExtResource("2_84qh2")]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+COLORSIZE = 32
+
+[node name="ColorText3" parent="VBOX/HBoxContainer" instance=ExtResource("2_84qh2")]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+COLORSIZE = 32
+
+[node name="Label3" type="Label" parent="VBOX"]
+visible = false
+layout_mode = 2
+theme_override_font_sizes/font_size = 15
+text = "Description"
+horizontal_alignment = 1
+autowrap_mode = 3

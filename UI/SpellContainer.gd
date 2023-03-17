@@ -26,5 +26,5 @@ func _on_target_selected(target):
 	update_label()
 	
 func update_label(_crea = null, _player = null):
-	$VBoxContainer/SpellCount.text = var_to_str(get_node("SpellFlow").get_child_count()) + "/" + var_to_str(GAME.get_mental_capacity(GAME.player1))
+	$VBoxContainer/SpellCount.text = var_to_str(get_node("SpellFlow").get_child_count()) + "/" + var_to_str(GAME.get_mental_capacity(GAME.get_player_object(GAME.get_player())))
 	

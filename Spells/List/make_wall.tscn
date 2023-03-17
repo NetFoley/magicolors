@@ -8,6 +8,6 @@
 script = ExtResource("2_dhubd")
 spell_id = "make_wall"
 spell_name = "Apparition de bosquet"
-spell_desc = "Créé des mursr destructibles en 3x3 avec 20 PV chacuns"
+spell_desc = "Créé des murs destructibles en 3x3 avec 20 PV chacuns"
 
 [node name="Wall" parent="." index="1" instance=ExtResource("2_pak0w")]

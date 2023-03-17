@@ -7,3 +7,4 @@
 script = ExtResource("2_vh5rj")
 spell_id = "invoc_red"
 spell_name = "Invocation rouge"
+spell_desc = "Invoque une créature rouge."

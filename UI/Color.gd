@@ -2,7 +2,7 @@
 extends TextureRect
 class_name ColorText
 
-const COLORSIZE = 64
+@export var COLORSIZE = 64
 var tween = null
 
 @export var is_visible = true:

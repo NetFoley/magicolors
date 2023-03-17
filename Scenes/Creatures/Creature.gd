@@ -7,6 +7,7 @@ class_name Creature
 		max_life = value
 		if get_node_or_null("LifeBar"):
 			$LifeBar.max_value = value
+		update_tool_tip()
 		
 var life = 3:
 	set(value):
@@ -17,16 +18,24 @@ var life = 3:
 			life = max_life
 		if $LifeBar:
 			$LifeBar.value = life
+		update_tool_tip()
 		
 var multiplicater = 1.0
 		
-@export var movement = 3
-@export var dmg = 1
+@export var movement = 3:
+	set(value):
+		movement = value
+		update_tool_tip()
+@export var dmg = 1:
+	set(value):
+		dmg = value
+		update_tool_tip()
 @export var c_range = 1
 @export var can_be_targeted = true
 @onready var but = $SelectButton
 @export var can_be_selected = true
 @export var mental_cap_cost = 1.0
+@export var particularity_desc = ""
 
 signal can_move_changed(value)
 signal damaged(value, damager)
@@ -58,7 +67,18 @@ func _ready():
 	GAME.turn_changed.connect(func(__): can_move = true; can_attack = true)
 	max_life = max_life
 	life = max_life
-
+	update_tool_tip()
+	
+func update_tool_tip():
+	if !get_node_or_null("SelectButton"):
+		return
+	$SelectButton.tooltip_text = str(name) 
+	$SelectButton.tooltip_text += "\n Vie: " + str(life) + "/" + str(max_life)
+	$SelectButton.tooltip_text += "\n Dégâts : " + str(dmg)
+	$SelectButton.tooltip_text += "\n Portée : " + str(c_range)
+	$SelectButton.tooltip_text += "\n Déplacement : " + str(movement)
+	$SelectButton.tooltip_text += "\n Coût en cap. mentale : " + str(mental_cap_cost)
+	
 func _on_gui_input(event):
 	if !is_multiplayer_authority() or !GAME.is_our_turn() or !can_be_selected:
 		return
@@ -72,6 +92,9 @@ func _on_gui_input(event):
 func appear():
 	visible = true
 	$Sprite.appear()
+
+func get_texture():
+	return $Sprite.sprite_frames.get_frame_texture("default", 0)
 
 func _spell_tween_finished():
 	$Sprite.play("default")
@@ -99,6 +122,7 @@ func attack(target_path):
 	
 func damage(value, damager):
 	life -= value
+	$Blood.restart()
 	damaged.emit(value, damager)
 	
 func enable_but(value):

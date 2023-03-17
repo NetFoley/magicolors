@@ -1,19 +1,14 @@
-[gd_scene load_steps=2 format=3 uid="uid://ongyl48jw1y5"]
+[gd_scene load_steps=4 format=3 uid="uid://ongyl48jw1y5"]
 
 [ext_resource type="Script" path="res://UI/Menu.gd" id="1_d2ccq"]
+[ext_resource type="Theme" uid="uid://bg3jq1neuxixx" path="res://res/new_theme.tres" id="2_54oaj"]
+[ext_resource type="PackedScene" uid="uid://cahydqhs3vvso" path="res://UI/aide_container.tscn" id="2_ccyrg"]
 
-[node name="Menu" type="Control"]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="Menu" type="CanvasLayer"]
 script = ExtResource("1_d2ccq")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 custom_minimum_size = Vector2(200, 200)
-layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -25,18 +20,22 @@ offset_right = 4.0
 offset_bottom = 10.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("2_54oaj")
 
 [node name="HostBut" type="Button" parent="VBoxContainer"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 32
 text = "Host	"
 
 [node name="JoinBut" type="Button" parent="VBoxContainer"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 32
 text = "Join
 "
 
 [node name="TextEdit" type="TextEdit" parent="VBoxContainer"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 32
 text = "127.0.0.1"
 placeholder_text = "Ip adress to join
 "
@@ -44,7 +43,6 @@ scroll_fit_content_height = true
 
 [node name="Label" type="RichTextLabel" parent="."]
 visible = false
-layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -59,3 +57,16 @@ grow_vertical = 2
 theme_override_font_sizes/normal_font_size = 64
 bbcode_enabled = true
 text = "[wave amp=50 freq=1.5][center]Waiting for connexion[/center][/wave]"
+
+[node name="AideContainer" parent="." instance=ExtResource("2_ccyrg")]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 0.0
+offset_left = -206.0
+offset_top = 0.0
+offset_right = 0.0
+offset_bottom = 615.0
+
+[node name="Camera2D" type="Camera2D" parent="."]

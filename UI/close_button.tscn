@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://ef0syu5snnng"]
+[gd_scene load_steps=6 format=3 uid="uid://ef0syu5snnng"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mywrw"]
 bg_color = Color(0.533333, 0, 0.0666667, 0.588235)
@@ -13,6 +13,12 @@ border_width_bottom = 1
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sq1hv"]
 bg_color = Color(0.278431, 0, 0.0196078, 1)
 
+[sub_resource type="InputEventAction" id="InputEventAction_wqy3n"]
+action = &"close_ui"
+
+[sub_resource type="Shortcut" id="Shortcut_h2txj"]
+events = [SubResource("InputEventAction_wqy3n")]
+
 [node name="Close" type="Button"]
 custom_minimum_size = Vector2(30, 0)
 anchors_preset = 1
@@ -26,4 +32,5 @@ pivot_offset = Vector2(30, 0)
 theme_override_styles/normal = SubResource("StyleBoxFlat_mywrw")
 theme_override_styles/hover = SubResource("StyleBoxFlat_5dhqd")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_sq1hv")
+shortcut = SubResource("Shortcut_h2txj")
 text = "X"

@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://dquvnnqcn2rmc"]
+[gd_scene load_steps=18 format=3 uid="uid://dquvnnqcn2rmc"]
 
 [ext_resource type="Texture2D" uid="uid://30leiholxpcn" path="res://res/0x72_DungeonTilesetII_v1.4.png" id="1_iyf6o"]
 [ext_resource type="Script" path="res://Scenes/Creatures/Creature.gd" id="1_p1ic5"]
@@ -26,7 +26,7 @@ void fragment() {
 }
 "
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_bto1j"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_sac5n"]
 resource_local_to_scene = true
 shader = SubResource("Shader_atsyp")
 shader_parameter/gen = 1.0
@@ -75,6 +75,36 @@ corner_detail = 4
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o0nsd"]
 bg_color = Color(1, 0, 0, 0.588235)
 
+[sub_resource type="Gradient" id="Gradient_qiuqb"]
+interpolation_mode = 2
+offsets = PackedFloat32Array(0, 0.125506, 0.287449, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_h7xkd"]
+gradient = SubResource("Gradient_qiuqb")
+
+[sub_resource type="Curve" id="Curve_wm27r"]
+max_value = 100.0
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.533217, 0), 0.0, 0.0, 0, 0, Vector2(1, 100), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_iserl"]
+curve = SubResource("Curve_wm27r")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_1cefu"]
+particle_flag_disable_z = true
+direction = Vector3(0, -1, 0)
+gravity = Vector3(0, 98, 0)
+initial_velocity_max = 70.07
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+damping_max = 29.3
+damping_curve = SubResource("CurveTexture_iserl")
+color = Color(0.819608, 0.231373, 0.305882, 1)
+color_ramp = SubResource("GradientTexture1D_h7xkd")
+hue_variation_min = -0.09
+hue_variation_max = 0.07
+
 [node name="Creature" type="Node2D"]
 texture_filter = 1
 script = ExtResource("1_p1ic5")
@@ -82,7 +112,7 @@ max_life = 10
 dmg = 5
 
 [node name="Sprite" parent="." instance=ExtResource("2_rcetl")]
-material = SubResource("ShaderMaterial_bto1j")
+material = SubResource("ShaderMaterial_sac5n")
 sprite_frames = SubResource("SpriteFrames_aiedk")
 
 [node name="SelectButton" type="Button" parent="."]
@@ -114,3 +144,10 @@ theme_override_styles/background = SubResource("StyleBoxFlat_yu63v")
 theme_override_styles/fill = SubResource("StyleBoxFlat_o0nsd")
 value = 60.0
 show_percentage = false
+
+[node name="Blood" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 16
+process_material = SubResource("ParticleProcessMaterial_1cefu")
+one_shot = true
+explosiveness = 1.0

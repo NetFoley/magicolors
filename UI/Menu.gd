@@ -1,4 +1,4 @@
-extends Control
+extends CanvasLayer
 
 const PORT = 9999
 const ADDRESS = "127.0.0.1"

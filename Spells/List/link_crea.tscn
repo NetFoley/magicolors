@@ -8,7 +8,7 @@
 script = ExtResource("2_oknuy")
 spell_id = "link_crea"
 spell_name = "Protection anti-magie"
-spell_desc = "Rend une créature insensible à tous les sorts pour 3 tours.Rend une créature insensible à tous les sorts pour 3 tours."
+spell_desc = "Rend une créature insensible à tous les sorts pour 3 tours."
 
 [node name="magic_shield" parent="." index="1" instance=ExtResource("3_mks7y")]
 visible = false

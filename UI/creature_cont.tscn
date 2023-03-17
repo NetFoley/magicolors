@@ -1,0 +1,94 @@
+[gd_scene load_steps=2 format=3 uid="uid://dt15gn2qa4d68"]
+
+[ext_resource type="Script" path="res://UI/creature_cont.gd" id="1_gm5qb"]
+
+[node name="creature_cont" type="PanelContainer"]
+custom_minimum_size = Vector2(200, 0)
+script = ExtResource("1_gm5qb")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = -4
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+
+[node name="Name" type="Label" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/outline_size = 2
+theme_override_font_sizes/font_size = 25
+text = "Nom"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+text = "Vie : "
+
+[node name="LValue" type="Label" parent="VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+text = "0"
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+text = "Dégâts :
+"
+
+[node name="LValue" type="Label" parent="VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+text = "0"
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer4"]
+layout_mode = 2
+text = "Portée :
+"
+
+[node name="LValue" type="Label" parent="VBoxContainer/HBoxContainer4"]
+layout_mode = 2
+text = "0"
+
+[node name="HBoxContainer5" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer5"]
+layout_mode = 2
+text = "Déplacement :
+"
+
+[node name="LValue" type="Label" parent="VBoxContainer/HBoxContainer5"]
+layout_mode = 2
+text = "0"
+
+[node name="HBoxContainer6" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer6"]
+layout_mode = 2
+text = "Capacité mentale :
+"
+
+[node name="LValue" type="Label" parent="VBoxContainer/HBoxContainer6"]
+layout_mode = 2
+text = "0"
+
+[node name="HBoxContainer7" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer7"]
+layout_mode = 2
+text = "Particularité :
+"
+
+[node name="LValue" type="Label" parent="VBoxContainer/HBoxContainer7"]
+layout_mode = 2
