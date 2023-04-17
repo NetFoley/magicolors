@@ -34,6 +34,9 @@ max_life = 25
 movement = 5
 dmg = 12
 mental_cap_cost = 0.5
+particularity_desc = "Peut jouer dés qu'il est invoqué"
+start_can_move = true
+start_can_attack = true
 
 [node name="Sprite" parent="." index="0"]
 material = SubResource("ShaderMaterial_qk5m7")

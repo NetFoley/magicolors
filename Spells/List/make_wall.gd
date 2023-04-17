@@ -13,4 +13,4 @@ func launch(_target, _sender):
 				GAME.add_creature_to_tilemap(fire, pos, "neutral")
 		
 func get_target():
-	GAME.get_targets({"type": GAME.tile_map.select_type.ANY})
+	GAME.get_targets([{"type": GAME.tile_map.select_type.ANY}])

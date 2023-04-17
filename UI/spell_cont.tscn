@@ -12,7 +12,7 @@ border_width_bottom = 1
 border_color = Color(0, 0, 0, 1)
 
 [node name="SpellCont" type="PanelContainer"]
-custom_minimum_size = Vector2(250, 0)
+custom_minimum_size = Vector2(450, 0)
 offset_right = 150.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -33,7 +33,7 @@ alignment = 1
 [node name="Label" type="Label" parent="VBOX/HBoxContainer3"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 19
+theme_override_font_sizes/font_size = 30
 text = "Nom qsd qsdsqdqsdqs"
 horizontal_alignment = 1
 autowrap_mode = 3
@@ -43,8 +43,8 @@ custom_minimum_size = Vector2(50, 40)
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 4
-theme_override_font_sizes/font_size = 24
-text = "?"
+theme_override_font_sizes/font_size = 39
+text = "Info"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBOX"]
 clip_contents = true
@@ -60,24 +60,24 @@ text = "Combinaison :"
 horizontal_alignment = 1
 
 [node name="ColorText" parent="VBOX/HBoxContainer" instance=ExtResource("2_84qh2")]
-custom_minimum_size = Vector2(32, 32)
+custom_minimum_size = Vector2(48, 48)
 layout_mode = 2
-COLORSIZE = 32
+COLORSIZE = 48
 
 [node name="ColorText2" parent="VBOX/HBoxContainer" instance=ExtResource("2_84qh2")]
-custom_minimum_size = Vector2(32, 32)
+custom_minimum_size = Vector2(48, 48)
 layout_mode = 2
-COLORSIZE = 32
+COLORSIZE = 48
 
 [node name="ColorText3" parent="VBOX/HBoxContainer" instance=ExtResource("2_84qh2")]
-custom_minimum_size = Vector2(32, 32)
+custom_minimum_size = Vector2(48, 48)
 layout_mode = 2
-COLORSIZE = 32
+COLORSIZE = 48
 
 [node name="Label3" type="Label" parent="VBOX"]
 visible = false
 layout_mode = 2
-theme_override_font_sizes/font_size = 15
+theme_override_font_sizes/font_size = 24
 text = "Description"
 horizontal_alignment = 1
 autowrap_mode = 3

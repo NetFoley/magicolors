@@ -14,4 +14,4 @@ func launch(_target, _sender):
 			
 		
 func get_target():
-	GAME.get_targets({"type": GAME.tile_map.select_type.CREATURE})
+	GAME.get_targets([{"type": GAME.tile_map.select_type.CREATURE}])

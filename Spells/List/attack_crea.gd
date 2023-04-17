@@ -12,4 +12,4 @@ func launch(_target, _sender):
 		particles.queue_free()
 		
 func get_target():
-	GAME.get_targets({"type": GAME.tile_map.select_type.ALLY_CREATURE})
+	GAME.get_targets([{"type": GAME.tile_map.select_type.ALLY_CREATURE}])

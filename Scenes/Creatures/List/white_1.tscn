@@ -71,6 +71,7 @@ color = 3
 max_life = 25
 dmg = 9
 c_range = 5
+particularity_desc = "Unité à distance qui tir de loin"
 
 [node name="Sprite" parent="." index="0"]
 material = SubResource("ShaderMaterial_gexoy")

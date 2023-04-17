@@ -15,10 +15,7 @@ var nb_of_color = 0:
 	set(value):
 		nb_of_color = value
 		if nb_label:
-			if value == 3:
-				nb_label.text = "Lachez votre couleur ici "
-			else:
-				nb_label.text = "Lachez votre couleur ici " + var_to_str(nb_of_color) + "/3"
+			nb_label.text = "Lachez votre couleur ici " + var_to_str(nb_of_color) + "/3"
 
 func _ready():
 	var __ = GAME.connect("color_drag",Callable(self,"_on_color_drag"))
@@ -47,6 +44,7 @@ func _on_create_spell():
 
 func _on_color_drag():
 	visible = true
+	update_current_spell()
 
 # Called when the node enters the scene tree for the first time.
 func _on_color_input(event:InputEvent, child):
@@ -61,7 +59,16 @@ func remove_color(child):
 	child.disappear()
 	
 func _can_drop_data(_position, data):
-	return data.has("color") and colors_container.get_children().size() < capacity
+	var can_drop = data.has("color") and colors_container.get_children().size() < capacity
+	if can_drop:
+		modulate = Color(1.2, 1.2, 1.2, 1.0)
+	else:
+		modulate = Color(1.0, 1.0, 1.0, 1.0)
+	return can_drop
+	
+func _input(_event):
+	modulate = Color(1.0, 1.0, 1.0, 1.0)
+
 
 #func _drop_data(_position, data):
 #	var i = 0
@@ -135,6 +142,12 @@ func update_current_spell():
 		spell_but.disabled = true
 		current_spell = null
 		return
+	if GAME.spell_cont.get_child_count() >= GAME.get_mental_capacity(GAME.get_player_object(GAME.get_player())):
+		spell_label.text = "Impossible de rajouter un sort sans dépasser votre limite de capacité mentale"
+		spell_desc.text = ""
+		spell_but.disabled = true
+		current_spell = null
+		return 
 	current_spell = spell
 	spell_label.text = spell.spell_name
 	spell_desc.text = spell.spell_desc
@@ -142,8 +155,6 @@ func update_current_spell():
 
 func can_create_spell(spell):
 	if !spell:
-		return false
-	if GAME.spell_cont.get_child_count() >= GAME.get_mental_capacity(GAME.player1):
 		return false
 		
 	return true

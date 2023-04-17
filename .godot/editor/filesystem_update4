@@ -1,14 +1,2 @@
-res://UI/ui.tscn
+res://Scenes/Creatures/List/white_2.tscn
 res://res/new_theme.tres
-res://Scenes/Battleground.tscn
-res://UI/aide_container.tscn
-res://GLOBAL/GAME.tscn
-res://UI/spell_cont.tscn
-res://UI/creature_cont.tscn
-res://Scenes/Creatures/List/blue_1.tscn
-res://Scenes/Creatures/Creature.tscn
-res://Spells/List/invoc_blue.tscn
-res://Spells/List/invoc_red.tscn
-res://Spells/List/invoc_white.tscn
-res://Spells/List/invoc_reserve.tscn
-res://UI/AideContainer.gd

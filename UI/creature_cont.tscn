@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://UI/creature_cont.gd" id="1_gm5qb"]
 
 [node name="creature_cont" type="PanelContainer"]
-custom_minimum_size = Vector2(200, 0)
+custom_minimum_size = Vector2(450, 0)
 script = ExtResource("1_gm5qb")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
@@ -87,8 +87,11 @@ layout_mode = 2
 
 [node name="Label" type="Label" parent="VBoxContainer/HBoxContainer7"]
 layout_mode = 2
+size_flags_vertical = 1
 text = "Particularité :
 "
 
 [node name="LValue" type="Label" parent="VBoxContainer/HBoxContainer7"]
 layout_mode = 2
+size_flags_horizontal = 3
+autowrap_mode = 3

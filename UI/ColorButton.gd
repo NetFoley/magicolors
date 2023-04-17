@@ -16,6 +16,7 @@ func _ready():
 
 func _get_drag_data(_position):
 	if !GAME.is_our_turn():
+		GAME.error_popup.emit("not_your_turn")
 		return null
 	var cpb = color_text.duplicate()
 	cpb.modulate.a *= 0.5

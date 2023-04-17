@@ -70,9 +70,12 @@ animations = [{
 color = 2
 max_life = 40
 dmg = 9
+can_dmg_ally = true
+aoe_area = 2
+c_range = 0
 
 [node name="Sprite" parent="." index="0"]
-modulate = Color(0.419608, 0.411765, 1, 1)
+self_modulate = Color(0.466667, 0.431373, 1, 1)
 material = SubResource("ShaderMaterial_w5bb3")
 position = Vector2(0, -4)
 sprite_frames = SubResource("SpriteFrames_4xnae")

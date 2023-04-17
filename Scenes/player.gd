@@ -35,6 +35,14 @@ func _ready():
 		GAME.player1 = self
 	GAME.new_spell.connect(_on_new_spell)
 	GAME.old_spell.connect(_on_old_spell)
+	$Timer.timeout.connect(_on_timer_timeout)
+	
+func _on_timer_timeout():
+	if GAME.get_player_turn() == name:
+		$GPUParticles2D.emitting = true
+	else:
+		$GPUParticles2D.emitting = false
+	$Timer.start(10*randf())
 
 func _on_new_spell(spell_id, _player):
 	if _player != name:

@@ -16,4 +16,4 @@ func launch(_target, _sender):
 			target.set_multiplayer_authority(multiplayer.get_remote_sender_id())
 			
 func get_target():
-	GAME.get_targets({"type": GAME.tile_map.select_type.ENEMY_CREATURE})
+	GAME.get_targets([{"type": GAME.tile_map.select_type.ENEMY_CREATURE}])

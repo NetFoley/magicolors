@@ -35,7 +35,6 @@ hue_variation_min = -0.05
 
 [node name="heal_crea" instance=ExtResource("1_vntsq")]
 script = ExtResource("2_yg7ej")
-heal_value = 10
 spell_id = "heal_crea"
 spell_name = "Soin de zone"
 spell_desc = "Soigne de 8 PV toutes les créatures dans une zone de rayon 2"

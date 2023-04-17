@@ -33,8 +33,13 @@ movie_writer/movie_file="magicolors.avi"
 version_control/plugin_name="GitPlugin"
 version_control/autoload_on_startup=true
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/shaker/plugin.cfg")
+
 [gui]
 
+timers/tooltip_delay_sec=0.08
 common/drop_mouse_on_gui_input_disabled=true
 
 [input]

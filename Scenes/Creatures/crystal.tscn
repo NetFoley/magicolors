@@ -3,32 +3,12 @@
 [ext_resource type="PackedScene" uid="uid://dquvnnqcn2rmc" path="res://Scenes/Creatures/Creature.tscn" id="1_6n1tl"]
 [ext_resource type="Texture2D" uid="uid://kind10w437do" path="res://res/Fire Bullet Pixel All.png" id="2_hurtm"]
 [ext_resource type="Script" path="res://Scenes/Creatures/crystal.gd" id="2_pgspa"]
-
-[sub_resource type="Shader" id="Shader_atsyp"]
-resource_local_to_scene = true
-code = "shader_type canvas_item;
-
-uniform float gen = 1.0;
-
-void fragment() {
-	float value = (0.5+UV.x)*(gen)*22.0*COLOR.r;
-	if (value > 10.0){
-		
-	}
-	else if(value > 9.5){
-		COLOR.rgb = vec3(1.0);
-	}
-	else{
-		COLOR.a = 0.0;
-		
-	}
-}
-"
+[ext_resource type="Shader" path="res://Scenes/Creatures/Creature.gdshader" id="3_jm10c"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_bb2ag"]
 resource_local_to_scene = true
-shader = SubResource("Shader_atsyp")
-shader_parameter/gen = 50.0
+shader = ExtResource("3_jm10c")
+shader_parameter/gen = 1.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fgmvq"]
 atlas = ExtResource("2_hurtm")
@@ -48,7 +28,7 @@ animations = [{
 [node name="Crystal" instance=ExtResource("1_6n1tl")]
 script = ExtResource("2_pgspa")
 start_player = ""
-end_turn_life = 3
+end_turn_life = 5
 heal_range = 2
 color = 4
 max_life = 50
@@ -56,8 +36,11 @@ movement = 0
 dmg = 0
 c_range = 0
 can_be_targeted = false
+mental_cap_cost = 0.0
+particularity_desc = "Votre crystal ! S'il est détruit vous perdez la partie. Soigne les créatures de 5 PV dans un rayon de 2 cases à la fin du tour."
+always_show_life = true
 
 [node name="Sprite" parent="." index="0"]
-modulate = Color(0.27, 0.61, 100, 1)
+self_modulate = Color(0.0901961, 0.160784, 3.31373, 1)
 material = SubResource("ShaderMaterial_bb2ag")
 sprite_frames = SubResource("SpriteFrames_mdmnd")

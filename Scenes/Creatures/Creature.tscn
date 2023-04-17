@@ -1,34 +1,15 @@
-[gd_scene load_steps=18 format=3 uid="uid://dquvnnqcn2rmc"]
+[gd_scene load_steps=22 format=3 uid="uid://dquvnnqcn2rmc"]
 
 [ext_resource type="Texture2D" uid="uid://30leiholxpcn" path="res://res/0x72_DungeonTilesetII_v1.4.png" id="1_iyf6o"]
 [ext_resource type="Script" path="res://Scenes/Creatures/Creature.gd" id="1_p1ic5"]
 [ext_resource type="PackedScene" uid="uid://cy2tpoccf1jv6" path="res://Scenes/spell_sprite.tscn" id="2_rcetl"]
+[ext_resource type="Shader" path="res://Scenes/Creatures/Creature.gdshader" id="3_2nt40"]
+[ext_resource type="Texture2D" uid="uid://b7fvnvkq25ij8" path="res://res/spritesheet_32x32.png" id="4_w2mxb"]
+[ext_resource type="Texture2D" uid="uid://cjfn1grmrf88x" path="res://res/Sheet.png" id="5_x132n"]
 
-[sub_resource type="Shader" id="Shader_atsyp"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bo1uw"]
 resource_local_to_scene = true
-code = "shader_type canvas_item;
-
-uniform float gen = 1.0;
-
-void fragment() {
-	float color_int = (COLOR.r + COLOR.g + COLOR.b)/3.0;
-	float value = color_int *UV.x + gen;
-	if (value >= 1.0){
-		
-	}
-	else if(value > 0.5){
-		COLOR.rgb = vec3(1.0);
-	}
-	else{
-		COLOR.a = 0.0;
-		
-	}
-}
-"
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_sac5n"]
-resource_local_to_scene = true
-shader = SubResource("Shader_atsyp")
+shader = ExtResource("3_2nt40")
 shader_parameter/gen = 1.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xg82d"]
@@ -67,13 +48,34 @@ animations = [{
 "speed": 12.65
 }]
 
+[sub_resource type="Animation" id="Animation_l7pma"]
+resource_name = "Hit"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(5, 5, 5, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_pp4nb"]
+_data = {
+"Hit": SubResource("Animation_l7pma")
+}
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yu63v"]
 bg_color = Color(0, 0, 0, 0.345098)
 border_color = Color(1, 1, 1, 1)
 corner_detail = 4
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o0nsd"]
-bg_color = Color(1, 0, 0, 0.588235)
+bg_color = Color(1, 1, 1, 0.843137)
 
 [sub_resource type="Gradient" id="Gradient_qiuqb"]
 interpolation_mode = 2
@@ -112,8 +114,13 @@ max_life = 10
 dmg = 5
 
 [node name="Sprite" parent="." instance=ExtResource("2_rcetl")]
-material = SubResource("ShaderMaterial_sac5n")
+material = SubResource("ShaderMaterial_bo1uw")
 sprite_frames = SubResource("SpriteFrames_aiedk")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite"]
+libraries = {
+"": SubResource("AnimationLibrary_pp4nb")
+}
 
 [node name="SelectButton" type="Button" parent="."]
 anchors_preset = 8
@@ -137,7 +144,7 @@ flat = true
 
 [node name="LifeBar" type="ProgressBar" parent="."]
 offset_left = -10.0
-offset_top = -18.0
+offset_top = -16.0
 offset_right = 11.0
 offset_bottom = -13.0
 theme_override_styles/background = SubResource("StyleBoxFlat_yu63v")
@@ -151,3 +158,21 @@ amount = 16
 process_material = SubResource("ParticleProcessMaterial_1cefu")
 one_shot = true
 explosiveness = 1.0
+
+[node name="MoveIcon" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(-7, -11)
+scale = Vector2(0.297, 0.297)
+texture = ExtResource("4_w2mxb")
+region_enabled = true
+region_rect = Rect2(480, 96, 32, 32)
+
+[node name="AttackIcon" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(8, -11)
+rotation = 3.14159
+scale = Vector2(0.612, 0.612)
+texture = ExtResource("5_x132n")
+flip_h = true
+region_enabled = true
+region_rect = Rect2(16, 0, 16, 16)

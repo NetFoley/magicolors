@@ -78,6 +78,8 @@ enum colorType{
 	BLACK
 }
 
+var nb_of_colors = {}
+var color_spawned = {}
 var spell_cont = null
 var COLOR_SIZE = 64
 var turn = 0 :
@@ -85,7 +87,9 @@ var turn = 0 :
 		turn = value
 		turn_changed.emit(value)
 		
+signal time_left_changed(time)
 signal casted(spell_name, player_name)
+signal error_popup(text)
 signal turn_changed(value)
 signal color_drag()
 signal new_spell(spell : String, player)
@@ -95,6 +99,7 @@ signal selecting(value)
 signal cancel_selection()
 signal new_creature(creature, player)
 
+var player_turn_time = 60.0
 var dir_creature_path = "res://Scenes/Creatures/List/"
 var creature_list = [Creature]
 var dir_spell_path = "res://Spells/List/"
@@ -120,9 +125,20 @@ var emetter
 func _ready():
 #	load_spells()
 #	load_creatures()
+	setup_crea_colors()
 	target_selected.connect(_on_target_selected)
 	var __ = connect("turn_changed", _on_new_turn)
 	cancel_selection.connect(_on_cancel_selection)
+	$Timer.timeout.connect(_on_timer_timeout)
+	
+func setup_crea_colors():
+	var creatures = get_creatures()
+	for crea in creatures:
+		if nb_of_colors.has(crea.color):
+			nb_of_colors[crea.color] += 1
+		else:
+			nb_of_colors[crea.color] = 1
+		
 	
 func get_color_type(color : String):
 	match(color):
@@ -136,6 +152,21 @@ func get_color_type(color : String):
 			return colorType.WHITE
 		"B":
 			return colorType.BLACK
+	
+func _physics_process(_delta):
+	if $Timer.is_stopped():
+		return
+		
+	time_left_changed.emit($Timer.time_left)
+	
+@rpc("reliable", "call_local", "any_peer")
+func go_next_turn():
+	GAME.turn += 1
+	
+func _on_timer_timeout():
+	if !is_our_turn():
+		return
+	rpc("go_next_turn")
 	
 func get_combi_of_spell_id(id) -> String :
 	var keys = sort_elements.keys()
@@ -198,13 +229,41 @@ func is_our_turn():
 	else:
 		return mod == 0
 #	return false
+func get_player_turn():
+	var mod = (turn % 2)
+	if mod == 1:
+		return "Player1"
+	else:
+		return "Player2"
+	
+func get_random_color():
+	var color = colorType.RED
+	var rd = randi_range(0, 2)
+	match(rd):
+		0:
+			color = colorType.RED
+		1:
+			color = colorType.BLUE
+		2:
+			color = colorType.WHITE
+	return color
 	
 func spawn_creature(color, pos, player):
+	var color_found = 0
+	var crea_nb = 1
+	if nb_of_colors.has(color) and color_spawned.has(color):
+		crea_nb = color_spawned[color] % nb_of_colors[color] + 1
 	for child in creatures_node.get_children():
 		if child.color == color:
-			var crea = child.duplicate()
-			add_creature_to_tilemap(crea, pos, player)
-			return crea
+			color_found += 1
+			if color_found == crea_nb:
+				var crea = child.duplicate()
+				add_creature_to_tilemap(crea, pos, player)
+				if color_spawned.has(color):
+					color_spawned[color] += 1
+				else:
+					color_spawned[color] = 1
+				return crea
 	return null
 	
 func add_creature_to_tilemap(crea, pos, player):
@@ -227,6 +286,9 @@ func add_color(color):
 	color_container.add_child(color_inst)
 	
 func _on_new_turn(_value):
+	$Timer.start(player_turn_time)
+	if turn < 3:
+		$Timer.start(player_turn_time*1.5)
 	if !color_container:
 		return
 	
@@ -297,11 +359,11 @@ func get_spell(id):
 		if spell.spell_id == id:
 			return spell
 
-func get_targets(info : Dictionary):
+func get_targets(infos):
 	if !tile_map:
 		return
 	GAME.selecting.emit(true)
-	tile_map.get_tiles(info)
+	tile_map.get_tiles(infos)
 	
 func end_game(crystal):
 	if crystal.player == get_player():

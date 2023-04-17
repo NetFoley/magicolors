@@ -25,7 +25,7 @@ void fragment() {
 }
 "
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_u84w3"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_loxjy"]
 resource_local_to_scene = true
 shader = SubResource("Shader_yokwg")
 shader_parameter/gen = 0.776
@@ -144,7 +144,7 @@ texture_filter = 1
 script = ExtResource("1_nv26m")
 
 [node name="SpellSprite" parent="." instance=ExtResource("2_xxstc")]
-material = SubResource("ShaderMaterial_u84w3")
+material = SubResource("ShaderMaterial_loxjy")
 
 [node name="Explosion" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_l501s")

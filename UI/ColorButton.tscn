@@ -18,4 +18,5 @@ mouse_default_cursor_shape = 2
 script = ExtResource("1")
 
 [node name="Color" parent="." instance=ExtResource("2")]
+custom_minimum_size = Vector2(1.46531, 1.46531)
 layout_mode = 2

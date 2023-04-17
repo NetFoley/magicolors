@@ -7,4 +7,6 @@ func _ready():
 	text = ""
 	
 func _on_casted(spell_name, sender):
-	text = (sender + " a lancé " + spell_name + " !")
+	text += "\n" + "[Tour " + str(GAME.turn) + "] " +sender + " a lancé " + spell_name + " !"
+	await get_tree().process_frame
+	get_parent().scroll_vertical += 150

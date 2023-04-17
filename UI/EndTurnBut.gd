@@ -11,8 +11,8 @@ func _on_turn_changed(_value):
 	
 func _on_pressed():
 	if GAME.is_our_turn():
-		rpc("go_next_turn")
-
-@rpc("reliable", "call_local", "any_peer")
-func go_next_turn():
-	GAME.turn += 1
+		GAME.rpc("go_next_turn")
+#
+#@rpc("reliable", "call_local", "any_peer")
+#func go_next_turn():
+#	GAME.turn += 1

@@ -2,7 +2,7 @@ extends Creature
 class_name Crystal
 
 @export var start_player : String
-@export var end_turn_life = 3
+@export var end_turn_life = 5
 @export var heal_range = 2
 
 # Called when the node enters the scene tree for the first time.

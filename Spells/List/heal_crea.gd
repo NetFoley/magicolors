@@ -1,6 +1,7 @@
 extends Spell
+class_name HealingSpell
 
-@export var heal_value = 10
+var heal_value : int = 10
 
 # Called when the node enters the scene tree for the first time.
 func launch(target, sender):
@@ -15,4 +16,4 @@ func launch(target, sender):
 			crea.life += heal_value
 
 func get_target():
-	GAME.get_targets({"type": GAME.tile_map.select_type.ANY})
+	GAME.get_targets([{"type": GAME.tile_map.select_type.ANY}])

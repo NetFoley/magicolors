@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://cnhblbba4j373"]
+[gd_scene load_steps=24 format=3 uid="uid://cnhblbba4j373"]
 
 [ext_resource type="Theme" uid="uid://bg3jq1neuxixx" path="res://res/new_theme.tres" id="1_cunch"]
 [ext_resource type="Script" path="res://UI/Reserve.gd" id="2_fbog8"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://UI/Colors.gd" id="5_rud7d"]
 [ext_resource type="Script" path="res://UI/SpellFlow.gd" id="6_gd841"]
 [ext_resource type="Script" path="res://UI/SpellMaker.gd" id="7_in54p"]
+[ext_resource type="Script" path="res://UI/ScrollContainer.gd" id="8_hopa4"]
 [ext_resource type="Script" path="res://UI/DropColor.gd" id="8_p6t5y"]
 [ext_resource type="PackedScene" uid="uid://ef0syu5snnng" path="res://UI/close_button.tscn" id="9_aefkk"]
 [ext_resource type="AudioStream" uid="uid://cwx38lgsuokh0" path="res://res/La Marseillaise French National Anthem FrEn.mp3" id="9_mb512"]
@@ -17,6 +18,12 @@
 [ext_resource type="Script" path="res://UI/Label.gd" id="15_ihnaf"]
 [ext_resource type="Script" path="res://UI/CastFeedBack.gd" id="16_134tr"]
 [ext_resource type="PackedScene" uid="uid://cahydqhs3vvso" path="res://UI/aide_container.tscn" id="17_k67rs"]
+[ext_resource type="Script" path="res://UI/TimeLabel.gd" id="18_038vl"]
+[ext_resource type="Script" path="res://UI/YourTurnLabel.gd" id="18_78aes"]
+[ext_resource type="Script" path="res://UI/PopupPanel.gd" id="19_xwhlw"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hbtm1"]
+bg_color = Color(0.6, 0.6, 0.6, 0.137255)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i8srb"]
 bg_color = Color(0, 0, 0, 0.278431)
@@ -33,14 +40,21 @@ mouse_filter = 2
 theme = ExtResource("1_cunch")
 metadata/_edit_lock_ = true
 
-[node name="Reserve" type="PanelContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+custom_minimum_size = Vector2(0, 120)
 layout_mode = 0
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_left = 171.0
-offset_top = -141.0
-offset_right = 231.0
-offset_bottom = -81.0
+offset_left = 151.0
+offset_top = 529.0
+offset_right = 232.0
+offset_bottom = 649.0
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Réserve"
+
+[node name="Reserve" type="PanelContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
 script = ExtResource("2_fbog8")
 
 [node name="ScrollContainer" type="ScrollContainer" parent="."]
@@ -105,17 +119,6 @@ size_flags_vertical = 0
 alignment = 1
 script = ExtResource("6_gd841")
 
-[node name="CastFeedBack" type="Label" parent="SpellContainer"]
-layout_mode = 2
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_constants/shadow_offset_x = 6
-theme_override_constants/shadow_offset_y = 6
-theme_override_constants/outline_size = 3
-theme_override_font_sizes/font_size = 40
-theme_override_styles/normal = SubResource("StyleBoxFlat_i8srb")
-text = "Casted !"
-script = ExtResource("16_134tr")
-
 [node name="SpellMaker" type="Control" parent="." node_paths=PackedStringArray("nb_label")]
 anchors_preset = 0
 anchor_left = 0.5
@@ -174,6 +177,7 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 33
 text = "FIREBALL"
 horizontal_alignment = 1
+autowrap_mode = 3
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="SpellMaker/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -199,8 +203,8 @@ size_flags_vertical = 4
 size_flags_stretch_ratio = 20.0
 mouse_filter = 1
 theme_override_font_sizes/font_size = 22
-text = "Commencer la préparation de votre sort
-"
+disabled = true
+text = "Préparer le sort pour le prochain tour"
 
 [node name="bluewhitered" type="AudioStreamPlayer" parent="SpellMaker"]
 stream = ExtResource("9_mb512")
@@ -272,7 +276,99 @@ anchor_left = 1.0
 anchor_top = 0.0
 anchor_right = 1.0
 anchor_bottom = 0.0
-offset_left = -250.0
+offset_left = -450.0
 offset_top = 0.0
 offset_right = 0.0
 offset_bottom = 615.0
+
+[node name="TimeLabel" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.807
+anchor_top = 1.0
+anchor_right = 0.807
+anchor_bottom = 1.0
+offset_left = 93.04
+offset_top = -124.0
+offset_right = 204.04
+offset_bottom = -54.0
+grow_horizontal = 0
+grow_vertical = 0
+pivot_offset = Vector2(110, 45)
+theme_override_constants/outline_size = 3
+theme_override_font_sizes/font_size = 57
+text = "30.0"
+horizontal_alignment = 2
+script = ExtResource("18_038vl")
+
+[node name="YourTurnLabel" type="RichTextLabel" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -10.0
+offset_bottom = 66.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_font_sizes/normal_font_size = 64
+theme_override_styles/normal = SubResource("StyleBoxFlat_hbtm1")
+bbcode_enabled = true
+text = "[center][wave amp=50]C'est votre tour ![/wave][/center]"
+fit_content = true
+script = ExtResource("18_78aes")
+
+[node name="PopupPanel" type="PopupPanel" parent="."]
+position = Vector2i(0, 48)
+size = Vector2i(1280, 100)
+script = ExtResource("19_xwhlw")
+
+[node name="ColorRect" type="ColorRect" parent="PopupPanel"]
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 1276.0
+offset_bottom = 96.0
+
+[node name="Label" type="Label" parent="PopupPanel"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 1276.0
+offset_bottom = 96.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 34
+text = "Vous ne pouvez pas faire ça !"
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="History" type="ScrollContainer" parent="."]
+custom_minimum_size = Vector2(400, 120)
+layout_mode = 1
+offset_right = 300.0
+offset_bottom = 70.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+mouse_filter = 0
+mouse_default_cursor_shape = 2
+follow_focus = true
+script = ExtResource("8_hopa4")
+
+[node name="CastFeedBack" type="Label" parent="History"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 1
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
+theme_override_constants/outline_size = 2
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("StyleBoxFlat_i8srb")
+text = "Casted !"
+autowrap_mode = 3
+script = ExtResource("16_134tr")

@@ -40,4 +40,4 @@ amount = 6
 process_material = SubResource("ParticleProcessMaterial_3g8mg")
 lifetime = 0.4
 trail_enabled = true
-trail_lifetime = 0.01
+trail_lifetime = 0.15

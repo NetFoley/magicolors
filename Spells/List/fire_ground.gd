@@ -13,4 +13,4 @@ func launch(_target, _sender):
 				fire.attach()
 		
 func get_target():
-	GAME.get_targets({"type": GAME.tile_map.select_type.ANY})
+	GAME.get_targets([{"type": GAME.tile_map.select_type.ANY}])

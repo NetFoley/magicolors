@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://bevxrh8833q0a"]
+[gd_scene load_steps=28 format=3 uid="uid://bevxrh8833q0a"]
 
 [ext_resource type="Script" path="res://GLOBAL/GAME.gd" id="1_itph7"]
 [ext_resource type="PackedScene" uid="uid://dguxhq21etc4x" path="res://Spells/List/attack_crea.tscn" id="2_ovbwh"]
@@ -24,6 +24,9 @@
 [ext_resource type="PackedScene" uid="uid://noe61rhbrjxn" path="res://Scenes/Creatures/List/blue_1.tscn" id="22_0ejb8"]
 [ext_resource type="PackedScene" uid="uid://dcrmgvlucwn8t" path="res://Scenes/Creatures/List/red_1.tscn" id="23_kmh53"]
 [ext_resource type="PackedScene" uid="uid://c2f8ypfw20ywh" path="res://Scenes/Creatures/List/white_1.tscn" id="24_8elqj"]
+[ext_resource type="PackedScene" uid="uid://doit0qr0bs58c" path="res://Scenes/Creatures/List/blue_2.tscn" id="25_o3qeu"]
+[ext_resource type="PackedScene" uid="uid://b10wnv0as0127" path="res://Scenes/Creatures/List/red_2.tscn" id="26_niu3g"]
+[ext_resource type="PackedScene" uid="uid://c4bch3ysculo3" path="res://Scenes/Creatures/List/white_2.tscn" id="27_j32tp"]
 
 [node name="GAME" type="Node"]
 script = ExtResource("1_itph7")
@@ -78,3 +81,12 @@ color_but_res = "res://UI/ColorButton.tscn"
 [node name="Red1" parent="Creatures" instance=ExtResource("23_kmh53")]
 
 [node name="White1" parent="Creatures" instance=ExtResource("24_8elqj")]
+
+[node name="blue_2" parent="Creatures" instance=ExtResource("25_o3qeu")]
+
+[node name="red_2" parent="Creatures" instance=ExtResource("26_niu3g")]
+
+[node name="white_2" parent="Creatures" instance=ExtResource("27_j32tp")]
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true

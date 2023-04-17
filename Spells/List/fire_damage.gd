@@ -10,4 +10,4 @@ func launch(_target, _sender):
 		shield.attach(target)
 		
 func get_target():
-	GAME.get_targets({"type": GAME.tile_map.select_type.ALLY_CREATURE})
+	GAME.get_targets([{"type": GAME.tile_map.select_type.ALLY_CREATURE}])

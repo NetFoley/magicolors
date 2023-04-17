@@ -1,0 +1,79 @@
+[gd_scene load_steps=10 format=3 uid="uid://b10wnv0as0127"]
+
+[ext_resource type="PackedScene" uid="uid://dquvnnqcn2rmc" path="res://Scenes/Creatures/Creature.tscn" id="1_yikmd"]
+[ext_resource type="Texture2D" uid="uid://30leiholxpcn" path="res://res/0x72_DungeonTilesetII_v1.4.png" id="2_s4jce"]
+
+[sub_resource type="Shader" id="Shader_atsyp"]
+resource_local_to_scene = true
+code = "shader_type canvas_item;
+
+uniform float gen = 1.0;
+
+void fragment() {
+	float color_int = (COLOR.r + COLOR.g + COLOR.b)/3.0;
+	float value = color_int *UV.x + gen;
+	if (value >= 1.0){
+		
+	}
+	else if(value > 0.5){
+		COLOR.rgb = vec3(1.0);
+	}
+	else{
+		COLOR.a = 0.0;
+		
+	}
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3juvp"]
+resource_local_to_scene = true
+shader = SubResource("Shader_atsyp")
+shader_parameter/gen = 1.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_niog5"]
+atlas = ExtResource("2_s4jce")
+region = Rect2(368, 368, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0mhfm"]
+atlas = ExtResource("2_s4jce")
+region = Rect2(384, 368, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u6fpx"]
+atlas = ExtResource("2_s4jce")
+region = Rect2(400, 368, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_stbb6"]
+atlas = ExtResource("2_s4jce")
+region = Rect2(416, 368, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_wmfbd"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_niog5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0mhfm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u6fpx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_stbb6")
+}],
+"loop": true,
+"name": &"default",
+"speed": 12.65
+}]
+
+[node name="red_2" instance=ExtResource("1_yikmd")]
+max_life = 20
+dmg = 7
+c_range = 4
+mental_cap_cost = 0.5
+
+[node name="Sprite" parent="." index="0"]
+self_modulate = Color(1, 0.2, 0.243137, 1)
+material = SubResource("ShaderMaterial_3juvp")
+position = Vector2(0, -2)
+sprite_frames = SubResource("SpriteFrames_wmfbd")

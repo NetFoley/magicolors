@@ -39,5 +39,3 @@ script = ExtResource("1_xmifd")
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
 amount = 25
 process_material = SubResource("ParticleProcessMaterial_yaufn")
-trail_sections = 43
-trail_section_subdivisions = 40
