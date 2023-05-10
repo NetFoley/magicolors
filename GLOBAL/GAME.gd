@@ -115,7 +115,7 @@ var color_reserve = null
 var reserve_cont = null
 var creature_color_cont = null
 
-var save_res : SaveGame = SaveGame.new()
+var save_res : SaveGame
 
 var player1 : Node2D
 var player2 : Node2D
@@ -151,8 +151,21 @@ func _on_button_pressed():
 	$ButtonSound.play()
 
 func start_game():
-	turn = 1
 	wait_for_all_connection()
+	if !save_res:
+		save_res = SaveGame.new()
+	else:
+		save_res.discharge_savegame()
+		if is_multiplayer_authority():
+			client_load_game.rpc(SaveGame.get_file_buffer(SaveGame.get_save_path()))
+		
+@rpc("authority", "call_remote", "reliable")
+func client_load_game(save_game : PackedByteArray):
+	var file = FileAccess.open(SaveGame.get_download_path(), FileAccess.WRITE)
+	file.store_buffer(save_game)
+	file.close()
+	save_res = SaveGame.load_savegame(SaveGame.get_download_path())
+	save_res.discharge_savegame()
 	
 func wait_for_all_connection():
 	started.rpc()
@@ -169,8 +182,8 @@ func _on_validation_pop(_text):
 	selecting.emit(true)
 
 func setup_crea_colors():
-	var creatures = get_creatures()
-	for crea in creatures:
+	var creas = get_creatures()
+	for crea in creas:
 		if nb_of_colors.has(crea.color):
 			nb_of_colors[crea.color] += 1
 		else:
@@ -449,4 +462,6 @@ func add_change_label(pos, value):
 	new_clabel.call_deferred("appear")
 
 func save_game():
+	if !save_res:
+		return
 	save_res.save_game()

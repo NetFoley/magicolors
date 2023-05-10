@@ -12,7 +12,7 @@
 [ext_resource type="AudioStream" uid="uid://ccybnoa0nn713" path="res://Sound/Retro Impact Punch Hurt 01.wav" id="10_st1nx"]
 [ext_resource type="AudioStream" uid="uid://dq1tfu6fqriml" path="res://Sound/Retro FootStep Mud 01.wav" id="11_7xy17"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_tuqhi"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_d4tvu"]
 resource_local_to_scene = true
 shader = ExtResource("3_2nt40")
 shader_parameter/gen = 1.0
@@ -124,7 +124,7 @@ dmg = 5
 [node name="Effets" type="Node2D" parent="."]
 
 [node name="Sprite" parent="." instance=ExtResource("2_rcetl")]
-material = SubResource("ShaderMaterial_tuqhi")
+material = SubResource("ShaderMaterial_d4tvu")
 sprite_frames = SubResource("SpriteFrames_aiedk")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite"]

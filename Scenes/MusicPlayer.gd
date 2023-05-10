@@ -12,6 +12,6 @@ func _ready():
 		
 func _on_music_finished():
 	if music_played > 2 + randi() % (music_played + 10):
-		await get_tree().create_timer(randf()*10.0)
+		await get_tree().create_timer(randf()*10.0).timeout
 	get_child(randi()%get_child_count()).play()
 	music_played += 1

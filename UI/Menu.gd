@@ -8,12 +8,12 @@ var local_player_character
 signal upnp_completed(error)
 
 # Replace this with your own server port number between 1024 and 65535.
-var save
+var save : SaveGame
 
 func _ready():
 	$VBoxContainer/HostBut.pressed.connect(_on_host_pressed)
 	$VBoxContainer/JoinBut.pressed.connect(_on_join_pressed)
-	save = GAME.save_res.load_savegame()
+	save = SaveGame.load_savegame(SaveGame.get_save_path())
 #	await get_tree().create_timer(1.0)
 	var but = CheckButton.new()
 	but.text = str(save.save_name)
@@ -29,6 +29,11 @@ func _on_host_pressed():
 	multiplayer.peer_connected.connect(func(_id):$Label.set_text("CONNECTED"); start_level())
 	$VBoxContainer.visible = false
 	$Label.visible = true
+	if !$VBoxContainer/HostBut/ScrollContainer/VBoxContainer/CheckButton.button_pressed:
+		print(save.save_name)
+		print(save.turn)
+		GAME.save_res = save.duplicate(true)
+		print("GAME saveres " + str(GAME.save_res.turn))
 
 func _on_join_pressed():
 	$Button.play()
