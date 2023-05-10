@@ -13,7 +13,8 @@ config_version=5
 config/name="magicolors"
 run/main_scene="res://UI/Menu.tscn"
 config/features=PackedStringArray("4.0")
-config/icon="res://res/icon.png"
+config/icon="res://res/colorIcon.png"
+config/windows_native_icon="res://res/colorIcon.ico"
 
 [autoload]
 

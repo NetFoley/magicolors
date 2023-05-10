@@ -1,5 +1,6 @@
 extends HBoxContainer
 
+signal color_removed(color_but)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -17,4 +18,9 @@ func _on_turn_changed(_turn):
 
 func add_color(color):
 	var color_inst = GAME.get_color_but(color)
+	color_inst.second_action.connect(_on_second_action.bind(color_inst))
 	add_child(color_inst)
+
+func _on_second_action(color_but):
+	color_removed.emit(color_but)
+	

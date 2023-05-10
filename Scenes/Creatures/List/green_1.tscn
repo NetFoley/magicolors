@@ -1,0 +1,60 @@
+[gd_scene load_steps=11 format=3 uid="uid://bv48xpu7jqxcl"]
+
+[ext_resource type="PackedScene" uid="uid://dquvnnqcn2rmc" path="res://Scenes/Creatures/Creature.tscn" id="1_ouxmo"]
+[ext_resource type="Script" path="res://Scenes/Creatures/List/green_1.gd" id="2_itshp"]
+[ext_resource type="Shader" path="res://Scenes/Creatures/Creature.gdshader" id="2_ly8la"]
+[ext_resource type="Texture2D" uid="uid://30leiholxpcn" path="res://res/0x72_DungeonTilesetII_v1.4.png" id="3_0gm3q"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4tmlu"]
+resource_local_to_scene = true
+shader = ExtResource("2_ly8la")
+shader_parameter/gen = 1.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_neihc"]
+atlas = ExtResource("3_0gm3q")
+region = Rect2(368, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0f66p"]
+atlas = ExtResource("3_0gm3q")
+region = Rect2(384, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d1tbl"]
+atlas = ExtResource("3_0gm3q")
+region = Rect2(400, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7mb43"]
+atlas = ExtResource("3_0gm3q")
+region = Rect2(416, 32, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6bsk0"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_neihc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0f66p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d1tbl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7mb43")
+}],
+"loop": true,
+"name": &"default",
+"speed": 12.65
+}]
+
+[node name="green_1" instance=ExtResource("1_ouxmo")]
+script = ExtResource("2_itshp")
+color = 1
+max_life = 35
+movement = 5
+dmg = 7
+particularity_desc = "Quand elle tape une créature elle l'empêche de bouger mais ne pourra pas bouger au prochain tour non plus"
+
+[node name="Sprite" parent="." index="1"]
+material = SubResource("ShaderMaterial_4tmlu")
+position = Vector2(-1, -4)
+sprite_frames = SubResource("SpriteFrames_6bsk0")

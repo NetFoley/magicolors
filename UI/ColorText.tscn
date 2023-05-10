@@ -64,6 +64,7 @@ script = ExtResource("1")
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
 position = Vector2(32, 32)
+emitting = false
 amount = 18
 process_material = SubResource("ParticleProcessMaterial_ut22e")
 one_shot = true
@@ -74,6 +75,7 @@ position = Vector2(32, 32)
 amount = 141
 process_material = SubResource("ParticleProcessMaterial_jauxg")
 lifetime = 0.38
+fixed_fps = 60
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 0

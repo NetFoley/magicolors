@@ -6,7 +6,7 @@ func launch(_target, _sender):
 	if target:
 		if target.player == "Player1" or target.player == "Player2":
 			var shield = get_node("mental_control").duplicate()
-			target.add_child(shield)
+			target.add_effect(shield)
 			target.player = _sender
 			var old_id = target.get_multiplayer_authority()
 			shield.attach(target, old_id)

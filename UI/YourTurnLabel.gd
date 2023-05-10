@@ -7,10 +7,13 @@ func _ready():
 
 func _on_turn_changed(_turn):
 	if GAME.is_our_turn():
-		appear()
+		show_new_turn()
+	else:
+		show_end_turn()
 
-func appear():
+func show_new_turn():
 	visible = true
+	text = "[center][wave amp=50]C'est votre tour ![/wave][/center]"
 	var tween = create_tween()
 	tween.tween_property(self, "anchor_top", 0.5, 1.0).from(-0.2).set_trans(Tween.TRANS_CIRC).set_ease(Tween.EASE_OUT)
 	tween.tween_property(self, "anchor_top", 1.0, 2.0).set_trans(Tween.TRANS_CIRC).set_ease(Tween.EASE_IN)
@@ -21,3 +24,14 @@ func appear():
 	tween3.tween_property(self, "modulate", Color(1.0, 1.0, 1.0, 1.0), 0.35).from(Color(1.0,1.0,1.0,-0.3))
 	tween3.tween_property(self, "modulate", Color(1.0, 1.0, 1.0, 1.0), 2.0)
 	tween3.tween_property(self, "modulate", Color(1.0, 1.0, 1.0, -1.0), 1.0)
+	
+func show_end_turn():
+	visible = true
+	text = "[center][wave amp=50]Tour de l'adversaire[/wave][/center]"
+	anchor_top = 0.5
+	anchor_bottom = 0.5
+	var tween3 = create_tween()
+	tween3.tween_property(self, "modulate", Color(0.6, 0.6, 0.6, 1.0), 0.35).from(Color(1.0,1.0,1.0,-0.3))
+	tween3.tween_property(self, "modulate", Color(0.6, 0.6, 0.6, 1.0), 2.0)
+	tween3.tween_property(self, "modulate", Color(0.6, 0.6, 0.6, -1.0), 1.0)
+	

@@ -28,6 +28,7 @@ toggle_mode = true
 text = "Aide"
 
 [node name="TabContainer" type="TabContainer" parent="."]
+visible = false
 custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
 size_flags_vertical = 3
@@ -35,6 +36,7 @@ theme_override_constants/side_margin = 22
 
 [node name="Sorts" type="TabBar" parent="TabContainer"]
 layout_mode = 2
+mouse_force_pass_scroll_events = false
 
 [node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/Sorts"]
 layout_mode = 1
@@ -54,6 +56,7 @@ size_flags_vertical = 3
 [node name="Creatures" type="TabBar" parent="TabContainer"]
 visible = false
 layout_mode = 2
+mouse_force_pass_scroll_events = false
 
 [node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/Creatures"]
 layout_mode = 1

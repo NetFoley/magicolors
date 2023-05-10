@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://bevxrh8833q0a"]
+[gd_scene load_steps=32 format=3 uid="uid://bevxrh8833q0a"]
 
 [ext_resource type="Script" path="res://GLOBAL/GAME.gd" id="1_itph7"]
 [ext_resource type="PackedScene" uid="uid://dguxhq21etc4x" path="res://Spells/List/attack_crea.tscn" id="2_ovbwh"]
@@ -27,6 +27,10 @@
 [ext_resource type="PackedScene" uid="uid://doit0qr0bs58c" path="res://Scenes/Creatures/List/blue_2.tscn" id="25_o3qeu"]
 [ext_resource type="PackedScene" uid="uid://b10wnv0as0127" path="res://Scenes/Creatures/List/red_2.tscn" id="26_niu3g"]
 [ext_resource type="PackedScene" uid="uid://c4bch3ysculo3" path="res://Scenes/Creatures/List/white_2.tscn" id="27_j32tp"]
+[ext_resource type="PackedScene" uid="uid://typypogl14dc" path="res://Scenes/change_label.tscn" id="28_hlm4c"]
+[ext_resource type="PackedScene" uid="uid://bv48xpu7jqxcl" path="res://Scenes/Creatures/List/green_1.tscn" id="28_yrarx"]
+[ext_resource type="PackedScene" uid="uid://cp6otsgwbh3i0" path="res://Scenes/Creatures/List/green_2.tscn" id="29_06n3r"]
+[ext_resource type="AudioStream" uid="uid://c55y1meexh88w" path="res://Sound/448086__breviceps__normal-click.wav" id="31_wjvap"]
 
 [node name="GAME" type="Node"]
 script = ExtResource("1_itph7")
@@ -88,5 +92,15 @@ color_but_res = "res://UI/ColorButton.tscn"
 
 [node name="white_2" parent="Creatures" instance=ExtResource("27_j32tp")]
 
+[node name="green_1" parent="Creatures" instance=ExtResource("28_yrarx")]
+
+[node name="green_2" parent="Creatures" instance=ExtResource("29_06n3r")]
+
 [node name="Timer" type="Timer" parent="."]
 one_shot = true
+
+[node name="changeLabel" parent="." instance=ExtResource("28_hlm4c")]
+visible = false
+
+[node name="ButtonSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("31_wjvap")

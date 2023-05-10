@@ -27,5 +27,7 @@ func _on_target_selected(target):
 	
 func update_label(_crea = null, _player = null):
 	await get_tree().process_frame
-	$VBoxContainer/SpellCount.text = "Capacité mentale : " + var_to_str(get_node("SpellFlow").get_child_count()) + "/" + var_to_str(GAME.get_mental_capacity(GAME.get_player_object(GAME.get_player())))
+	var nb_spells = 0
+	nb_spells += $SpellFlow/VBoxContainer2/ReadySpells.get_child_count() + $SpellFlow/VBoxContainer/UnreadySpells.get_child_count()
+	$VBoxContainer/SpellCount.text = "Capacité mentale : " + var_to_str(nb_spells) + "/" + "10"
 	

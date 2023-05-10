@@ -9,7 +9,6 @@ func launch(_target, _sender):
 		for _i in range(2):
 			GAME.add_color(res_col)
 	
-	
 func can_be_casted():
 	var value = GAME.color_reserve and GAME.color_reserve.get_child_count() > 0
 	if !value:
@@ -17,4 +16,4 @@ func can_be_casted():
 	return value
 
 func get_target():
-	GAME.get_targets([{"type": GAME.tile_map.select_type.FREE_TILE}])
+	GAME.validation_popup.emit(spell_name)

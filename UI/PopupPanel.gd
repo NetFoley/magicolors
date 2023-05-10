@@ -3,7 +3,9 @@ extends PopupPanel
 var dic = {
 	"not_your_turn": "Ce n'est pas votre tour ! \nVous pouvez voir le temps restant en bas à droite et l'aide de jeu en haut à droite.",
 	"need_reserve": "Ce sort a besoin d'une couleur dans votre réserve en bas à gauche !",
-	"crea_cant_move": "Cette créature est fatigué est n'est pas capable d'actions ce tour !"
+	"crea_cant_move": "Cette créature est fatigué est n'est pas capable d'actions ce tour !",
+	"need_crea_cont": "Ce sort a besoin d'une couleur pour être consommé en bas à gauche !",
+	"unrdyspell": "Le sort est en préparation est sera disponible au prochain tour !"
 	}
 
 # Called when the node enters the scene tree for the first time.
@@ -11,6 +13,7 @@ func _ready():
 	GAME.error_popup.connect(_on_error_popup)
 	
 func _on_error_popup(t):
+	$AudioStreamPlayer.play()
 	if dic.has(t):
 		$Label.text = dic[t]
 	else:

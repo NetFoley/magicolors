@@ -1,7 +1,7 @@
-[gd_scene load_steps=14 format=3 uid="uid://b8vyq4w81bpml"]
+[gd_scene load_steps=29 format=3 uid="uid://b8vyq4w81bpml"]
 
 [ext_resource type="Script" path="res://Scenes/Battleground.gd" id="1_8h6iu"]
-[ext_resource type="PackedScene" uid="uid://cnhblbba4j373" path="res://UI/ui.tscn" id="1_hn8y0"]
+[ext_resource type="PackedScene" uid="uid://ck56mv3sb7viy" path="res://UI/ui.tscn" id="1_hn8y0"]
 [ext_resource type="Script" path="res://UI/Debug.gd" id="2_m6b6y"]
 [ext_resource type="Texture2D" uid="uid://30leiholxpcn" path="res://res/0x72_DungeonTilesetII_v1.4.png" id="3_g66mf"]
 [ext_resource type="Script" path="res://Scenes/CheckButton.gd" id="3_i3w7o"]
@@ -9,8 +9,23 @@
 [ext_resource type="PackedScene" uid="uid://end5hd6isluf" path="res://Scenes/player.tscn" id="4_4r4o0"]
 [ext_resource type="Script" path="res://Scenes/TileMap.gd" id="4_x6h0e"]
 [ext_resource type="Texture2D" uid="uid://doun8xnhixggp" path="res://res/select_cursor.png" id="5_uithd"]
+[ext_resource type="Texture2D" uid="uid://b632wisnte2dk" path="res://res/littlelight.png" id="6_0egsq"]
 [ext_resource type="Script" path="res://Scenes/ValidTargets.gd" id="7_b1rot"]
 [ext_resource type="PackedScene" uid="uid://bn02kafsp5aul" path="res://Scenes/Creatures/crystal.tscn" id="7_dw85s"]
+[ext_resource type="Script" path="res://Scenes/PointLight2D2.gd" id="13_3gsn0"]
+[ext_resource type="Script" path="res://Scenes/MusicPlayer.gd" id="14_sn6hp"]
+[ext_resource type="AudioStream" uid="uid://cunlmffjas8cf" path="res://Music/game1.wav" id="14_wstdc"]
+[ext_resource type="AudioStream" uid="uid://uv0xj7iddwpt" path="res://Music/game2.wav" id="15_g27i6"]
+[ext_resource type="AudioStream" uid="uid://f8vnix3mfk8q" path="res://Music/game3.wav" id="16_eq3d3"]
+[ext_resource type="AudioStream" uid="uid://c32kpsosbdx0n" path="res://Music/game4.wav" id="17_l1cpq"]
+[ext_resource type="AudioStream" uid="uid://bcq7v18ke7y67" path="res://Music/game5.wav" id="18_y7ali"]
+[ext_resource type="AudioStream" uid="uid://dim2iny5b8c8m" path="res://Music/game6.wav" id="19_jnu51"]
+[ext_resource type="AudioStream" uid="uid://cggc4f1luv4uj" path="res://Music/game7.wav" id="20_rnhcc"]
+[ext_resource type="AudioStream" uid="uid://jajpkhh2xmn5" path="res://Music/game8.wav" id="21_ypdaf"]
+[ext_resource type="AudioStream" uid="uid://b21va5f2dp0t3" path="res://Music/game9.wav" id="22_eeb8g"]
+[ext_resource type="AudioStream" uid="uid://dy3d1s5kfrrou" path="res://Music/game10.wav" id="23_13d0l"]
+[ext_resource type="AudioStream" uid="uid://cu7l42fibctxe" path="res://Music/game11.wav" id="24_ty5st"]
+[ext_resource type="AudioStream" uid="uid://cstokqel27mpe" path="res://Sound/Retro Cinematic Drums 01.wav" id="26_ijbki"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_33fsj"]
 resource_name = "ground"
@@ -591,7 +606,7 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(172, 58)
+position = Vector2(172, 34)
 zoom = Vector2(2.8, 2.8)
 
 [node name="TileMap" type="TileMap" parent="."]
@@ -644,3 +659,75 @@ position = Vector2(-24, 30)
 [node name="Player2" parent="." instance=ExtResource("4_4r4o0")]
 position = Vector2(378, 30)
 flipped = true
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(167, 69)
+color = Color(0, 0, 0, 1)
+blend_mode = 2
+texture = ExtResource("6_0egsq")
+texture_scale = 50.0
+
+[node name="PointLight2D2" type="PointLight2D" parent="."]
+position = Vector2(-20, 21)
+scale = Vector2(33.971, 33.971)
+blend_mode = 2
+texture = ExtResource("6_0egsq")
+texture_scale = 3.49
+script = ExtResource("13_3gsn0")
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+position = Vector2(-308.736, -115.925)
+scale = Vector2(1.6465, 1.58836)
+color = Color(0, 0.235294, 0.227451, 1)
+polygon = PackedVector2Array(2, 333, 575, 332, 556, -131, -53, -90)
+
+[node name="MusicPlayer" type="Node" parent="."]
+script = ExtResource("14_sn6hp")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="MusicPlayer"]
+stream = ExtResource("14_wstdc")
+volume_db = -14.876
+
+[node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="MusicPlayer"]
+stream = ExtResource("15_g27i6")
+volume_db = -14.876
+
+[node name="AudioStreamPlayer3" type="AudioStreamPlayer" parent="MusicPlayer"]
+stream = ExtResource("16_eq3d3")
+volume_db = -14.876
+
+[node name="AudioStreamPlayer4" type="AudioStreamPlayer" parent="MusicPlayer"]
+stream = ExtResource("17_l1cpq")
+volume_db = -14.876
+
+[node name="AudioStreamPlayer5" type="AudioStreamPlayer" parent="MusicPlayer"]
+stream = ExtResource("18_y7ali")
+volume_db = -14.876
+
+[node name="AudioStreamPlayer6" type="AudioStreamPlayer" parent="MusicPlayer"]
+stream = ExtResource("19_jnu51")
+volume_db = -14.876
+
+[node name="AudioStreamPlayer7" type="AudioStreamPlayer" parent="MusicPlayer"]
+stream = ExtResource("20_rnhcc")
+volume_db = -14.876
+
+[node name="AudioStreamPlayer8" type="AudioStreamPlayer" parent="MusicPlayer"]
+stream = ExtResource("21_ypdaf")
+volume_db = -14.876
+
+[node name="AudioStreamPlayer9" type="AudioStreamPlayer" parent="MusicPlayer"]
+stream = ExtResource("22_eeb8g")
+volume_db = -14.876
+
+[node name="AudioStreamPlayer10" type="AudioStreamPlayer" parent="MusicPlayer"]
+stream = ExtResource("23_13d0l")
+volume_db = -14.876
+
+[node name="AudioStreamPlayer11" type="AudioStreamPlayer" parent="MusicPlayer"]
+stream = ExtResource("24_ty5st")
+volume_db = -14.876
+
+[node name="Start" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("26_ijbki")
+autoplay = true

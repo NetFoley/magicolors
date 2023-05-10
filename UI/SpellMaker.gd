@@ -8,6 +8,7 @@ extends Control
 @onready var close_but : Button = get_node("Close")
 @export var capacity = 3
 var current_spell = null
+var start_pos
 
 var bwr_start_time = 29.8
 
@@ -24,9 +25,11 @@ func _ready():
 	spell_but.pressed.connect(_on_create_spell)
 	close_but.pressed.connect(_close_pressed)
 	GAME.turn_changed.connect(_on_turn_changed)
+	start_pos = position
 
 func _on_turn_changed(_value):
-	clear_colors()
+	if !GAME.is_our_turn():
+		clear_colors()
 	
 func clear_colors():
 	for child in colors_container.get_children():
@@ -38,18 +41,30 @@ func _close_pressed():
 		drop_color(child)
 
 func _on_create_spell():
+	if !GAME.is_our_turn():
+		GAME.error_popup.emit("not_your_turn")
+		return
 	clear_colors()
 	GAME.new_spell.emit(current_spell.spell_id, GAME.get_player())
 	visible = false
+	$createSpell.play(0.5)
 
 func _on_color_drag():
-	visible = true
 	update_current_spell()
+	if visible == true:
+		return
+	visible = true
+	var tween = create_tween()
+	tween.tween_property(self, "position", start_pos, 0.3).from(start_pos + Vector2(0, 500)).set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_OUT)
+	
 
 # Called when the node enters the scene tree for the first time.
 func _on_color_input(event:InputEvent, child):
 	if event.is_action_pressed("remove"):
 		drop_color(child)
+		
+func _on_color_second_action(color):
+	drop_color(color)
 		
 func drop_color(child):
 	GAME.add_color(child.color)
@@ -88,7 +103,7 @@ func _drop_data(_position, data):
 		return
 	data.button.disappear()
 	var but_inst = GAME.get_color_but(data.color)
-	but_inst.connect("gui_input", _on_color_input.bind(but_inst))
+	but_inst.connect("second_action", _on_color_second_action.bind(but_inst))
 	add_color(but_inst)
 	
 
@@ -142,9 +157,9 @@ func update_current_spell():
 		spell_but.disabled = true
 		current_spell = null
 		return
-	if GAME.spell_cont.get_child_count() >= GAME.get_mental_capacity(GAME.get_player_object(GAME.get_player())):
-		spell_label.text = "Impossible de rajouter un sort sans dépasser votre limite de capacité mentale"
-		spell_desc.text = ""
+	if GAME.spell_cont.get_spell_nb() >= 10:
+		spell_label.text = "Impossible de rajouter un sort sans dépasser votre limite de sorts"
+		spell_desc.text = "Vous ne pouvez pas stoquer plus de 10 sorts"
 		spell_but.disabled = true
 		current_spell = null
 		return 

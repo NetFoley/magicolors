@@ -15,4 +15,4 @@ func can_be_casted():
 	return value
 
 func get_target():
-	GAME.get_targets([{"type": GAME.tile_map.select_type.FREE_TILE}])
+	GAME.validation_popup.emit(spell_name)

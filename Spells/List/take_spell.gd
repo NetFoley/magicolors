@@ -21,3 +21,6 @@ func steal_spell(player_to_give, player_to_take, spell_idx):
 	var spell = player.spells[spell_idx]
 	GAME.old_spell.emit(spell, player_to_take)
 	GAME.new_spell.emit(spell, player_to_give)
+
+func get_target():
+	GAME.validation_popup.emit(spell_name)

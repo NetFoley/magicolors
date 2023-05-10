@@ -42,7 +42,7 @@ func _on_timer_timeout():
 		$GPUParticles2D.emitting = true
 	else:
 		$GPUParticles2D.emitting = false
-	$Timer.start(10*randf())
+	$Timer.start(10.0*randf())
 
 func _on_new_spell(spell_id, _player):
 	if _player != name:
@@ -67,6 +67,7 @@ func _on_peer_connected(peer_id):
 
 @rpc("reliable", "authority", "call_local")
 func cast(spell_id, target):
+	$CastSound.play()
 	var spell = GAME.get_spell(spell_id)
 	print("["+str(NETWORK.id)+"]"+name + " casted " + spell.spell_name + " !")
 	$AnimNode/Node2D/Sprite2D/AnimationPlayer.play("Cast")

@@ -10,6 +10,7 @@ func launch(_target, _sender):
 				GAME.tile_map.add_child(fire)
 				var t_size : Vector2i = GAME.tile_map.tile_set.tile_size
 				fire.position = Vector2(target_pos*t_size) + Vector2(float(i*t_size.x), float(j*t_size.y)) + Vector2(t_size/2)
+				fire.name = _sender
 				fire.attach()
 		
 func get_target():

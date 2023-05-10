@@ -5,11 +5,11 @@ func launch(_target, _sender):
 	if target:
 		if target.player == _sender:
 			var shield = get_node("celerity").duplicate()
-			target.add_child(shield)
+			target.add_effect(shield)
 			shield.attach(target)
 		else:
 			var shield = get_node("impede").duplicate()
-			target.add_child(shield)
+			target.add_effect(shield)
 			shield.attach(target)
 			
 		

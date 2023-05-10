@@ -21,6 +21,7 @@ func _spell_tween_finished():
 	$SpellSprite.play("default")
 
 func _tween_finished():
+	$AudioStreamPlayer2D.play()
 	$SpellSprite.visible = false
 	$Explosion.play("default")
 	$Explosion.animation_finished.connect(_anim_finished)

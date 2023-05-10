@@ -1,0 +1,62 @@
+[gd_scene load_steps=11 format=3 uid="uid://cp6otsgwbh3i0"]
+
+[ext_resource type="PackedScene" uid="uid://dquvnnqcn2rmc" path="res://Scenes/Creatures/Creature.tscn" id="1_d0j8m"]
+[ext_resource type="Script" path="res://Scenes/Creatures/List/green_2.gd" id="2_owcgd"]
+[ext_resource type="Shader" path="res://Scenes/Creatures/Creature.gdshader" id="2_pn0l8"]
+[ext_resource type="Texture2D" uid="uid://30leiholxpcn" path="res://res/0x72_DungeonTilesetII_v1.4.png" id="3_hy78g"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_u13ir"]
+resource_local_to_scene = true
+shader = ExtResource("2_pn0l8")
+shader_parameter/gen = 1.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b1emg"]
+atlas = ExtResource("3_hy78g")
+region = Rect2(128, 224, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_abeon"]
+atlas = ExtResource("3_hy78g")
+region = Rect2(160, 224, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vi1r0"]
+atlas = ExtResource("3_hy78g")
+region = Rect2(144, 224, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2nll5"]
+atlas = ExtResource("3_hy78g")
+region = Rect2(176, 224, 16, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_2obg2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b1emg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_abeon")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vi1r0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2nll5")
+}],
+"loop": true,
+"name": &"default",
+"speed": 12.65
+}]
+
+[node name="green_2" instance=ExtResource("1_d0j8m")]
+script = ExtResource("2_owcgd")
+color = 1
+max_life = 30
+movement = 4
+dmg = 9
+can_dmg_ally = true
+c_range = 2
+particularity_desc = "Lorsqu'elle attaque cette créature rend une couleur de la couleur de la créature tapé. Peut taper ses alliés."
+
+[node name="Sprite" parent="." index="1"]
+material = SubResource("ShaderMaterial_u13ir")
+position = Vector2(0, -11)
+sprite_frames = SubResource("SpriteFrames_2obg2")

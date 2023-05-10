@@ -38,5 +38,5 @@ particularity_desc = "Peut jouer dés qu'il est invoqué"
 start_can_move = true
 start_can_attack = true
 
-[node name="Sprite" parent="." index="0"]
+[node name="Sprite" parent="." index="1"]
 material = SubResource("ShaderMaterial_qk5m7")

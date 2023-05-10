@@ -40,7 +40,7 @@ mental_cap_cost = 0.0
 particularity_desc = "Votre crystal ! S'il est détruit vous perdez la partie. Soigne les créatures de 5 PV dans un rayon de 2 cases à la fin du tour."
 always_show_life = true
 
-[node name="Sprite" parent="." index="0"]
+[node name="Sprite" parent="." index="1"]
 self_modulate = Color(0.0901961, 0.160784, 3.31373, 1)
 material = SubResource("ShaderMaterial_bb2ag")
 sprite_frames = SubResource("SpriteFrames_mdmnd")

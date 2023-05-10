@@ -152,6 +152,22 @@ func get_tiles_around(pos, r) -> Array:
 		if get_pure_dist_between(pos, tile) <= r:
 			tiles.append(tile)
 	return tiles
+	
+func get_free_tiles_around(pos, r) -> Array:
+	var tiles = get_tiles_around(pos, r)
+	for tile in tiles:
+		if is_pos_occupied(tile):
+			tiles.erase(tile)
+	
+	return tiles
+	
+func get_closest_free_tile(pos) -> Vector2i:
+	var tiles = get_free_tiles_around(pos, 5)
+	var closest_tile = tiles[0]
+	for tile in tiles:
+		if (tile - pos).length() < (closest_tile - pos).length():
+			closest_tile = tile
+	return closest_tile
 
 func get_tiles(info):
 	tile_selectors = info

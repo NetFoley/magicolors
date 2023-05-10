@@ -73,9 +73,10 @@ color = 2
 max_life = 35
 movement = 4
 dmg = 10
+mental_cap_cost = 1.5
 particularity_desc = "Se soigne de la moitié des dégâts qu'elle inflige"
 
-[node name="Sprite" parent="." index="0"]
+[node name="Sprite" parent="." index="1"]
 self_modulate = Color(0.239216, 0.305882, 1, 1)
 material = SubResource("ShaderMaterial_em1nc")
 position = Vector2(0, -3)

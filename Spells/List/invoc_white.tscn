@@ -6,5 +6,5 @@
 [node name="invoc_white" instance=ExtResource("1_6f8v7")]
 script = ExtResource("2_smwd2")
 spell_id = "invoc_white"
-spell_name = "Invocation blanche"
-spell_desc = "Invoque une créature blanche"
+spell_name = "Portail multidimensionnel"
+spell_desc = "Créer 2 sorts aléatoires mais prêt tout de suite"

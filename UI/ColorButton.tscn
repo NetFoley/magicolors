@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://c18t7edyv5yr6"]
+[gd_scene load_steps=5 format=3 uid="uid://c18t7edyv5yr6"]
 
 [ext_resource type="Script" path="res://UI/ColorButton.gd" id="1"]
 [ext_resource type="PackedScene" uid="uid://cl3qf5tgqq252" path="res://UI/ColorText.tscn" id="2"]
+[ext_resource type="AudioStream" uid="uid://c55y1meexh88w" path="res://Sound/448086__breviceps__normal-click.wav" id="3_ejqd2"]
+[ext_resource type="AudioStream" uid="uid://u3a0oup3dh52" path="res://Sound/447910__breviceps__plop.wav" id="4_uo06k"]
 
 [node name="ColorButton" type="CenterContainer"]
 anchors_preset = 8
@@ -18,5 +20,10 @@ mouse_default_cursor_shape = 2
 script = ExtResource("1")
 
 [node name="Color" parent="." instance=ExtResource("2")]
-custom_minimum_size = Vector2(1.46531, 1.46531)
 layout_mode = 2
+
+[node name="Pick" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_ejqd2")
+
+[node name="Drop" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_uo06k")

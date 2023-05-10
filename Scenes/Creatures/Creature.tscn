@@ -1,13 +1,18 @@
-[gd_scene load_steps=22 format=3 uid="uid://dquvnnqcn2rmc"]
+[gd_scene load_steps=28 format=3 uid="uid://dquvnnqcn2rmc"]
 
 [ext_resource type="Texture2D" uid="uid://30leiholxpcn" path="res://res/0x72_DungeonTilesetII_v1.4.png" id="1_iyf6o"]
 [ext_resource type="Script" path="res://Scenes/Creatures/Creature.gd" id="1_p1ic5"]
 [ext_resource type="PackedScene" uid="uid://cy2tpoccf1jv6" path="res://Scenes/spell_sprite.tscn" id="2_rcetl"]
 [ext_resource type="Shader" path="res://Scenes/Creatures/Creature.gdshader" id="3_2nt40"]
 [ext_resource type="Texture2D" uid="uid://b7fvnvkq25ij8" path="res://res/spritesheet_32x32.png" id="4_w2mxb"]
+[ext_resource type="Script" path="res://Scenes/Creatures/SelectButton.gd" id="5_t7tpg"]
 [ext_resource type="Texture2D" uid="uid://cjfn1grmrf88x" path="res://res/Sheet.png" id="5_x132n"]
+[ext_resource type="Script" path="res://Scenes/Creatures/CombatIcon.gd" id="6_kybi7"]
+[ext_resource type="AudioStream" uid="uid://b8bwt033ifxx6" path="res://Sound/Retro Impact Punch 07.wav" id="9_ka07i"]
+[ext_resource type="AudioStream" uid="uid://ccybnoa0nn713" path="res://Sound/Retro Impact Punch Hurt 01.wav" id="10_st1nx"]
+[ext_resource type="AudioStream" uid="uid://dq1tfu6fqriml" path="res://Sound/Retro FootStep Mud 01.wav" id="11_7xy17"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_bo1uw"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tuqhi"]
 resource_local_to_scene = true
 shader = ExtResource("3_2nt40")
 shader_parameter/gen = 1.0
@@ -107,14 +112,19 @@ color_ramp = SubResource("GradientTexture1D_h7xkd")
 hue_variation_min = -0.09
 hue_variation_max = 0.07
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_a5q6d"]
+radius = 3.0
+
 [node name="Creature" type="Node2D"]
 texture_filter = 1
 script = ExtResource("1_p1ic5")
 max_life = 10
 dmg = 5
 
+[node name="Effets" type="Node2D" parent="."]
+
 [node name="Sprite" parent="." instance=ExtResource("2_rcetl")]
-material = SubResource("ShaderMaterial_bo1uw")
+material = SubResource("ShaderMaterial_tuqhi")
 sprite_frames = SubResource("SpriteFrames_aiedk")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite"]
@@ -141,6 +151,7 @@ theme_override_constants/outline_size = 0
 theme_override_constants/h_separation = 0
 action_mode = 0
 flat = true
+script = ExtResource("5_t7tpg")
 
 [node name="LifeBar" type="ProgressBar" parent="."]
 offset_left = -10.0
@@ -160,15 +171,14 @@ one_shot = true
 explosiveness = 1.0
 
 [node name="MoveIcon" type="Sprite2D" parent="."]
-visible = false
 position = Vector2(-7, -11)
 scale = Vector2(0.297, 0.297)
 texture = ExtResource("4_w2mxb")
 region_enabled = true
 region_rect = Rect2(480, 96, 32, 32)
+script = ExtResource("6_kybi7")
 
 [node name="AttackIcon" type="Sprite2D" parent="."]
-visible = false
 position = Vector2(8, -11)
 rotation = 3.14159
 scale = Vector2(0.612, 0.612)
@@ -176,3 +186,22 @@ texture = ExtResource("5_x132n")
 flip_h = true
 region_enabled = true
 region_rect = Rect2(16, 0, 16, 16)
+script = ExtResource("6_kybi7")
+
+[node name="Hitbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("CircleShape2D_a5q6d")
+
+[node name="Hit" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("9_ka07i")
+volume_db = -6.117
+pitch_scale = 1.66
+
+[node name="Hit2" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("10_st1nx")
+volume_db = 3.337
+pitch_scale = 1.83
+
+[node name="Move" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("11_7xy17")

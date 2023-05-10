@@ -1,7 +1,8 @@
-[gd_scene load_steps=20 format=3 uid="uid://end5hd6isluf"]
+[gd_scene load_steps=21 format=3 uid="uid://end5hd6isluf"]
 
 [ext_resource type="Script" path="res://Scenes/player.gd" id="1_yk7i2"]
 [ext_resource type="Texture2D" uid="uid://30leiholxpcn" path="res://res/0x72_DungeonTilesetII_v1.4.png" id="2_spkwe"]
+[ext_resource type="AudioStream" uid="uid://b2gvfgpxvu0ii" path="res://Sound/Retro HiTech 16.wav" id="3_84u7i"]
 
 [sub_resource type="Shader" id="Shader_pk5jj"]
 code = "shader_type canvas_item;
@@ -443,8 +444,8 @@ texture_filter = 1
 script = ExtResource("1_yk7i2")
 
 [node name="AnimNode" type="Node2D" parent="."]
-scale = Vector2(1, 1.00431)
-skew = 0.118144
+scale = Vector2(1, 1.06762)
+skew = 0.0175533
 
 [node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="AnimNode"]
 material = SubResource("ShaderMaterial_d3jrh")
@@ -498,3 +499,6 @@ trail_section_subdivisions = 1
 wait_time = 3.0
 one_shot = true
 autostart = true
+
+[node name="CastSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_84u7i")

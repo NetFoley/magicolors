@@ -1,10 +1,15 @@
-[gd_scene load_steps=3 format=3 uid="uid://2on77jloqxwd"]
+[gd_scene load_steps=4 format=3 uid="uid://2on77jloqxwd"]
 
 [ext_resource type="PackedScene" uid="uid://bvcso44tg3wn5" path="res://Spells/Spell.tscn" id="1_x2ehg"]
 [ext_resource type="Script" path="res://Spells/List/invoc_blue.gd" id="2_gxv76"]
+[ext_resource type="PackedScene" uid="uid://uf6wb1gotorw" path="res://Spells/List/res/SelfDelete.tscn" id="3_nixmb"]
 
 [node name="Spell" instance=ExtResource("1_x2ehg")]
 script = ExtResource("2_gxv76")
 spell_id = "invoc_blue"
-spell_name = "Invocation bleu"
-spell_desc = "Invoque une créature bleu"
+spell_name = "Division de l'âme"
+spell_desc = "Invoque une copie d'une créature pour 3 tours"
+
+[node name="SelfDelete" parent="." index="1" instance=ExtResource("3_nixmb")]
+visible = false
+duration = 3

@@ -7,3 +7,6 @@ func launch(_target, sender):
 		if crea is Crystal and crea.player == sender:
 			crea.life += 15
 	
+
+func get_target():
+	GAME.validation_popup.emit(spell_name)
