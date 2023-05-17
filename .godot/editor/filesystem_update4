@@ -4,5 +4,7 @@ res://Scenes/Creatures/Creature.tscn
 res://GLOBAL/GAME.tscn
 res://UI/ui.tscn
 res://UI/Menu.tscn
-res://Scenes/Creatures/crystal.tscn
-res://GLOBAL/SaveGame.gd
+res://Scenes/player.tscn
+res://GLOBAL/GAME.gd
+res://UI/Colors.gd
+res://UI/Menu.gd

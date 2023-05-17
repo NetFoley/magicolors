@@ -444,8 +444,8 @@ texture_filter = 1
 script = ExtResource("1_yk7i2")
 
 [node name="AnimNode" type="Node2D" parent="."]
-scale = Vector2(1, 1.06762)
-skew = 0.0175533
+scale = Vector2(1, 1.04762)
+skew = 0.0701417
 
 [node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="AnimNode"]
 material = SubResource("ShaderMaterial_d3jrh")

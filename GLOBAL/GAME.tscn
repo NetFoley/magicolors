@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://bevxrh8833q0a"]
+[gd_scene load_steps=33 format=3 uid="uid://bevxrh8833q0a"]
 
 [ext_resource type="Script" path="res://GLOBAL/GAME.gd" id="1_itph7"]
 [ext_resource type="PackedScene" uid="uid://dguxhq21etc4x" path="res://Spells/List/attack_crea.tscn" id="2_ovbwh"]
@@ -31,6 +31,7 @@
 [ext_resource type="PackedScene" uid="uid://bv48xpu7jqxcl" path="res://Scenes/Creatures/List/green_1.tscn" id="28_yrarx"]
 [ext_resource type="PackedScene" uid="uid://cp6otsgwbh3i0" path="res://Scenes/Creatures/List/green_2.tscn" id="29_06n3r"]
 [ext_resource type="AudioStream" uid="uid://c55y1meexh88w" path="res://Sound/448086__breviceps__normal-click.wav" id="31_wjvap"]
+[ext_resource type="PackedScene" uid="uid://c2x88l6ohjomn" path="res://Spells/List/res/wall.tscn" id="33_va5dn"]
 
 [node name="GAME" type="Node"]
 script = ExtResource("1_itph7")
@@ -104,3 +105,7 @@ visible = false
 
 [node name="ButtonSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("31_wjvap")
+
+[node name="NeutralCreatures" type="Node" parent="."]
+
+[node name="Wall" parent="NeutralCreatures" instance=ExtResource("33_va5dn")]

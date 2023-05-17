@@ -8,10 +8,12 @@ class_name Crystal
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	super._ready()
-	player = start_player
+	if start_player != "":
+		player = start_player
 	visible = true
 	life = max_life
 	max_life = max_life
+	creature_id = "crystal"
 
 func _on_turn_changed(_turn):
 	if GAME.get_player_turn() == player:

@@ -29,8 +29,8 @@ func eat_color():
 		return
 	var color_but : ColorButton = $Reserve/ReserveColors.get_child($Reserve/ReserveColors.get_child_count() -1)
 	eaten_colors.append(color_but.color)
-	color_but.disappear()
 	var sacr_left = get_sacr_left()
+	color_but.disappear()
 	if sacr_left <= 0:
 		var crystal_pos = GAME.tile_map.local_to_map(GAME.get_crystal(GAME.get_player()).position)
 		var closest_tile = GAME.tile_map.get_closest_free_tile(crystal_pos)

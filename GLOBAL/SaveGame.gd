@@ -8,28 +8,27 @@ const DOWNLOAD_GAME_BASE_PATH = "user://download"
 @export var creatures = []
 @export var spells1 = []
 @export var spells2 = []
+@export var colors1 = []
+@export var colors2 = []
 
 func update_res():
 	turn = GAME.turn
 	creatures = GAME.tile_map.get_creatures()
 	spells1 = GAME.get_player_object("Player1").spells
 	spells2 = GAME.get_player_object("Player2").spells
+	colors1 = GAME.get_player_object("Player1").colors
+	colors2 = GAME.get_player_object("Player2").colors
 	save_name = "Tour " + str(turn) + " - " + Time.get_datetime_string_from_system()
 	
 func save_game():
 	update_res()
-	ResourceSaver.save(self, get_save_path())
+	ResourceSaver.save(self, SaveGame.get_save_path())
+	print("Saved game ! \n" + str(creatures))
 	
 func save_download_game():
 	update_res()
-	ResourceSaver.save(self, get_download_path())
+	ResourceSaver.save(self, SaveGame.get_download_path())
 	
-func discharge_savegame():
-	GAME.turn = turn
-	var creas = GAME.tile_map.get_creatures()
-#	for crea in creas:
-#		crea.die mais pas activier le connard de die du crystal()
-
 static func load_savegame(save_path) -> Resource:
 	if ResourceLoader.has_cached(save_path):
 		# Once the resource caching bug is fixed, you will only need this line of code to load the save game.
@@ -68,6 +67,7 @@ static func load_savegame(save_path) -> Resource:
 	var directory := DirAccess.open("user://")
 	directory.remove(tmp_file_path)
 	return save
+	
 	
 static func get_file_buffer(file_path : String):
 	var file = FileAccess.open(file_path, FileAccess.READ)

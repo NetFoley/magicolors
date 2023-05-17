@@ -19,6 +19,7 @@ class_name Player
 
 var creatures = []
 var spells = []
+var colors = []
 
 func _ready():
 	$AnimNode/AnimatedSprite2D2/AnimationPlayer.play("Idle")
@@ -34,6 +35,7 @@ func _ready():
 	else:
 		GAME.player1 = self
 	GAME.new_spell.connect(_on_new_spell)
+	GAME.new_colors.connect(_on_new_colors)
 	GAME.old_spell.connect(_on_old_spell)
 	$Timer.timeout.connect(_on_timer_timeout)
 	
@@ -44,6 +46,15 @@ func _on_timer_timeout():
 		$GPUParticles2D.emitting = false
 	$Timer.start(10.0*randf())
 
+func _on_new_colors(new_colors, player):
+	if player != name:
+		return
+	add_colors.rpc(new_colors)
+	
+@rpc("any_peer", "call_local", "reliable")
+func add_colors(new_colors : Array):
+	colors = new_colors.duplicate()
+	
 func _on_new_spell(spell_id, _player):
 	if _player != name:
 		return

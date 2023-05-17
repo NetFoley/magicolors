@@ -73,6 +73,7 @@ hue_variation_min = -1.0
 hue_variation_max = 1.0
 
 [node name="Wall" instance=ExtResource("1_0tkh6")]
+visible = false
 color = 1
 max_life = 30
 movement = 0
@@ -80,7 +81,7 @@ dmg = 0
 c_range = 0
 can_be_selected = false
 
-[node name="Sprite" parent="." index="0"]
+[node name="Sprite" parent="." index="1"]
 material = SubResource("ShaderMaterial_ecvap")
 scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_pp1ia")

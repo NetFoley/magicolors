@@ -73,7 +73,8 @@ var can_move = true:
 		can_move = value
 		can_move_changed.emit(value)
 #		enable_but(value)
-var player:
+
+@export var player : String:
 	set(value):
 		player = value
 		if !is_inside_tree():
@@ -107,7 +108,11 @@ func _ready():
 	await get_tree().process_frame
 	initialized = true
 	update_modulate_tween()
-
+	
+@rpc("any_peer", "call_local", "reliable")
+func set_creature_name(s_name : String):
+	name = s_name
+	update_tool_tip()
 	
 #func _enter_tree():
 	
@@ -261,11 +266,15 @@ func enable_but(value):
 	but.disabled = !value
 
 func die():
+	remove_from_game()
+
+func remove_from_game():
 	var player_obj = GAME.get_player_object(player)
 	if player_obj:
 		player_obj.creatures.erase(self)
 	queue_free()
-
-func get_resources():
-	var res : Resource
 	
+#
+#func get_resources():
+#	var res : Resource
+#

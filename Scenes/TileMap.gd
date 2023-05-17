@@ -174,7 +174,10 @@ func get_tiles(info):
 	selecting = true
 
 func add_creature(creature):
-	$Creatures.add_child(creature)
+	if creature.owner:
+		creature.reparent($Creatures)
+	else:
+		$Creatures.add_child(creature)
 	
 func _on_turn_changed(_t):
 	selecting = false

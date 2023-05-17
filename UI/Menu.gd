@@ -16,6 +16,8 @@ func _ready():
 	save = SaveGame.load_savegame(SaveGame.get_save_path())
 #	await get_tree().create_timer(1.0)
 	var but = CheckButton.new()
+	if !save:
+		return
 	but.text = str(save.save_name)
 	but.button_group = $VBoxContainer/HostBut/ScrollContainer/VBoxContainer/CheckButton.button_group
 	$VBoxContainer/HostBut/ScrollContainer/VBoxContainer.add_child(but)
@@ -23,17 +25,18 @@ func _ready():
 func _on_host_pressed():
 	$Button.play()
 	NETWORK.side = "Server"
-	NETWORK.peer.create_server(NETWORK.SERVER_PORT)
+	NETWORK.peer.create_server(NETWORK.SERVER_PORT)	
 	multiplayer.multiplayer_peer = NETWORK.peer
 	NETWORK.id = multiplayer.get_unique_id()
 	multiplayer.peer_connected.connect(func(_id):$Label.set_text("CONNECTED"); start_level())
 	$VBoxContainer.visible = false
 	$Label.visible = true
+	$Label/Label.text = str(IP.get_local_interfaces()[2]["addresses"])
 	if !$VBoxContainer/HostBut/ScrollContainer/VBoxContainer/CheckButton.button_pressed:
-		print(save.save_name)
-		print(save.turn)
+#		print(save.save_name)
+#		print(save.turn)
 		GAME.save_res = save.duplicate(true)
-		print("GAME saveres " + str(GAME.save_res.turn))
+#		print("GAME saveres " + str(GAME.save_res.turn))
 
 func _on_join_pressed():
 	$Button.play()

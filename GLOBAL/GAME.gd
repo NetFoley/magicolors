@@ -84,6 +84,7 @@ var nb_of_colors = {}
 var color_spawned = {}
 var spell_cont = null
 var COLOR_SIZE = 64
+var turn_done = 0
 var turn = 0 :
 	set(value):
 		turn = value
@@ -102,6 +103,7 @@ signal selecting(value)
 signal cancel_selection()
 signal new_creature(creature, player)
 signal validation_popup(text)
+signal new_colors(colors: Array)
 
 var player_turn_time = 40.0
 var dir_creature_path = "res://Scenes/Creatures/List/"
@@ -127,6 +129,7 @@ var tile_map = null
 
 @onready var spells_node = get_node("Spells")
 @onready var creatures_node = get_node("Creatures")
+@onready var neutral_creatures_node = get_node("NeutralCreatures")
 
 var emetter
 var nb_of_started = 0
@@ -151,21 +154,68 @@ func _on_button_pressed():
 	$ButtonSound.play()
 
 func start_game():
-	wait_for_all_connection()
+#	wait_for_all_connection()
 	if !save_res:
+		turn = 1
 		save_res = SaveGame.new()
 	else:
-		save_res.discharge_savegame()
 		if is_multiplayer_authority():
-			client_load_game.rpc(SaveGame.get_file_buffer(SaveGame.get_save_path()))
+			client_load_game()
+#			client_load_game.rpc(SaveGame.get_file_buffer(SaveGame.get_save_path()))
 		
-@rpc("authority", "call_remote", "reliable")
-func client_load_game(save_game : PackedByteArray):
-	var file = FileAccess.open(SaveGame.get_download_path(), FileAccess.WRITE)
-	file.store_buffer(save_game)
-	file.close()
-	save_res = SaveGame.load_savegame(SaveGame.get_download_path())
-	save_res.discharge_savegame()
+func client_load_game():
+#	var file = FileAccess.open(SaveGame.get_download_path(), FileAccess.WRITE)
+#	file.store_buffer(s_game)
+#	file.close()
+#	save_res = SaveGame.load_savegame(SaveGame.get_download_path())
+	discharge_savegame()
+#	start_game()
+	
+#@rpc("authority", "call_local", "reliable")
+func discharge_savegame():
+	clear_creatures.rpc()
+	for crea in save_res.creatures:
+#		var new_crea = 
+		var creature_data = ({
+			"max_life": crea.max_life,
+			"life": crea.life,
+			})
+#		var properties = crea.get_property_list()
+#		for prop in properties.keys():
+#			creature_data[prop] = prop
+		spawn_creature_by_data.rpc(crea.creature_id, crea.position, crea.player, creature_data)
+#		if new_crea:
+#			if crea.player == GAME.get_player():
+#				new_crea.set_multiplayer_authority(NETWORK.id)
+#			new_crea.set_creature_name.rpc(crea.player)
+	
+	for spell in save_res.spells1:
+		rpc_add_spell.rpc(spell, "Player1")
+	for spell in save_res.spells2:
+		rpc_add_spell.rpc(spell, "Player2")
+	set_load_const.rpc(save_res.turn)
+	rpc_new_colors.rpc(save_res.colors1, "Player1")
+	rpc_new_colors.rpc(save_res.colors2, "Player2")
+	print("Loaded game ! \n")
+	
+@rpc("any_peer", "call_local", "reliable")
+func rpc_new_colors(colors, player):
+	GAME.new_colors.emit(colors, player)
+	
+@rpc("any_peer", "reliable", "call_local")
+func rpc_add_spell(spell, player):
+	GAME.new_spell.emit(spell, player)
+	
+@rpc("any_peer", "call_local", "reliable")
+func set_load_const(t):
+	turn = t
+	
+@rpc("any_peer", "call_local", "reliable")
+func clear_creatures():
+	var creas = GAME.tile_map.get_creatures()
+	for crea in creas:
+		if !crea is Crystal:
+			crea.remove_from_game()
 	
 func wait_for_all_connection():
 	started.rpc()
@@ -188,7 +238,6 @@ func setup_crea_colors():
 			nb_of_colors[crea.color] += 1
 		else:
 			nb_of_colors[crea.color] = 1
-		
 	
 func get_color_type(color : String):
 	match(color):
@@ -212,6 +261,7 @@ func _physics_process(_delta):
 @rpc("reliable", "call_local", "any_peer")
 func go_next_turn():
 	GAME.turn += 1
+	turn_done += 1
 	
 func _on_timer_timeout():
 	if !is_our_turn():
@@ -227,10 +277,13 @@ func get_combi_of_spell_id(id) -> String :
 	return ""
 	
 func get_spells() -> Array:
-	return $Spells.get_children()
+	return spells_node.get_children()
 	
 func get_creatures():
-	return $Creatures.get_children()
+	return creatures_node.get_children()
+
+func get_neut_creatures():
+	return neutral_creatures_node.get_children()
 	
 func get_reserve_color():
 	if color_reserve and color_reserve.get_child_count() > 0:
@@ -243,6 +296,12 @@ func get_player() -> String:
 	else:
 		return "Player2"
 #	return "Player1"
+
+func get_player_id(player):
+	if player == get_player():
+		return NETWORK.id
+	else:
+		return multiplayer.get_peers()[0]
 	
 func get_player_object(player : String) -> Node:
 	if player == "Player1":
@@ -325,6 +384,7 @@ func spawn_creature(color, pos, player):
 				return crea
 	return null
 	
+@rpc("any_peer", "call_local", "reliable")
 func spawn_creature_by_name(s_name, pos, player):
 	for child in creatures_node.get_children():
 		if child.name == s_name:
@@ -337,17 +397,40 @@ func spawn_creature_by_name(s_name, pos, player):
 			return crea
 	return null
 	
+@rpc("any_peer", "call_local", "reliable")
+func spawn_creature_by_data(id, pos, player, data):
+	for child in creatures_node.get_children():
+		if child.name == id:
+			var crea = child.duplicate()
+			add_creature_to_tilemap(crea, pos, player)
+			for key in data.keys():
+				crea.set(key, data[key])
+			if color_spawned.has(crea.color):
+				color_spawned[crea.color] += 1
+			else:
+				color_spawned[crea.color] = 1
+			return crea
+	for child in neutral_creatures_node.get_children():
+		if child.name == id:
+			var crea = child.duplicate()
+			add_creature_to_tilemap(crea, pos, player)
+			for key in data.keys():
+				crea.set(key, data[key])
+			return crea
+	return null
+	
 func add_creature_to_tilemap(crea, pos, player):
-	crea.visible = true
-	crea.player = player
-	crea.creature_id = crea.name
-	print(crea.creature_id)
 	tile_map.add_creature(crea)
+	crea.visible = true
+	crea.creature_id = crea.name
+#	print(crea.creature_id)
 	var player_obj = get_player_object(player)
 	if player_obj:
 		player_obj.creatures.append(crea)
-	crea.set_multiplayer_authority(multiplayer.get_remote_sender_id())
-	crea.name = player
+	print("autho " + str(multiplayer.get_remote_sender_id()))
+	crea.set_multiplayer_authority(get_player_id(player))
+	crea.player = player
+	crea.set_creature_name.rpc(player)
 	crea.appear()
 	crea.global_position = Vector2(pos)
 	new_creature.emit(crea, player)
@@ -364,7 +447,8 @@ func _on_new_turn(_value):
 		$Timer.start(player_turn_time*1.5)
 	if !color_container:
 		return
-	save_game()
+	if turn_done > 0:
+		save_game()
 	
 	
 func get_color_but(color):
@@ -464,4 +548,4 @@ func add_change_label(pos, value):
 func save_game():
 	if !save_res:
 		return
-	save_res.save_game()
+	save_res.call_deferred("save_game")

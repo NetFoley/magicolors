@@ -1,3 +1,6 @@
+Node
+Label
+MultiplayerSpawner
 VBoxContainer
 CheckButton
 Button
@@ -5,7 +8,6 @@ MenuButton
 ScrollContainer
 AudioStreamPlayer
 AudioStreamPlayer2D
-Node
 GPUParticles2D
 Polygon2D
 ColorRect
@@ -15,7 +17,6 @@ CanvasModulate
 Line2D
 Timer
 Node2D
-Label
 VSeparator
 HFlowContainer
 HBoxContainer
@@ -29,4 +30,3 @@ Area2D
 GPUParticles3D
 GPUParticlesAttractorSphere3D
 AnimationPlayer
-AnimationTree
